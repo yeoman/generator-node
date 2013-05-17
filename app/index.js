@@ -22,7 +22,7 @@ var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   this.props = Object.create(null);
   this.props.devDependencies = {
     'grunt': '~0.4.1',
-    'grunt-contrib-jshint': '~0.5.0',
+    'grunt-contrib-jshint': '~0.5.1',
     'grunt-contrib-nodeunit': '~0.1.2',
     'grunt-contrib-watch': '~0.4.3',
   };
