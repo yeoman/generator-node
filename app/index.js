@@ -20,6 +20,12 @@ var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
   this.currentYear = (new Date()).getFullYear();
   this.props = Object.create(null);
+  this.props.devDependencies = {
+    'grunt': '~0.4.1',
+    'grunt-contrib-jshint': '~0.5.0',
+    'grunt-contrib-nodeunit': '~0.1.2',
+    'grunt-contrib-watch': '~0.4.3',
+  };
 };
 util.inherits(NodeGenerator, yeoman.generators.NamedBase);
 
@@ -107,29 +113,6 @@ NodeGenerator.prototype.askFor = function askFor() {
   ]));
 };
 
-NodeGenerator.prototype.devDependencies = function devDependencies() {
-  var self = this;
-  var done = this.async();
-  async.map([
-    'grunt',
-    'grunt-contrib-jshint',
-    'grunt-contrib-nodeunit',
-    'grunt-contrib-watch',
-  ], function(name, next) {
-    latest(name, function(err, version) {
-      if (err) { return next(err); }
-      next(null, {name: name, version: version});
-    });
-  }, function(err, result) {
-    if (err) {
-      self.emit('error', err);
-    } else {
-      self.props.devDependencies = result;
-    }
-    done();
-  });
-};
-
 NodeGenerator.prototype.lib = function lib() {
   this.mkdir('lib');
   this.template('lib/name.js', 'lib/' + this.slugname + '.js');
@@ -155,5 +138,5 @@ NodeGenerator.prototype.projectfiles = function projectfiles() {
 
   this.template('README.md');
   this.template('Gruntfile.js');
-  this.template('_package.json', 'package.json');
+  this.write('package.json', prompts.packageJSON(this.props));
 };

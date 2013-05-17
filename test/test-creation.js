@@ -32,13 +32,15 @@ describe('node generator', function () {
       'name': 'mymodule',
       'description': 'awesome module',
       'version': '0.1.0',
-      'repository': 'http://github.com',
+      'repository': 'http://github.com/user/module',
       'bugs': 'http://jira.com',
       'licenses': 'MIT',
       'github_username': 'octocat',
       'author_name': 'Octo Cat',
       'author_email': 'octo@example.com',
-      'node_version': '~0.10.5'
+      'node_version': '~0.10.5',
+      'npm_test': 'grunt nodeunit -v',
+      'main': 'lib/index.js'
     });
 
     this.app.run({}, function () {
