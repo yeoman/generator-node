@@ -4,10 +4,8 @@
   "description": "<%= props.title %>",
   "keywords": [
   ],
-  "homepage": "https://github.com/<%= props.github_username %>/<%= slugname %>",
-  <% if (props.bugs) { %>
-  "bugs": "<%= props.bugs %>",
-  <% } %>
+  "homepage": "https://github.com/<%= props.github_username %>/<%= slugname %>",<% if (props.bugs) { %>
+  "bugs": "<%= props.bugs %>",<% } %>
   "author": {
     "name": "<%= props.author_name %>",
     "email": "<%= props.author_email %>",
@@ -22,12 +20,7 @@
       "type": "<%= props.license %>"
     }
   ],
-  "devDependencies": {
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-qunit": "~0.1.1",
-    "grunt-contrib-concat": "~0.1.2",
-    "grunt-contrib-uglify": "~0.1.1",
-    "grunt-contrib-watch": "~0.2.0",
-    "grunt-contrib-clean": "~0.4.0"
+  "devDependencies": {<% props.devDependencies.forEach(function(dep, i) { %>
+    "<%= dep.name %>": "<%= dep.version %>"<% if (i < props.devDependencies.length - 1) { %>, <% } %><% }); %>
   }
 }

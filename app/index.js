@@ -5,6 +5,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var prompts = require('grunt-prompts');
 var async = require('async');
+var latest = require('latest');
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
@@ -46,7 +47,7 @@ NodeGenerator.prototype.askFor = function askFor() {
   '\nmore information about installing and configuring Grunt, please see' +
   '\nthe Getting Started guide:' +
   '\n' +
-  '\nhttp://gruntjs.com/getting-started';
+  '\nhttp://gruntjs.com/getting-started\n';
 
   console.log(welcome);
 
@@ -104,6 +105,29 @@ NodeGenerator.prototype.askFor = function askFor() {
     'main',
     'npm_test',
   ]));
+};
+
+NodeGenerator.prototype.devDependencies = function devDependencies() {
+  var self = this;
+  var done = this.async();
+  async.map([
+    'grunt',
+    'grunt-contrib-jshint',
+    'grunt-contrib-nodeunit',
+    'grunt-contrib-watch',
+  ], function(name, next) {
+    latest(name, function(err, version) {
+      if (err) { return next(err); }
+      next(null, {name: name, version: version});
+    });
+  }, function(err, result) {
+    if (err) {
+      self.emit('error', err);
+    } else {
+      self.props.devDependencies = result;
+    }
+    done();
+  });
 };
 
 NodeGenerator.prototype.lib = function lib() {
