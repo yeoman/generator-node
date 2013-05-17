@@ -26,7 +26,7 @@
     "yeoman-generator": "~0.10.5",
     "async": "~0.2.8",
     "grunt-prompts": "~0.1.0",
-    "latest": "~0.1.0"
+    "latest": "~0.1.1"
   },
   "devDependencies": {
     "mocha": "~1.9.0"
