@@ -23,7 +23,9 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yeoman-generator": "~0.10.5"
+    "yeoman-generator": "~0.10.5",
+    "async": "~0.2.8",
+    "grunt-prompts": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "~1.9.0"

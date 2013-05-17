@@ -3,6 +3,8 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var prompts = require('grunt-prompts');
+var async = require('async');
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
@@ -15,12 +17,14 @@ var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.currentYear = (new Date()).getFullYear();
+  this.props = Object.create(null);
 };
 util.inherits(NodeGenerator, yeoman.generators.NamedBase);
 
 NodeGenerator.prototype.askFor = function askFor() {
   var self = this;
-  var cb = this.async();
+  var done = this.async();
 
   // welcome message
   var welcome =
@@ -34,103 +38,72 @@ NodeGenerator.prototype.askFor = function askFor() {
   '\n   __' + '\'.___.\''.yellow + '__' +
   '\n ´   ' + '`  |'.red + '° ' + '´ Y'.red + ' `\n' +
   '\n' +
-  '_Project name_ shouldn\'t contain "node" or "js" and should\n' +
-  'be a unique ID not already in use at search.npmjs.org.\n' +
+  '\n_Project name_ shouldn\'t contain "node" or "js" and should' +
+  '\nbe a unique ID not already in use at search.npmjs.org.' +
   '\n' +
-  'You should now install project dependencies with _npm install_.\n' +
-  'After that, you may execute project tasks with _grunt_. For\n' +
-  'more information about installing and configuring Grunt, please see\n' +
-  'the Getting Started guide:\n' +
+  '\nYou should now install project dependencies with _npm install_.' +
+  '\nAfter that, you may execute project tasks with _grunt_. For' +
+  '\nmore information about installing and configuring Grunt, please see' +
+  '\nthe Getting Started guide:' +
   '\n' +
-  'http://gruntjs.com/getting-started';
+  '\nhttp://gruntjs.com/getting-started';
 
   console.log(welcome);
 
-  var projectname = path.basename(process.cwd());
-  var username = (process.env.USER || process.env.USERNAME || '???');
+  var queue = async.queue(function(rawPrompt, next) {
+    prompts.default(rawPrompt, self.props, function(prompt) {
+      prompt.message = String(prompt.message).grey;
 
-  var prompts = [{
-    name: 'name',
-    message: 'Project name',
-    default: projectname
-  }, {
-    name: 'description',
-    default: 'The best project ever'
-  }, {
-    name: 'version',
-    default: '0.1.0'
-  }, {
-    name: 'repository',
-    message: 'Project git repository',
-    default: 'git://github.com/' + username + '/' + projectname + '.git'
-  }, {
-    name: 'homepage',
-    message: 'Project homepage',
-    default: 'https://github.com/' + username + '/' + projectname
-  }, {
-    name: 'bugs',
-    message: 'Project issues tracker',
-    default: 'https://github.com/' + username + '/' + projectname + '/issues'
-  }, {
-    name: 'license',
-    default: 'MIT'
-  }, {
-    name: 'author_name',
-    // TODO(shama): Default to Name
-  }, {
-    name: 'author_email',
-    // TODO(shama): Default to Email
-  }, {
-    name: 'author_url',
-    // TODO(shama): Default to homepage
-  }, {
-    name: 'node_version',
-    message: 'What versions of node does it run on?',
-    default: this.pkg.engines.node
-  }, {
-    name: 'main',
-    message: 'Main module entry point:',
-    default: 'lib/' + projectname + '.js'
-  }, {
-    name: 'npm_test',
-    message: 'npm test command:',
-    default: 'grunt nodeunit',
-  }, {
-    name: 'travis',
-    message: 'Will this project be tested with Travis CI?',
-    default: 'Y/n'
-  }];
+      function validate(valid, value) {
+        if (!valid) {
+          // Print warning and requeue the current prompt
+          var warning = (prompt.warning) ? prompt.warning : 'Invalid input for ' + prompt.name;
+          console.log('error'.red + ': ' + warning);
+          queue.unshift(rawPrompt);
+          return next();
+        }
 
-  var nameToMessage = function (name) {
-    return name.split('_').map(
-      function (x) { return self._.capitalize(x); }
-    ).join(' ');
-  };
+        switch (prompt.name) {
+          case 'name':
+            self.props.slugname = self.slugname = self._.slugify(value);
+            break;
+          case 'author_name':
+            self.authorName = value;
+            break;
+        }
 
-  // Generate prompt messages if only the name is defined.
-  prompts.map(function (entry) {
-    if (entry.message === undefined) {
-      entry.message = nameToMessage(entry.name);
-    }
-    entry.message = String(entry.message).grey;
-    return entry;
-  });
+        // Looks good, set the property
+        self.props[prompt.name] = value;
+        next();
+      }
 
-  this.currentYear = (new Date()).getFullYear();
+      // Prompt user for input and validate
+      self.prompt(prompt, function(err, props) {
+        if (err) { return self.emit('error', err); }
+        prompts.validate(prompt, props[prompt.name], self.props, validate);
+      });
+    });
+  }, 1);
 
-  this.prompt(prompts, function (err, props) {
-    if (err) {
-      return self.emit('error', err);
-    }
-    self.props = props;
-    // For easier access in the templates.
-    self.slugname = self._.slugify(props.name);
-    cb();
-  });
-};
+  // Call this when the queue is done
+  queue.drain = done;
 
-NodeGenerator.prototype.dependencies = function dependencies() {
-  // TODO(shama): look up latest devDeps and inject into package.json
+  // Prompt for these values
+  queue.push(prompts.defaults([
+    'name',
+    'description',
+    'version',
+    'repository',
+    'homepage',
+    'bugs',
+    'licenses',
+    'author_name',
+    'author_email',
+    'author_url',
+    'node_version',
+    'main',
+    'npm_test',
+  ]));
 };
 
 NodeGenerator.prototype.lib = function lib() {
@@ -141,6 +114,14 @@ NodeGenerator.prototype.lib = function lib() {
 NodeGenerator.prototype.test = function test() {
   this.mkdir('test');
   this.template('test/name_test.js', 'test/' + this.slugname + '_test.js');
+};
+
+NodeGenerator.prototype.licenses = function licenses() {
+  var self = this;
+  this.props.licenses.forEach(function(license) {
+    var licensePath = prompts.availableLicenses(license);
+    self.template(licensePath, 'LICENSE-' + license);
+  });
 };
 
 NodeGenerator.prototype.projectfiles = function projectfiles() {

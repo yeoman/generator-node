@@ -22,6 +22,7 @@ describe('node generator', function () {
   it('creates expected files', function (done) {
     var expected = [
       '.jshintrc',
+      'LICENSE-MIT',
       'lib/mymodule.js',
       'test/mymodule_test.js',
       ['package.json', /"name": "mymodule"/],
@@ -33,7 +34,7 @@ describe('node generator', function () {
       'version': '0.1.0',
       'repository': 'http://github.com',
       'bugs': 'http://jira.com',
-      'license': 'MIT',
+      'licenses': 'MIT',
       'github_username': 'octocat',
       'author_name': 'Octo Cat',
       'author_email': 'octo@example.com',
