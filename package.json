@@ -1,0 +1,41 @@
+{
+  "name": "generator-node",
+  "version": "0.0.0",
+  "description": "A node generator for Yeoman",
+  "keywords": [
+    "yeoman-generator",
+    "scaffold",
+    "node"
+  ],
+  "homepage": "https://github.com/yeoman/generator-node",
+  "bugs": "https://github.com/yeoman/generator-node/issues",
+  "author": {
+    "name": "Pascal Hartig",
+    "email": "phartig@rdrei.net",
+    "url": "https://github.com/passy"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yeoman/generator-node.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.10.5",
+    "async": "~0.2.8",
+    "grunt-prompts": "~0.1.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
