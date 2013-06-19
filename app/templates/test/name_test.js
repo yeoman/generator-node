@@ -1,6 +1,6 @@
 'use strict';
 
-var <%= props.slugname %> = require('../lib/<%= props.slugname %>.js');
+var <%= slugname %> = require('../lib/<%= slugname %>.js');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -22,7 +22,7 @@ var <%= props.slugname %> = require('../lib/<%= props.slugname %>.js');
     test.ifError(value)
 */
 
-exports.<%= props.slugname %> = {
+exports['<%= slugname %>'] = {
   setUp: function(done) {
     // setup here
     done();
@@ -30,7 +30,7 @@ exports.<%= props.slugname %> = {
   'no args': function(test) {
     test.expect(1);
     // tests here
-    test.equal(<%= props.slugname %>.awesome(), 'awesome', 'should be awesome.');
+    test.equal(<%= slugname %>.awesome(), 'awesome', 'should be awesome.');
     test.done();
   },
 };

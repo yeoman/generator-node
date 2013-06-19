@@ -2,8 +2,8 @@
  * <%= props.name %>
  * <%= props.homepage %>
  *
- * Copyright (c) <%= currentYear %> <%= props.author_name %>
- * Licensed under the <%= props.licenses.join(', ') %> license<%= props.licenses.length === 1 ? '' : 's' %>.
+ * Copyright (c) <%= currentYear %> <%= props.authorName %>
+ * Licensed under the <%= props.license %> license.
  */
 
 'use strict';

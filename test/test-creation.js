@@ -21,26 +21,23 @@ describe('node generator', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      '.jshintrc',
-      'LICENSE-MIT',
       'lib/mymodule.js',
       'test/mymodule_test.js',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      'Gruntfile.js',
       ['package.json', /"name": "mymodule"/],
+      'README.md',
     ];
 
     helpers.mockPrompt(this.app, {
       'name': 'mymodule',
       'description': 'awesome module',
-      'version': '0.1.0',
-      'repository': 'http://github.com/user/module',
-      'bugs': 'http://jira.com',
-      'licenses': 'MIT',
-      'github_username': 'octocat',
-      'author_name': 'Octo Cat',
-      'author_email': 'octo@example.com',
-      'node_version': '~0.10.5',
-      'npm_test': 'grunt nodeunit -v',
-      'main': 'lib/index.js'
+      'license': 'MIT',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com'
     });
 
     this.app.run({}, function () {
