@@ -1,0 +1,26 @@
+{
+  "name": "<%= slugname %>",
+  "version": "0.0.0",
+  "description": "<%= props.description %>",
+  "homepage": "<%= props.homepage %>",
+  "bugs": "<%= repoUrl %>/issues",
+  "author": {
+    "name": "<%= props.authorName %>",
+    "email": "<%= props.authorEmail %>"<% if (props.authorUrl) { %>,
+    "url": "<%= props.authorUrl %>"<% } %>
+  },
+  "repository": {
+    "type": "git",
+    "url": "<%= repoUrl %>"
+  },
+  "licenses": [
+    {
+      "type": "<%= props.license %>"
+    }
+  ],
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-watch": "~0.2.0"
+  }
+}

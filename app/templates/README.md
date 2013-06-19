@@ -1,13 +1,13 @@
-# <%= props.name %><% if (props.travis) { %> [![Build Status](https://secure.travis-ci.org/<%= props.git_user %>/<%= props.git_repo %>.png?branch=master)](http://travis-ci.org/<%= props.git_user %>/<%= props.git_repo %>)<% } %>
+# <%= props.name %> [![Build Status](https://secure.travis-ci.org/<%= props.githubUsername %>/<%= slugname %>.png?branch=master)](http://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>)
 
 <%= props.description %>
 
 ## Getting Started
-Install the module with: `npm install <%= props.slugname %>`
+Install the module with: `npm install <%= slugname %>`
 
 ```javascript
-var <%= props.slugname %> = require('<%= props.slugname %>');
-<%= props.slugname %>.awesome(); // "awesome"
+var <%= slugname %> = require('<%= slugname %>');
+<%= slugname %>.awesome(); // "awesome"
 ```
 
 ## Documentation
@@ -23,5 +23,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 _(Nothing yet)_
 
 ## License
-Copyright (c) <%= currentYear %> <%= authorName %>  
-Licensed under the <%= props.licenses.join(', ') %> license<%= props.licenses.length === 1 ? '' : 's' %>.
+Copyright (c) <%= currentYear %> <%= props.authorName %>. Licensed under the <%= props.license %> license.

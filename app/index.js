@@ -17,99 +17,60 @@ var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
-  this.currentYear = (new Date()).getFullYear();
-  this.props = Object.create(null);
-  this.props.devDependencies = {
-    'grunt': '~0.4.1',
-    'grunt-contrib-jshint': '~0.5.1',
-    'grunt-contrib-nodeunit': '~0.1.2',
-    'grunt-contrib-watch': '~0.4.3',
-  };
 };
 util.inherits(NodeGenerator, yeoman.generators.NamedBase);
 
 NodeGenerator.prototype.askFor = function askFor() {
-  var self = this;
-  var done = this.async();
+  var cb = this.async();
 
-  // welcome message
-  var welcome =
-  '\n     _-----_' +
-  '\n    |       |' +
-  '\n    |' + '--(o)--'.red + '|   .--------------------------.' +
-  '\n   `---------´  |    ' + 'Welcome to Yeoman,'.yellow.bold + '    |' +
-  '\n    ' + '( '.yellow + '_' + '´U`'.yellow + '_' + ' )'.yellow + '   |   ' + 'ladies and gentlemen!'.yellow.bold + '  |' +
-  '\n    /___A___\\   \'__________________________\'' +
-  '\n     |  ~  |'.yellow +
-  '\n   __' + '\'.___.\''.yellow + '__' +
-  '\n ´   ' + '`  |'.red + '° ' + '´ Y'.red + ' `\n' +
-  '\n' +
-  '\n_Project name_ shouldn\'t contain "node" or "js" and should' +
-  '\nbe a unique ID not already in use at search.npmjs.org.' +
-  '\n' +
-  '\nYou should now install project dependencies with _npm install_.' +
-  '\nAfter that, you may execute project tasks with _grunt_. For' +
-  '\nmore information about installing and configuring Grunt, please see' +
-  '\nthe Getting Started guide:' +
-  '\n' +
-  '\nhttp://gruntjs.com/getting-started\n';
+  console.log(
+    this.yeoman
+    + '\nThe name of your project shouldn\'t contain "node" or "js" and'
+    + '\nshould be a unique ID not already in use at search.npmjs.org.');
 
-  console.log(welcome);
+  var prompts = [{
+    name: 'name',
+    message: 'Module Name'
+  }, {
+    name: 'description',
+    message: 'Description',
+    default: 'The best module ever.'
+  }, {
+    name: 'homepage',
+    message: 'Homepage'
+  }, {
+    name: 'license',
+    message: 'License',
+    default: 'MIT'
+  }, {
+    name: 'githubUsername',
+    message: 'GitHub username'
+  }, {
+    name: 'authorName',
+    message: 'Author\'s Name'
+  }, {
+    name: 'authorEmail',
+    message: 'Author\'s Email'
+  }, {
+    name: 'authorUrl',
+    message: 'Author\'s Homepage'
+  }];
 
-  var queue = async.queue(function(rawPrompt, next) {
-    prompts.default(rawPrompt, self.props, function(prompt) {
-      prompt.message = String(prompt.message).grey;
+  this.currentYear = (new Date()).getFullYear();
 
-      function validate(valid, value) {
-        if (!valid) {
-          // Print warning and requeue the current prompt
-          var warning = (prompt.warning) ? prompt.warning : 'Invalid input for ' + prompt.name;
-          console.log('error'.red + ': ' + warning);
-          queue.unshift(rawPrompt);
-          return next();
-        }
+  this.prompt(prompts, function (props) {
+    this.slugname = this._.slugify(props.name);
 
-        switch (prompt.name) {
-          case 'name':
-            self.props.slugname = self.slugname = self._.slugify(value);
-            break;
-          case 'author_name':
-            self.authorName = value;
-            break;
-        }
+    this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
 
-        // Looks good, set the property
-        self.props[prompt.name] = value;
-        next();
-      }
+    if (!props.homepage) {
+      props.homepage = this.repoUrl;
+    }
 
-      // Prompt user for input and validate
-      self.prompt(prompt, function(err, props) {
-        if (err) { return self.emit('error', err); }
-        prompts.validate(prompt, props[prompt.name], self.props, validate);
-      });
-    });
-  }, 1);
+    this.props = props;
 
-  // Call this when the queue is done
-  queue.drain = done;
-
-  // Prompt for these values
-  queue.push(prompts.defaults([
-    'name',
-    'description',
-    'version',
-    'repository',
-    'homepage',
-    'bugs',
-    'licenses',
-    'author_name',
-    'author_email',
-    'author_url',
-    'node_version',
-    'main',
-    'npm_test',
-  ]));
+    cb();
+  }.bind(this));
 };
 
 NodeGenerator.prototype.lib = function lib() {
@@ -122,14 +83,6 @@ NodeGenerator.prototype.test = function test() {
   this.template('test/name_test.js', 'test/' + this.slugname + '_test.js');
 };
 
-NodeGenerator.prototype.licenses = function licenses() {
-  var self = this;
-  this.props.licenses.forEach(function(license) {
-    var licensePath = prompts.availableLicenses(license);
-    self.template(licensePath, 'LICENSE-' + license);
-  });
-};
-
 NodeGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('jshintrc', '.jshintrc');
   this.copy('gitignore', '.gitignore');
@@ -137,5 +90,5 @@ NodeGenerator.prototype.projectfiles = function projectfiles() {
 
   this.template('README.md');
   this.template('Gruntfile.js');
-  this.write('package.json', prompts.packageJSON(this.props));
+  this.template('_package.json', 'package.json');
 };
