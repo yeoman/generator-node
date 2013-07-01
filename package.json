@@ -1,6 +1,6 @@
 {
   "name": "generator-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A node generator for Yeoman",
   "keywords": [
     "yeoman-generator",
@@ -10,9 +10,9 @@
   "homepage": "https://github.com/yeoman/generator-node",
   "bugs": "https://github.com/yeoman/generator-node/issues",
   "author": {
-    "name": "Pascal Hartig",
-    "email": "phartig@rdrei.net",
-    "url": "https://github.com/passy"
+    "name": "Addy Osmani",
+    "email": "addyosmani@gmail.com",
+    "url": "https://github.com/addyosmani"
   },
   "main": "app/index.js",
   "repository": {
@@ -23,7 +23,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yeoman-generator": "~0.12.0"
+    "yeoman-generator": "~0.12.2"
   },
   "devDependencies": {
     "mocha": "~1.9.0"
