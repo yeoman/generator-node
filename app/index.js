@@ -3,8 +3,6 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-var prompts = require('grunt-prompts');
-var async = require('async');
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
