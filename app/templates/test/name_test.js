@@ -32,5 +32,5 @@ exports['<%= slugname %>'] = {
     // tests here
     test.equal(<%= slugname %>.awesome(), 'awesome', 'should be awesome.');
     test.done();
-  },
+  }
 };
