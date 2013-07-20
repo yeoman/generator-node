@@ -28,7 +28,8 @@ NodeGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
     name: 'name',
-    message: 'Module Name'
+    message: 'Module Name',
+    default: path.basename(process.cwd())
   }, {
     name: 'description',
     message: 'Description',
