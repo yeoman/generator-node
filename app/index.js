@@ -22,9 +22,9 @@ NodeGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   console.log(
-    this.yeoman
-    + '\nThe name of your project shouldn\'t contain "node" or "js" and'
-    + '\nshould be a unique ID not already in use at search.npmjs.org.');
+    this.yeoman +
+    '\nThe name of your project shouldn\'t contain "node" or "js" and' +
+    '\nshould be a unique ID not already in use at search.npmjs.org.');
 
   var prompts = [{
     name: 'name',
