@@ -13,9 +13,7 @@ Maintained by Kyle Robinson Young, Addy Osmani and Stephen Sawchuck.
 
 ## Installation
 
-If you haven't already done so, install [Yeoman][].
-
-Once Yeoman is installed, install this generator via `npm install -g generator-node`.
+Install the generator by running: `npm install -g generator-node`.
 
 
 ## Usage
