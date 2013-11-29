@@ -2,8 +2,6 @@
 
 var <%= slugname %> = require('../lib/<%= slugname %>.js');
 
-var slugCased = <%= slugname.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase() });
-
 /*
   ======== A Handy Little Nodeunit Reference ========
   https://github.com/caolan/nodeunit
@@ -24,7 +22,7 @@ var slugCased = <%= slugname.replace(/-([a-z])/g, function (g) { return g[1].toU
     test.ifError(value)
 */
 
-exports[slugCased] = {
+exports.<%= slugname %> = {
   setUp: function(done) {
     // setup here
     done();
@@ -32,7 +30,7 @@ exports[slugCased] = {
   'no args': function(test) {
     test.expect(1);
     // tests here
-    test.equal(slugCased.awesome(), 'awesome', 'should be awesome.');
+    test.equal(<%= slugname %>.awesome(), 'awesome', 'should be awesome.');
     test.done();
   }
 };
