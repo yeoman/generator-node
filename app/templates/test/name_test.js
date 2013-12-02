@@ -1,6 +1,6 @@
 'use strict';
 
-var <%= slugname %> = require('../lib/<%= slugname %>.js');
+var <%= safeSlugname %> = require('../lib/<%= slugname %>.js');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -22,7 +22,7 @@ var <%= slugname %> = require('../lib/<%= slugname %>.js');
     test.ifError(value)
 */
 
-exports.<%= slugname %> = {
+exports.<%= safeSlugname %> = {
   setUp: function(done) {
     // setup here
     done();
@@ -30,7 +30,7 @@ exports.<%= slugname %> = {
   'no args': function(test) {
     test.expect(1);
     // tests here
-    test.equal(<%= slugname %>.awesome(), 'awesome', 'should be awesome.');
+    test.equal(<%= safeSlugname %>.awesome(), 'awesome', 'should be awesome.');
     test.done();
   }
 };
