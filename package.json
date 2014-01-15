@@ -29,7 +29,7 @@
     "mocha": "~1.14.0"
   },
   "peerDependencies": {
-    "yo": "~1.0.3"
+    "yo": ">=1.0.3"
   },
   "engines": {
     "node": ">= 0.8.0",
