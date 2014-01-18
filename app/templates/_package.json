@@ -2,8 +2,8 @@
   "name": "<%= slugname %>",
   "version": "0.0.0",
   "main": "lib/<%= slugname %>.js",
-  "description": "<%= props.description %>,"<% if (prop.homepage) { %>
-  "homepage": "<%= props.homepage %>"<%,}%>
+  "description": "<%= props.description %>,"<% if (props.homepage) { %>
+  "homepage": "<%= props.homepage %>,"<%}%>
   "bugs": "<%= repoUrl %>/issues",
   "author": {
     "name": "<%= props.authorName %>",
