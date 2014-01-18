@@ -2,8 +2,8 @@
   "name": "<%= slugname %>",
   "version": "0.0.0",
   "main": "lib/<%= slugname %>.js",
-  "description": "<%= props.description %>",
-  "homepage": "<%= props.homepage %>",
+  "description": "<%= props.description %>,"<% if (props.homepage) { %>
+  "homepage": "<%= props.homepage %>,"<%}%>
   "bugs": "<%= repoUrl %>/issues",
   "author": {
     "name": "<%= props.authorName %>",
@@ -18,6 +18,11 @@
     {
       "type": "<%= props.license %>"
     }
+  ],
+  "files": [
+    ""
+  ],
+  "keywords":[
   ],
   "devDependencies": {
     "grunt-contrib-jshint": "~0.7.0",
