@@ -1,4 +1,4 @@
-# Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.png?branch=master)](https://travis-ci.org/yeoman/generator-node)
+# Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node)
 
 > Create a node.js module with [Yeoman][], including nodeunit unit tests.
 
