@@ -64,7 +64,7 @@ NodeGenerator.prototype.askFor = function askFor() {
       function (g) { return g[1].toUpperCase(); }
     );
 
-    if(!props.githubUsername){
+    if(props.githubUsername){
       this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
     } else {
       this.repoUrl = 'user/repo';
