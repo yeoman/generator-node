@@ -2,6 +2,7 @@
 
 var util = require('util');
 var path = require('path');
+var pkgName = require('pkg-name');
 var yeoman = require('yeoman-generator');
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
@@ -29,7 +30,20 @@ NodeGenerator.prototype.askFor = function askFor() {
   var prompts = [{
     name: 'name',
     message: 'Module Name',
-    default: path.basename(process.cwd())
+    default: path.basename(process.cwd()),
+    validate: function(input) {
+      var done = this.async();
+
+      pkgName(input, function (err, available) {
+        if (err) done(err);
+
+        if (!available.npm) {
+          done('Sorry, this name already exists on NPM. Please try another one.');
+        }
+
+        done(true);
+      });
+    }
   }, {
     name: 'description',
     message: 'Description',
