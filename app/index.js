@@ -1,8 +1,9 @@
 'use strict';
 
+var chalk = require('chalk');
 var util = require('util');
 var path = require('path');
-var pkgName = require('pkg-name');
+var npmName = require('npm-name');
 var yeoman = require('yeoman-generator');
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
@@ -21,6 +22,7 @@ util.inherits(NodeGenerator, yeoman.generators.NamedBase);
 
 NodeGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
+  var log = this.log;
 
   console.log(
     this.yeoman +
@@ -31,17 +33,15 @@ NodeGenerator.prototype.askFor = function askFor() {
     name: 'name',
     message: 'Module Name',
     default: path.basename(process.cwd()),
-    validate: function(input) {
+    filter: function (input) {
       var done = this.async();
 
-      pkgName(input, function (err, available) {
-        if (err) done(err);
-
-        if (!available.npm) {
-          done('Sorry, this name already exists on NPM. Please try another one.');
+      npmName(input, function (err, available) {
+        if (!available) {
+          log.info(chalk.yellow(input) + ' already exists on npm. You might want to use another name.');
         }
 
-        done(true);
+        done(input);
       });
     }
   }, {
