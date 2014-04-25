@@ -74,7 +74,7 @@ NodeGenerator.prototype.askFor = function askFor() {
   this.prompt(prompts, function (props) {
     this.slugname = this._.slugify(props.name);
     this.safeSlugname = this.slugname.replace(
-      /-([a-zA-Z])/g,
+      /-+([a-zA-Z0-9])/g,
       function (g) { return g[1].toUpperCase(); }
     );
 
