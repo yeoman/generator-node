@@ -12,8 +12,9 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
 
   prompting: function () {
     var cb = this.async();
+    var log = this.log;
 
-    this.log(
+    log(
       this.yeoman +
       '\nThe name of your project shouldn\'t contain "node" or "js" and' +
       '\nshould be a unique ID not already in use at search.npmjs.org.');
@@ -27,7 +28,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
 
         npmName(input, function (err, available) {
           if (!available) {
-            this.log.info(chalk.yellow(input) + ' already exists on npm. You might want to use another name.');
+            log.info(chalk.yellow(input) + ' already exists on npm. You might want to use another name.');
           }
 
           done(input);
