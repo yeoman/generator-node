@@ -2,6 +2,7 @@
 'use strict';
 
 var path = require('path');
+var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 
 describe('node generator', function () {
@@ -27,7 +28,7 @@ describe('node generator', function () {
       '.jshintrc',
       '.travis.yml',
       'Gruntfile.js',
-      ['package.json', /"name": "mymodule"/],
+      'package.json',
       'README.md',
     ];
 
@@ -41,7 +42,8 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      assert.file(expected);
+      assert.fileContent('package.json', /"name": "mymodule"/);
       done();
     });
   });
