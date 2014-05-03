@@ -1,0 +1,6 @@
+.editorconfig
+.gitattributes
+.jshintrc
+.npmignore
+.travis.yml
+test
