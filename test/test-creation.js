@@ -38,7 +38,8 @@ describe('node generator', function () {
       'license': 'MIT',
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
-      'authorEmail': 'octo@example.com'
+      'authorEmail': 'octo@example.com',
+      'keywords': 'keyword1,keyword2,keyword3'
     });
 
     this.app.run({}, function () {
