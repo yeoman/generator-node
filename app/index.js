@@ -57,6 +57,9 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
     }, {
       name: 'authorUrl',
       message: 'Author\'s Homepage'
+    }, {
+      name: 'keywords',
+      message: 'Key your keywords (comma to split)'
     }];
 
     this.currentYear = (new Date()).getFullYear();
@@ -77,6 +80,8 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
       if (!props.homepage) {
         props.homepage = this.repoUrl;
       }
+
+      this.keywords = props.keywords.split(',');
 
       this.props = props;
 

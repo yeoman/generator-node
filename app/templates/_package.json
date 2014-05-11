@@ -18,7 +18,10 @@
   "files": [
     "lib"
   ],
-  "keywords": [],
+  "keywords": [
+    "<%= slugname %>"<% for (var i=0;i<keywords.length;i++) { %>,
+    "<%= keywords[i] %>"<% } %>
+  ],
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
