@@ -60,6 +60,10 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
     }, {
       name: 'keywords',
       message: 'Key your keywords (comma to split)'
+    }, {
+      name: 'cli',
+      message: 'Do you need cli tools?',
+      default: 'yes'
     }];
 
     this.currentYear = (new Date()).getFullYear();
@@ -98,6 +102,10 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
     this.template('_README.md', 'README.md');
     this.template('_Gruntfile.js', 'Gruntfile.js');
     this.template('_package.json', 'package.json');
+
+    if (this.props.cli === 'yes' || this.props.cli === true) {
+        this.template('_cli.js', 'cli.js');
+    }
   },
 
   writing: function () {

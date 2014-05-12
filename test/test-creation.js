@@ -24,12 +24,13 @@ describe('node generator', function () {
     var expected = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
+      'cli.js',
       '.gitignore',
       '.jshintrc',
       '.travis.yml',
       'Gruntfile.js',
       'package.json',
-      'README.md',
+      'README.md'
     ];
 
     helpers.mockPrompt(this.app, {
@@ -39,7 +40,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'keywords': 'keyword1,keyword2,keyword3'
+      'keywords': 'keyword1,keyword2,keyword3',
+      'cli': 'yes'
     });
 
     this.app.run({}, function () {
