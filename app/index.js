@@ -103,7 +103,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
     this.template('_Gruntfile.js', 'Gruntfile.js');
     this.template('_package.json', 'package.json');
 
-    if (this.props.cli === 'yes' || this.props.cli === true) {
+    if (this.props.cli === 'yes' || this.props.cli) {
         this.template('_cli.js', 'cli.js');
     }
   },

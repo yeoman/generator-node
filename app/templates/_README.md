@@ -8,7 +8,7 @@ Install the module with: `npm install <%= slugname %>`
 ```javascript
 var <%= slugname %> = require('<%= slugname %>');
 <%= slugname %>.awesome(); // "awesome"
-```<% if (props.cli === "yes" || props.cli === true) { %>
+```<% if (props.cli === "yes" || props.cli) { %>
 
 Install with cli command
 

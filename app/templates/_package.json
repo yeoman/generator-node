@@ -32,7 +32,7 @@
   },
   "scripts": {
     "test": "grunt"
-  }<% if (props.cli === "yes" || props.cli === true) { %>,
+  }<% if (props.cli === "yes" || props.cli) { %>,
   "bin": {
     "<%= slugname %>": "cli.js"
   },
