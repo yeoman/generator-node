@@ -113,6 +113,8 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
     this.template('lib/name.js', 'lib/' + this.slugname + '.js');
     this.mkdir('test');
     this.template('test/name_test.js', 'test/' + this.slugname + '_test.js');
+    this.mkdir('example');
+    this.template('example/name_example.js', 'example/' + this.slugname + '_example.js');
   },
 
   install: function () {
