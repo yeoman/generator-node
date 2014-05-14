@@ -24,6 +24,7 @@ describe('node generator', function () {
     var expected = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
+      'example/mymodule_example.js',
       'cli.js',
       '.gitignore',
       '.jshintrc',
