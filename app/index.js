@@ -64,6 +64,10 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
       name: 'cli',
       message: 'Do you need cli tools?',
       default: 'yes'
+    }, {
+      name: 'browser',
+      message: 'Do you need browserify?',
+      default: 'yes'
     }];
 
     this.currentYear = (new Date()).getFullYear();
