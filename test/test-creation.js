@@ -42,7 +42,8 @@ describe('node generator', function () {
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
       'keywords': 'keyword1,keyword2,keyword3',
-      'cli': 'yes'
+      'cli': 'yes',
+      'browser': 'yes'
     });
 
     this.app.run({}, function () {
