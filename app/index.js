@@ -8,33 +8,56 @@ var yeoman = require('yeoman-generator');
 var NodeGenerator = module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
-  },
-
-  prompting: function () {
-    var cb = this.async();
-    var log = this.log;
-
-    log(
+    this.log(
       this.yeoman +
       '\nThe name of your project shouldn\'t contain "node" or "js" and' +
       '\nshould be a unique ID not already in use at search.npmjs.org.');
+  },
+
+  promptingName: function () {
+    var done = this.async();
 
     var prompts = [{
       name: 'name',
       message: 'Module Name',
       default: path.basename(process.cwd()),
-      filter: function (input) {
+    }, {
+      type: 'confirm',
+      name: 'pkgName',
+      message: 'The name above already exists on npm, choose another?',
+      default: true,
+      when: function(answers) {
         var done = this.async();
 
-        npmName(input, function (err, available) {
+        npmName(answers.name, function (err, available) {
           if (!available) {
-            log.info(chalk.yellow(input) + ' already exists on npm. You might want to use another name.');
+            done(true);
           }
 
-          done(input);
+          done(false);
         });
       }
-    }, {
+    }];
+
+    this.prompt(prompts, function (props) {
+      if (props.pkgName) {
+        return this.promptingName();
+      }
+
+      this.slugname = this._.slugify(props.name);
+      this.safeSlugname = this.slugname.replace(
+        /-+([a-zA-Z0-9])/g,
+        function (g) { return g[1].toUpperCase(); }
+      );
+
+      done();
+    }.bind(this));
+  },
+
+  prompting: function () {
+    var cb = this.async();
+
+    var prompts = [{
       name: 'description',
       message: 'Description',
       default: 'The best module ever.'
@@ -73,12 +96,6 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
     this.currentYear = (new Date()).getFullYear();
 
     this.prompt(prompts, function (props) {
-      this.slugname = this._.slugify(props.name);
-      this.safeSlugname = this.slugname.replace(
-        /-+([a-zA-Z0-9])/g,
-        function (g) { return g[1].toUpperCase(); }
-      );
-
       if(props.githubUsername){
         this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
       } else {
