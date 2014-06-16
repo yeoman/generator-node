@@ -14,8 +14,15 @@ Install with cli command
 
 ```bash
 $ npm install -g <%= slugname %>
-$ <%= slugname %> -h
+$ <%= slugname %> -h # Help message.
+$ <%= slugname %> -v # For version number.
 ```<% } %>
+
+<% if (props.browser === "yes") { %>
+```bash
+$ npm run browser # Will create a browser.js
+```
+<%}%>
 
 ## Documentation
 _(Coming soon)_
