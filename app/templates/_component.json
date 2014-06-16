@@ -1,0 +1,18 @@
+{
+  "name": "<%= slugname %>",
+  "version": "0.0.0",
+  "repo": "<%= props.homepage %>",
+  "description": "<%= props.description %>",
+  "keywords": [
+    "<%= slugname %>"<% for (var i=0;i<keywords.length;i++) { %>,
+    "<%= keywords[i] %>"<% } %>
+  ],
+  "dependencies": {
+  },
+  "development": {
+  },
+  "scripts": [
+      "<%= slugname %>.js"
+  ],
+  "license": "<%= props.license %>"
+}
