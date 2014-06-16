@@ -45,6 +45,23 @@ module.exports = function (grunt) {
   // Default task.
   grunt.registerTask('default', ['jshint', 'nodeunit']);
 
+  // NPM release task.
+  grunt.registerTask('publish', function(version){
+  	var exec = require(child_process).exec;
+    if(!version) {
+    	grunt.log.warn('Must specify the version like grunt publish:patch/minor/major');
+    } else {
+    	var publish = "npm version "+ version +"&& git push origin master && npm publish";
+    	exec(publish, function(error, stdout, stderr){
+  		if (error) {
+  			grunt.log.error('error publishing: ' + error);
+        } else {
+        	grunt.log.ok('Done with publishing.');
+        }
+  	});
+    }
+  });
+
   <% if (props.browser === "yes") { %>
   // Browserify task.
   grunt.registerTask('browserify',function() {
@@ -53,10 +70,10 @@ module.exports = function (grunt) {
     
   	exec(browserify, function(error, stdout, stderr){
   		if (error) {
-  			console.log('browserify error: ' + error);
+  			grunt.log.error('browserify error: ' + error);
         } else {
-        	console.log('Done with browserify.');
+        	grunt.log.ok('Done with browserify.');
         }
-  	})
+  	});
   });
  <%}%>
