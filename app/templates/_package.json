@@ -31,10 +31,7 @@
     "jshint-stylish": "^0.2.0"<% if (props.browser === "yes") { %>,
     "browserify": "^4.1.3"<% } %>
   },
-  "scripts": {
-    "test": "grunt"<% if (props.browser === "yes") { %>,
-    "browser": "browserify lib/<%= slugname %>.js > browser.js"<%}%>
-  }<% if (props.cli === "yes" || props.cli) { %>,
+  <% if (props.cli === "yes") { %>,
   "bin": {
     "<%= slugname %>": "cli.js"
   },

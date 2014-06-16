@@ -45,4 +45,18 @@ module.exports = function (grunt) {
   // Default task.
   grunt.registerTask('default', ['jshint', 'nodeunit']);
 
-};
+  <% if (props.browser === "yes") { %>
+  // Browserify task.
+  grunt.registerTask('browserify',function() {
+  	var exec = require('child_process').exec;
+  	var browserify = "browserify lib/<%= slugname %>.js > browser.js";
+    
+  	exec(browserify, function(error, stdout, stderr){
+  		if (error) {
+  			console.log('browserify error: ' + error);
+        } else {
+        	console.log('Done with browserify.');
+        }
+  	})
+  });
+ <%}%>

@@ -20,7 +20,7 @@ $ <%= slugname %> -v # For version number.
 
 <% if (props.browser === "yes") { %>
 ```bash
-$ npm run browser # Will create a browser.js
+$ grunt browserify # Will create a browser.js
 ```
 <%}%>
 
