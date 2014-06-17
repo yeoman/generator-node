@@ -61,19 +61,3 @@ module.exports = function (grunt) {
   	});
     }
   });
-
-  <% if (props.browser === "yes") { %>
-  // Browserify task.
-  grunt.registerTask('browserify',function() {
-  	var exec = require('child_process').exec;
-  	var browserify = "browserify lib/<%= slugname %>.js > browser.js";
-    
-  	exec(browserify, function(error, stdout, stderr){
-  		if (error) {
-  			grunt.log.error('browserify error: ' + error);
-        } else {
-        	grunt.log.ok('Done with browserify.');
-        }
-  	});
-  });
- <%}%>
