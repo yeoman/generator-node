@@ -124,6 +124,11 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
     this.template('_Gruntfile.js', 'Gruntfile.js');
     this.template('_package.json', 'package.json');
 
+    if (this.props.browser === 'yes') {
+        this.template('_bower.json', 'bower.json');
+        this.template('_component.json', 'component.json');
+    }
+
     if (this.props.cli === 'yes' || this.props.cli) {
         this.template('_cli.js', 'cli.js');
     }
