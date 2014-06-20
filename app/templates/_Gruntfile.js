@@ -26,13 +26,6 @@ module.exports = function (grunt) {
         src: ['test/**/*.js']
       }
     },
-    release: {
-    	options: {
-    	  github: {
-    	  	repo: '<%= props.githubUsername %>/<%= slugname %>'
-    	  } 
-    	}
-    },
     watch: {
       gruntfile: {
         files: '<%%= jshint.gruntfile.src %>',
