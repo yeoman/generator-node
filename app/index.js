@@ -37,29 +37,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
                     done(false);
                 });
             }
-        }];
-
-        this.prompt(prompts, function(props) {
-            if (props.pkgName) {
-                return this.promptingName();
-            }
-
-            this.slugname = this._.classify(props.name);
-            this.safeSlugname = this.slugname.replace(
-                /-+([a-zA-Z0-9])/g,
-                function(g) {
-                    return g[1].toUpperCase();
-                }
-            );
-
-            done();
-        }.bind(this));
-    },
-
-    prompting: function() {
-        var cb = this.async();
-
-        var prompts = [{
+        }, {
             name: 'description',
             message: 'Description',
             default: 'The best module ever.'
@@ -98,6 +76,15 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
         this.currentYear = (new Date()).getFullYear();
 
         this.prompt(prompts, function(props) {
+
+            this.slugname = this._.slugify(props.name);
+            this.safeSlugname = this.slugname.replace(
+                /-+([a-zA-Z0-9])/g,
+                function(g) {
+                    return g[1].toUpperCase();
+                }
+            );
+
             if (props.githubUsername) {
                 this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
             } else {
@@ -112,7 +99,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
 
             this.props = props;
 
-            cb();
+            done();
         }.bind(this));
     },
 
