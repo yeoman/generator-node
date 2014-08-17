@@ -1,6 +1,6 @@
 {
   "name": "generator-node",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "A node generator for Yeoman",
   "keywords": [
     "yeoman-generator",
@@ -9,11 +9,7 @@
   ],
   "homepage": "https://github.com/yeoman/generator-node",
   "bugs": "https://github.com/yeoman/generator-node/issues",
-  "author": {
-    "name": "Addy Osmani",
-    "email": "addyosmani@gmail.com",
-    "url": "https://github.com/addyosmani"
-  },
+  "author": "The Yeoman Team",
   "main": "app/index.js",
   "repository": {
     "type": "git",
