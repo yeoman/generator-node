@@ -1,41 +1,45 @@
 'use strict';
 
-var chalk = require('chalk');
 var path = require('path');
 var npmName = require('npm-name');
 var yeoman = require('yeoman-generator');
 
-var NodeGenerator = module.exports = yeoman.generators.Base.extend({
-    init: function() {
+module.exports = yeoman.generators.Base.extend({
+    init: function () {
         this.pkg = require('../package.json');
         this.log(
             this.yeoman +
             '\nThe name of your project shouldn\'t contain "node" or "js" and' +
             '\nshould be a unique ID not already in use at search.npmjs.org.');
     },
-
-    askFor: function() {
+    askFor: function () {
         var done = this.async();
+        var moduleName;
 
         var prompts = [{
+            type: 'input',
             name: 'name',
             message: 'Module Name',
             default: path.basename(process.cwd()),
-        }, {
-            type: 'confirm',
-            name: 'pkgName',
-            message: 'The name above already exists on npm, choose another?',
-            default: true,
-            when: function(answers) {
-                var done = this.async();
-
-                npmName(answers.name, function(err, available) {
-                    if (!available) {
-                        done(true);
-                    }
-
-                    done(false);
-                });
+            validate: function (answer) {
+              if (answer.toLowerCase() === 'ok') {
+                done(true);
+              }
+              moduleName = answer;
+              npmName(answer, function onResponse(error, available) {
+                if (error) {
+                  done('Unable to check availability on NPM: ' + error + '. Type another name or type `ok` to continue.');
+                  return;
+                }
+                if (!available) {
+                  done('Module name already exists on NPM. Type another name or type `ok` to continue.');
+                  return;
+                }
+                done(true);
+              });
+            },
+            filter: function () {
+              return moduleName;
             }
         }, {
             name: 'description',
@@ -75,12 +79,12 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
 
         this.currentYear = (new Date()).getFullYear();
 
-        this.prompt(prompts, function(props) {
+        this.prompt(prompts, function (props) {
 
             this.slugname = this._.slugify(props.name);
             this.safeSlugname = this.slugname.replace(
                 /-+([a-zA-Z0-9])/g,
-                function(g) {
+                function (g) {
                     return g[1].toUpperCase();
                 }
             );
@@ -103,7 +107,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
         }.bind(this));
     },
 
-    app: function() {
+    app: function () {
         this.config.save();
         this.copy('jshintrc', '.jshintrc');
         this.copy('gitignore', '.gitignore');
@@ -118,7 +122,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
         }
     },
 
-    projectfiles: function() {
+    projectfiles: function () {
         this.mkdir('lib');
         this.template('lib/name.js', 'lib/' + this.slugname + '.js');
         this.mkdir('test');
@@ -127,7 +131,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
         this.template('example/name_example.js', 'example/' + this.slugname + '_example.js');
     },
 
-    install: function() {
+    install: function () {
         this.installDependencies({
             bower: false,
             skipInstall: this.options['skip-install']
