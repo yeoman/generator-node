@@ -1,12 +1,12 @@
 # Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node)
 
-> Create a node.js module with [Yeoman][], including nodeunit unit tests.
+> Create a node.js module with [Yeoman](http://yeoman.io), including mocha unit tests.
 
 This generator is based of
 [grunt-init-node](https://github.com/gruntjs/grunt-init-node), authored by the
 magnificient GruntJS team.
 
-Maintained by Kyle Robinson Young, Addy Osmani and Stephen Sawchuck.
+Maintained by [Hemanth.HM](http://github.com/hemanth)
 
 [Yeoman]: http://yeoman.io/
 
