@@ -1,6 +1,6 @@
 {
   "name": "generator-node",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A node generator for Yeoman",
   "keywords": [
     "yeoman-generator",
@@ -19,7 +19,6 @@
     "test": "mocha"
   },
   "dependencies": {
-    "chalk": "~0.4.0",
     "npm-name": "~0.1.0",
     "yeoman-generator": "~0.17.0"
   },
