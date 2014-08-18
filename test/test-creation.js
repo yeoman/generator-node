@@ -37,10 +37,13 @@ describe('node generator', function () {
     helpers.mockPrompt(this.app, {
       'name': 'mymodule',
       'description': 'awesome module',
+      'pkgName': false,
       'license': 'MIT',
+      'homepage': 'http://yeoman.io',
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
+      'authorUrl': 'http://yeoman.io',
       'keywords': 'keyword1,keyword2,keyword3',
       'cli': 'yes',
       'browser': 'yes'

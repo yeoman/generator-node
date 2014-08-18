@@ -12,100 +12,106 @@ module.exports = yeoman.generators.Base.extend({
             '\nThe name of your project shouldn\'t contain "node" or "js" and' +
             '\nshould be a unique ID not already in use at search.npmjs.org.');
     },
-    askFor: function () {
-        var done = this.async();
-        var moduleName;
+    askForModuleName: function () {
+       var done = this.async();
 
-        var prompts = [{
-            type: 'input',
-            name: 'name',
-            message: 'Module Name',
-            default: path.basename(process.cwd()),
-            validate: function (answer) {
-              if (answer.toLowerCase() === 'ok') {
-                done(true);
-              }
-              moduleName = answer;
-              npmName(answer, function onResponse(error, available) {
-                if (error) {
-                  done('Unable to check availability on NPM: ' + error + '. Type another name or type `ok` to continue.');
-                  return;
-                }
-                if (!available) {
-                  done('Module name already exists on NPM. Type another name or type `ok` to continue.');
-                  return;
-                }
-                done(true);
-              });
-            },
-            filter: function () {
-              return moduleName;
-            }
-        }, {
-            name: 'description',
-            message: 'Description',
-            default: 'The best module ever.'
-        }, {
-            name: 'homepage',
-            message: 'Homepage'
-        }, {
-            name: 'license',
-            message: 'License',
-            default: 'MIT'
-        }, {
-            name: 'githubUsername',
-            message: 'GitHub username'
-        }, {
-            name: 'authorName',
-            message: 'Author\'s Name'
-        }, {
-            name: 'authorEmail',
-            message: 'Author\'s Email'
-        }, {
-            name: 'authorUrl',
-            message: 'Author\'s Homepage'
-        }, {
-            name: 'keywords',
-            message: 'Key your keywords (comma to split)'
-        }, {
-            name: 'cli',
-            message: 'Do you need cli tools?',
-            default: 'yes'
-        }, {
-            name: 'browser',
-            message: 'Do you need browserify?',
-            default: 'yes'
-        }];
+       var prompts = [{
+         name: 'name',
+         message: 'Module Name',
+         default: path.basename(process.cwd()),
+       }, {
+         type: 'confirm',
+         name: 'pkgName',
+         message: 'The name above already exists on npm, choose another?',
+         default: true,
+         when: function(answers) {
+           var done = this.async();
 
-        this.currentYear = (new Date()).getFullYear();
+           npmName(answers.name, function (err, available) {
+             if (!available) {
+               done(true);
+             }
 
-        this.prompt(prompts, function (props) {
+             done(false);
+           });
+         }
+       }];
 
-            this.slugname = this._.slugify(props.name);
-            this.safeSlugname = this.slugname.replace(
-                /-+([a-zA-Z0-9])/g,
-                function (g) {
-                    return g[1].toUpperCase();
-                }
-            );
+       this.prompt(prompts, function (props) {
+         if (props.pkgName) {
+           return this.askForModuleName();
+         }
 
-            if (props.githubUsername) {
-                this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
-            } else {
-                this.repoUrl = 'user/repo';
-            }
+         this.slugname = this._.slugify(props.name);
+         this.safeSlugname = this.slugname.replace(
+           /-+([a-zA-Z0-9])/g,
+           function (g) { return g[1].toUpperCase(); }
+         );
 
-            if (!props.homepage) {
-                props.homepage = this.repoUrl;
-            }
+         done();
+       }.bind(this));
+     },
 
-            this.keywords = props.keywords.split(',');
+     askFor: function () {
+       var cb = this.async();
 
-            this.props = props;
+       var prompts = [{
+         name: 'description',
+         message: 'Description',
+         default: 'The best module ever.'
+       }, {
+         name: 'homepage',
+         message: 'Homepage'
+       }, {
+         name: 'license',
+         message: 'License',
+         default: 'MIT'
+       }, {
+         name: 'githubUsername',
+         message: 'GitHub username'
+       }, {
+         name: 'authorName',
+         message: 'Author\'s Name'
+       }, {
+         name: 'authorEmail',
+         message: 'Author\'s Email'
+       }, {
+         name: 'authorUrl',
+         message: 'Author\'s Homepage'
+       }, {
+         name: 'keywords',
+         message: 'Key your keywords (comma to split)'
+       }, {
+         name: 'cli',
+         message: 'Do you need cli tools?',
+         default: 'yes'
+       }, {
+         name: 'browser',
+         message: 'Do you need browserify?',
+         default: 'yes'
+       }];
 
-            done();
-        }.bind(this));
-    },
+       this.currentYear = (new Date()).getFullYear();
+
+       this.prompt(prompts, function (props) {
+         if(props.githubUsername){
+           this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
+         } else {
+           this.repoUrl = 'user/repo';
+         }
+
+         if (!props.homepage) {
+           props.homepage = this.repoUrl;
+         }
+
+         this.keywords = props.keywords.split(',');
+
+         this.props = props;
+
+         cb();
+       }.bind(this));
+     },
+
 
     app: function () {
         this.config.save();
