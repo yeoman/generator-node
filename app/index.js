@@ -33,7 +33,7 @@ module.exports = yeoman.generators.Base.extend({
              }
 
              done(false);
-           }.bind(this));
+           });
          }
        }];
 
