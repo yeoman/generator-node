@@ -16,11 +16,11 @@
     "url": "https://github.com/yeoman/generator-node.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 3500"
   },
   "dependencies": {
     "npm-name": "~0.1.0",
-    "yeoman-generator": "~0.17.0"
+    "yeoman-generator": "~0.17.3"
   },
   "devDependencies": {
     "mocha": "*",
