@@ -34,7 +34,7 @@ module.exports = yeoman.generators.Base.extend({
 
              done(false);
            }.bind(this));
-         }.bind(this)
+         }
        }];
 
        this.prompt(prompts, function (props) {
