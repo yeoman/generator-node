@@ -5,6 +5,6 @@ var assert = require('assert'),
 
 describe('<%= slugname %> node module.', function() {
   it('must be awesome', function() {
-    assert( <%= safeSlugname %> .awesome(), 'awesome');
+    assert( <%= safeSlugname %>.awesome(), 'awesome');
   });
 });
