@@ -82,13 +82,15 @@ module.exports = yeoman.generators.Base.extend({
          name: 'keywords',
          message: 'Key your keywords (comma to split)'
        }, {
+         type: 'confirm',
          name: 'cli',
          message: 'Do you need cli tools?',
-         default: 'yes'
+         default: true
        }, {
+         type: 'confirm',
          name: 'browser',
          message: 'Do you need browserify?',
-         default: 'yes'
+         default: 'true'
        }];
 
        this.currentYear = (new Date()).getFullYear();
@@ -123,7 +125,7 @@ module.exports = yeoman.generators.Base.extend({
         this.template('_Gruntfile.js', 'Gruntfile.js');
         this.template('_package.json', 'package.json');
 
-        if (this.props.cli === 'yes' || this.props.cli) {
+        if (this.props.cli) {
             this.template('_cli.js', 'cli.js');
         }
     },

@@ -10,7 +10,7 @@ Install the module with: `npm install <%= slugname %>`
 ```js
 var <%= slugname %> = require('<%= slugname %>');
 <%= slugname %>.awesome(); // "awesome"
-```<% if (props.cli === "yes" || props.cli) { %>
+```<% if (props.cli) { %>
 
 Install with cli command
 
@@ -20,7 +20,7 @@ $ <%= slugname %> --help
 $ <%= slugname %> --version
 ```<% } %>
 
-<% if (props.browser === "yes") { %>
+<% if (props.browser) { %>
 ```sh
 # creates a browser.js
 $ grunt browserify
