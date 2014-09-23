@@ -45,8 +45,43 @@ describe('node generator', function () {
       'authorEmail': 'octo@example.com',
       'authorUrl': 'http://yeoman.io',
       'keywords': 'keyword1,keyword2,keyword3',
-      'cli': 'yes',
-      'browser': 'yes'
+      'cli': true,
+      'browser': true
+    });
+
+    this.app.run({}, function () {
+      assert.file(expected);
+      assert.fileContent('package.json', /"name": "mymodule"/);
+      done();
+    });
+  });
+
+  it('creates expected files without cli', function (done) {
+    var expected = [
+      'lib/mymodule.js',
+      'test/mymodule_test.js',
+      'example/mymodule_example.js',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      'Gruntfile.js',
+      'package.json',
+      'README.md'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'name': 'mymodule',
+      'description': 'awesome module',
+      'pkgName': false,
+      'license': 'MIT',
+      'homepage': 'http://yeoman.io',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com',
+      'authorUrl': 'http://yeoman.io',
+      'keywords': 'keyword1,keyword2,keyword3',
+      'cli': false,
+      'browser': true
     });
 
     this.app.run({}, function () {
