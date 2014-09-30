@@ -36,9 +36,5 @@
   "files": [
     "app"
   ],
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+  "license": "MIT"
 }
