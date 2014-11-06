@@ -22,7 +22,8 @@
   },
   "license": "<%= props.license %>",
   "files": [
-    "lib"
+    "lib"<% if (props.cli) { %>,
+    "cli.js"<% } %>
   ],
   "keywords": [
     "<%= slugname %>" <%
