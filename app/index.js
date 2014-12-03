@@ -84,13 +84,11 @@ module.exports = yeoman.generators.Base.extend({
        }, {
          type: 'confirm',
          name: 'cli',
-         message: 'Do you need cli tools?',
-         default: true
+         message: 'Do you need cli tools?'
        }, {
          type: 'confirm',
          name: 'browser',
-         message: 'Do you need browserify?',
-         default: 'true'
+         message: 'Do you need browserify?'
        }];
 
        this.currentYear = (new Date()).getFullYear();
