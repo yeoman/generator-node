@@ -68,16 +68,20 @@ module.exports = yeoman.generators.Base.extend({
       default: 'MIT'
     }, {
       name: 'githubUsername',
-      message: 'GitHub username'
+      message: 'GitHub username',
+      store: true
     }, {
       name: 'authorName',
-      message: 'Author\'s Name'
+      message: 'Author\'s Name',
+      store: true
     }, {
       name: 'authorEmail',
-      message: 'Author\'s Email'
+      message: 'Author\'s Email',
+      store: true
     }, {
       name: 'authorUrl',
-      message: 'Author\'s Homepage'
+      message: 'Author\'s Homepage',
+      store: true
     }, {
       name: 'keywords',
       message: 'Key your keywords (comma to split)'
