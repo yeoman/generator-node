@@ -52,8 +52,10 @@ describe('node generator', function () {
     this.app.run({}, function () {
       assert.file(expected);
       assert.fileContent('package.json', /"name": "mymodule"/);
+      assert.deepEqual(require('./temp/cli.js'), {});
       done();
     });
+
   });
 
   it('creates expected files without cli', function (done) {

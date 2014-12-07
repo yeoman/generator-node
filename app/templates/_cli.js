@@ -2,7 +2,7 @@
 
 'use strict';
 
-var <%= safeSlugname %> = require('./<%= slugname %>');
+var <%= safeSlugname %> = require('./lib/<%= slugname %>');
 
 var userArgs = process.argv;
 var searchParam = userArgs[2];
