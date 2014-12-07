@@ -4,6 +4,7 @@
 var path = require('path');
 var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
+var shelljs = require('shelljs');
 
 describe('node generator', function () {
   beforeEach(function (done) {
@@ -48,6 +49,8 @@ describe('node generator', function () {
       'cli': true,
       'browser': true
     });
+
+    shelljs.exec('npm install meow', {silent: true});
 
     this.app.run({}, function () {
       assert.file(expected);

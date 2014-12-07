@@ -31,6 +31,9 @@
         "<%= keywords[i] %>" <%
     } %>
   ],
+  "dependencies": {<% if (props.cli) { %>
+    "meow": "^2.0.0"
+  <% } %>},
   "devDependencies": {
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",

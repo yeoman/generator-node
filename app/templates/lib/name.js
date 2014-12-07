@@ -8,6 +8,6 @@
 
 'use strict';
 
-exports.awesome = function() {
-  return 'awesome';
+module.exports = function (str) {
+    console.log(str || 'Rainbow');
 };

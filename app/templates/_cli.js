@@ -1,16 +1,16 @@
-#! /usr/bin/env node
-
+#!/usr/bin/env node
 'use strict';
-
+var meow = require('meow');
 var <%= safeSlugname %> = require('./lib/<%= slugname %>');
 
-var userArgs = process.argv;
-var searchParam = userArgs[2];
+var cli = meow({
+    help: [
+        'Usage',
+        '  <%= slugname %> <input>',
+        '',
+        'Example',
+        '  <%= slugname %> Unicorn'
+    ].join('\n')
+});
 
-if (userArgs.indexOf('-h') !== -1 || userArgs.indexOf('--help') !== -1 || searchParam === undefined) {
-    return console.log('cli help');
-}
-
-if (userArgs.indexOf('-v') !== -1 || userArgs.indexOf('--version') !== -1) {
-    return console.log(require('./package').version);
-}
+<%= safeSlugname %>(cli.input[0]);
