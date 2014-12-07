@@ -1,5 +1,4 @@
 'use strict';
-
 var path = require('path');
 var npmName = require('npm-name');
 var yeoman = require('yeoman-generator');
@@ -10,7 +9,7 @@ module.exports = yeoman.generators.Base.extend({
         this.log(
             this.yeoman +
             '\nThe name of your project shouldn\'t contain "node" or "js" and' +
-            '\nshould be a unique ID not already in use at search.npmjs.org.');
+            '\nshould be a unique ID not already in use at npmjs.org.');
     },
     askForModuleName: function () {
        var done = this.async();
@@ -30,6 +29,7 @@ module.exports = yeoman.generators.Base.extend({
            npmName(answers.name, function (err, available) {
              if (!available) {
                done(true);
+               return;
              }
 
              done(false);
@@ -43,10 +43,9 @@ module.exports = yeoman.generators.Base.extend({
          }
 
          this.slugname = this._.slugify(props.name);
-         this.safeSlugname = this.slugname.replace(
-           /-+([a-zA-Z0-9])/g,
-           function (g) { return g[1].toUpperCase(); }
-         );
+         this.safeSlugname = this.slugname.replace(/-+([a-zA-Z0-9])/g, function (g) {
+           return g[1].toUpperCase();
+         });
 
          done();
        }.bind(this));
@@ -84,27 +83,25 @@ module.exports = yeoman.generators.Base.extend({
        }, {
          type: 'confirm',
          name: 'cli',
-         message: 'Do you need cli tools?'
+         message: 'Do you need a CLI?'
        }, {
          type: 'confirm',
          name: 'browser',
-         message: 'Do you need browserify?'
+         message: 'Do you need Browserify?'
        }];
 
        this.currentYear = (new Date()).getFullYear();
 
        this.prompt(prompts, function (props) {
-         if(props.githubUsername){
-           this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
+         if (props.githubUsername) {
+           this.repoUrl = props.githubUsername + '/' + this.slugname;
          } else {
            this.repoUrl = 'user/repo';
          }
 
-         if (!props.homepage) {
-           props.homepage = this.repoUrl;
-         }
-
-         this.keywords = props.keywords.split(',');
+         this.keywords = props.keywords.split(',').map(function (el) {
+           return el.trim();
+         })
 
          this.props = props;
 
@@ -119,22 +116,19 @@ module.exports = yeoman.generators.Base.extend({
         this.copy('gitignore', '.gitignore');
         this.copy('travis.yml', '.travis.yml');
 
-        this.template('_README.md', 'README.md');
-        this.template('_Gruntfile.js', 'Gruntfile.js');
+        this.template('README.md', 'README.md');
+        this.template('Gruntfile.js', 'Gruntfile.js');
         this.template('_package.json', 'package.json');
 
         if (this.props.cli) {
-            this.template('_cli.js', 'cli.js');
+            this.template('cli.js', 'cli.js');
         }
     },
 
     projectfiles: function () {
-        this.mkdir('lib');
-        this.template('lib/name.js', 'lib/' + this.slugname + '.js');
+        this.template('index.js', 'index.js');
         this.mkdir('test');
-        this.template('test/name_test.js', 'test/' + this.slugname + '_test.js');
-        this.mkdir('example');
-        this.template('example/name_example.js', 'example/' + this.slugname + '_example.js');
+        this.template('test/test.js', 'test/test.js');
     },
 
     install: function () {

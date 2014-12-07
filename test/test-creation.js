@@ -1,6 +1,5 @@
-/*global describe, beforeEach, it*/
+/*global describe, beforeEach, it */
 'use strict';
-
 var path = require('path');
 var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
@@ -10,7 +9,8 @@ describe('node generator', function () {
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
-        return done(err);
+        done(err);
+        return;
       }
 
       this.app = helpers.createGenerator('node:app', [
@@ -23,10 +23,9 @@ describe('node generator', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      'lib/mymodule.js',
-      'test/mymodule_test.js',
-      'example/mymodule_example.js',
+      'index.js',
       'cli.js',
+      'test/test.js',
       '.gitignore',
       '.jshintrc',
       '.travis.yml',
@@ -63,9 +62,8 @@ describe('node generator', function () {
 
   it('creates expected files without cli', function (done) {
     var expected = [
-      'lib/mymodule.js',
-      'test/mymodule_test.js',
-      'example/mymodule_example.js',
+      'index.js',
+      'test/test.js',
       '.gitignore',
       '.jshintrc',
       '.travis.yml',

@@ -1,37 +1,31 @@
 {
   "name": "generator-node",
   "version": "0.4.4",
-  "description": "A node generator for Yeoman",
+  "description": "Create a Node.js module",
   "keywords": [
     "yeoman-generator",
     "scaffold",
-    "node"
+    "node",
+    "module",
+    "cli"
   ],
-  "homepage": "https://github.com/yeoman/generator-node",
-  "bugs": "https://github.com/yeoman/generator-node/issues",
-  "author": "The Yeoman Team",
-  "main": "app/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yeoman/generator-node.git"
-  },
+  "author": "Yeoman team",
+  "main": "app",
+  "repository": "yeoman/generator-node",
   "scripts": {
     "test": "mocha --timeout 50000"
   },
   "dependencies": {
-    "npm-name": "~0.1.0",
-    "yeoman-generator": "~0.17.3"
+    "npm-name": "^1.0.2",
+    "yeoman-generator": "^0.18.3"
   },
   "devDependencies": {
-    "grunt": "~0.4.5",
+    "grunt": "^0.4.5",
     "mocha": "*",
     "shelljs": "^0.3.0"
   },
-  "peerDependencies": {
-    "yo": ">=1.0.3"
-  },
   "engines": {
-    "node": ">= 0.10.0",
+    "node": ">=0.10.0",
     "npm": ">=1.2.10"
   },
   "files": [

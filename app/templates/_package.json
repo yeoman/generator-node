@@ -1,61 +1,42 @@
 {
   "name": "<%= slugname %>",
   "version": "0.0.0",
-  "main": "lib/<%= slugname %>.js",
   "description": "<%= props.description %>",
-  <%
-  if (props.homepage) { %>
-      "homepage": "<%= props.homepage %>",
-    <%
-  } %>
-    "bugs": "<%= repoUrl %>/issues",
+<% if (props.homepage) { %>  "homepage": "<%= props.homepage %>",<% } %>
   "author": {
     "name": "<%= props.authorName %>",
-    "email": "<%= props.authorEmail %>" <%
-    if (props.authorUrl) { %> ,
-        "url": "<%= props.authorUrl %>" <%
-    } %>
+    "email": "<%= props.authorEmail %>"<% if (props.authorUrl) { %>,
+    "url": "<%= props.authorUrl %>"<% } %>
   },
-  "repository": {
-    "type": "git",
-    "url": "<%= repoUrl %>"
-  },
+  "repository": "<%= repoUrl %>",
   "license": "<%= props.license %>",
   "files": [
-    "lib"<% if (props.cli) { %>,
+    "index.js"<% if (props.cli) { %>,
     "cli.js"<% } %>
   ],
   "keywords": [
-    "<%= slugname %>" <%
-    for (var i = 0; i < keywords.length; i++) { %> ,
-        "<%= keywords[i] %>" <%
-    } %>
+    "<%= slugname %>"<% for (var i = 0; i < keywords.length; i++) { %>,
+    "<%= keywords[i] %>"<% } %>
   ],
   "dependencies": {<% if (props.cli) { %>
     "meow": "^2.0.0"
   <% } %>},
   "devDependencies": {
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
-    "load-grunt-tasks": "^0.4.0",
-    "time-grunt": "^0.3.1",
-    "grunt-mocha-cli": "^1.9.0",
-    "jshint-stylish": "^0.2.0" <%
-    if (props.browser) { %> ,
-        "browserify": "^4.1.3" <%
-    } %>
+    "load-grunt-tasks": "^1.0.0",
+    "time-grunt": "^1.0.0",
+    "grunt-mocha-cli": "^1.11.0",
+    "jshint-stylish": "^1.0.0"<% if (props.browser) { %>,
+    "browserify": "^7.0.0"<% } %>
   },
   "scripts": {
-    "test": "grunt" <%
-    if (props.browser) { %> ,
-        "browser": "browserify lib/<%= slugname %>.js > browser.js" <%
-    } %>
-  } <%
-  if (props.cli) { %> ,
-      "bin": {
-        "<%= slugname %>": "cli.js"
-    },
-    "preferGlobal": "true" <%
-  } %>
+    "test": "grunt"<% if (props.browser) { %>,
+    "browser": "browserify index.js > browser.js"<% } %>
+  }<% if (props.cli) { %>,
+  "bin": {
+    "<%= slugname %>": "cli.js"
+  }<% } %>
 }
