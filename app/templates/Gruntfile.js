@@ -11,6 +11,9 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
+      gruntfile: {
+        src: ['Gruntfile.js']
+      },
       js: {
         src: ['*.js']
       },
@@ -30,9 +33,9 @@ module.exports = function (grunt) {
         files: '<%%= jshint.gruntfile.src %>',
         tasks: ['jshint:gruntfile']
       },
-      lib: {
-        files: '<%%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'mochacli']
+      js: {
+        files: '<%%= jshint.js.src %>',
+        tasks: ['jshint:js', 'mochacli']
       },
       test: {
         files: '<%%= jshint.test.src %>',
