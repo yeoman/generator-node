@@ -1,6 +1,6 @@
 {
   "name": "generator-node",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Create a Node.js module",
   "keywords": [
     "yeoman-generator",
