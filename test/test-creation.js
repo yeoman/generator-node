@@ -29,6 +29,7 @@ describe('node generator', function () {
       '.gitignore',
       '.jshintrc',
       '.travis.yml',
+      '.editorconfig',
       'Gruntfile.js',
       'package.json',
       'README.md'

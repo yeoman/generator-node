@@ -116,6 +116,7 @@ module.exports = yeoman.generators.Base.extend({
 
   app: function () {
     this.config.save();
+    this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
