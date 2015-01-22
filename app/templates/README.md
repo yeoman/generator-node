@@ -31,7 +31,7 @@ $ npm run browser
 
 ## License
 
-MIT © [<%= props.authorName %>](<%= props.authorUrl %>)
+<%= props.license %> © [<%= props.authorName %>](<%= props.authorUrl %>)
 
 
 [npm-url]: https://npmjs.org/package/<%= slugname %>
