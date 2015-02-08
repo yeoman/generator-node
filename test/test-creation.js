@@ -52,7 +52,7 @@ describe('node generator', function () {
 
     shelljs.exec('npm install meow', {silent: true});
 
-    this.app.run({}, function () {
+    this.app.run(function () {
       assert.file(expected);
       assert.fileContent('package.json', /"name": "mymodule"/);
       assert.deepEqual(require('./temp/cli.js'), {});
@@ -88,7 +88,7 @@ describe('node generator', function () {
       'browser': true
     });
 
-    this.app.run({}, function () {
+    this.app.run(function () {
       assert.file(expected);
       assert.fileContent('package.json', /"name": "mymodule"/);
       done();
