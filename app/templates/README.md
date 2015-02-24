@@ -13,7 +13,7 @@ $ npm install --save <%= slugname %>
 ## Usage
 
 ```js
-var <%= slugname %> = require('<%= slugname %>');
+var <%= safeSlugname %> = require('<%= slugname %>');
 
 <%= slugname %>('Rainbow');
 ```<% if (props.cli) { %>
