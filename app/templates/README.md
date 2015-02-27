@@ -1,4 +1,4 @@
-# <%= props.slugname %> [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+# <%= props.slugname %> [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
 > <%= props.description %>
 
@@ -34,9 +34,9 @@ $ npm run browser
 <%= props.license %> © [<%= props.authorName %>](<%= props.authorUrl %>)
 
 
-[npm-url]: https://npmjs.org/package/<%= slugname %>
 [npm-image]: https://badge.fury.io/js/<%= slugname %>.svg
-[travis-url]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>
+[npm-url]: https://npmjs.org/package/<%= slugname %>
 [travis-image]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>.svg?branch=master
-[daviddm-url]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>.svg?theme=shields.io
-[daviddm-image]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>
+[travis-url]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>
+[daviddm-image]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>
