@@ -67,7 +67,7 @@ module.exports = yeoman.generators.Base.extend({
       default: 'MIT'
     }, {
       name: 'githubUsername',
-      message: 'GitHub username',
+      message: 'GitHub username or organization',
       store: true
     }, {
       name: 'authorName',
