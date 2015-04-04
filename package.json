@@ -22,7 +22,7 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "mocha": "*",
-    "shelljs": "^0.3.0"
+    "shelljs": "^0.4.0"
   },
   "engines": {
     "node": ">=0.10.0",
