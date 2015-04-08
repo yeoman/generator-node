@@ -16,7 +16,8 @@ describe('node:app', function () {
       '.editorconfig',
       '.jshintrc',
       '.gitignore',
-      '.gitattributes'
+      '.gitattributes',
+      '.jscsrc'
     ]);
   });
 });
