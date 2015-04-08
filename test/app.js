@@ -14,7 +14,9 @@ describe('node:app', function () {
     assert.file([
       '.travis.yml',
       '.editorconfig',
-      '.jshintrc'
+      '.jshintrc',
+      '.gitignore',
+      '.gitattributes'
     ]);
   });
 });
