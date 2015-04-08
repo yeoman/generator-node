@@ -12,7 +12,8 @@ describe('node:app', function () {
 
   it('creates files', function () {
     assert.file([
-      '.travis.yml'
+      '.travis.yml',
+      '.editorconfig'
     ]);
   });
 });
@@ -27,6 +28,20 @@ describe('node:app --no-travis', function () {
   it('skip .travis.yml', function () {
     assert.noFile([
       '.travis.yml'
+    ]);
+  });
+});
+
+describe('node:app --no-editorconfig', function () {
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../generators/app'))
+      .withOptions({ editorconfig: false })
+      .on('end', done);
+  });
+
+  it('skip .editorconfig', function () {
+    assert.noFile([
+      '.editorconfig'
     ]);
   });
 });

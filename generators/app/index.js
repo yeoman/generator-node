@@ -11,12 +11,25 @@ module.exports = generators.Base.extend({
       defaults: true,
       description: 'Include travis config'
     });
+
+    this.option('editorconfig', {
+      type: Boolean,
+      required: false,
+      defaults: true,
+      description: 'Include editor config file'
+    });
   },
 
   initializing: function() {
     if (this.options.travis) {
       this.composeWith('node:travis', {}, {
         local: require.resolve('../travis')
+      });
+    }
+
+    if (this.options.editorconfig) {
+      this.composeWith('node:editorconfig', {}, {
+        local: require.resolve('../editorconfig')
       });
     }
   }
