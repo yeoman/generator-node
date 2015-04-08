@@ -13,11 +13,19 @@ module.exports = generators.Base.extend({
     });
   },
 
-  initializing: function() {
+  initializing: function () {
     if (this.options.travis) {
       this.composeWith('node:travis', {}, {
         local: require.resolve('../travis')
       });
     }
+
+    this.composeWith('node:editorconfig', {}, {
+      local: require.resolve('../editorconfig')
+    });
+
+    this.composeWith('node:jshint', {}, {
+      local: require.resolve('../jshint')
+    });
   }
 });

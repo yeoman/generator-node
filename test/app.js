@@ -12,7 +12,9 @@ describe('node:app', function () {
 
   it('creates files', function () {
     assert.file([
-      '.travis.yml'
+      '.travis.yml',
+      '.editorconfig',
+      '.jshintrc'
     ]);
   });
 });
