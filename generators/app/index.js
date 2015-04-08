@@ -31,5 +31,9 @@ module.exports = generators.Base.extend({
     this.composeWith('node:git', {}, {
       local: require.resolve('../git')
     });
+
+    this.composeWith('node:jscs', {}, {
+      local: require.resolve('../jscs')
+    });
   }
 });
