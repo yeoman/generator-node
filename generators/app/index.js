@@ -27,5 +27,9 @@ module.exports = generators.Base.extend({
     this.composeWith('node:jshint', {}, {
       local: require.resolve('../jshint')
     });
+
+    this.composeWith('node:git', {}, {
+      local: require.resolve('../git')
+    });
   }
 });
