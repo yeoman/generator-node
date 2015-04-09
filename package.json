@@ -2,6 +2,7 @@
   "name": "generator-node",
   "version": "0.7.0",
   "description": "Create a Node.js module",
+  "homepage": "https://github.com/yeoman/generator-node",
   "keywords": [
     "yeoman-generator",
     "scaffold",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "mocha": "^2.2.3",
+    "mockery": "^1.4.0",
     "yeoman-assert": "^2.0.0"
   },
   "files": [

@@ -35,5 +35,9 @@ module.exports = generators.Base.extend({
     this.composeWith('node:jscs', {}, {
       local: require.resolve('../jscs')
     });
+
+    this.composeWith('node:package', {}, {
+      local: require.resolve('../package')
+    });
   }
 });
