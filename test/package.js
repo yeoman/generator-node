@@ -4,7 +4,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
 describe('node:package', function () {
-	before(function(done) {
+	before(function (done) {
 		helpers.run(path.join(__dirname, '../generators/package'))
 			.on('end', done);
 	});
