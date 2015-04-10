@@ -5,12 +5,6 @@ var path = require('path');
 var slugify = require("underscore.string/slugify");
 
 module.exports = generators.Base.extend({
-	initializing: function () {
-		this.fs.copy(
-			this.templatePath('_package.json'),
-			this.destinationPath('package.json')
-		);
-	},
 	askForModuleName: function () {
 		var done = this.async();
 
@@ -51,7 +45,7 @@ module.exports = generators.Base.extend({
 	},
 
 	askFor: function () {
-		var cb = this.async();
+		var done = this.async();
 
 		var prompts = [{
 			name: 'description',
@@ -83,32 +77,29 @@ module.exports = generators.Base.extend({
 		}, {
 			name: 'keywords',
 			message: 'Key your keywords (comma to split)'
-		}, {
-			type: 'confirm',
-			name: 'cli',
-			message: 'Do you need a CLI?'
-		}, {
-			type: 'confirm',
-			name: 'browser',
-			message: 'Do you need Browserify?'
 		}];
 
 		this.currentYear = (new Date()).getFullYear();
 
 		this.prompt(prompts, function (props) {
+      this.props = props;
 			if (props.githubUsername) {
-				this.repoUrl = props.githubUsername + '/' + this.slugname;
+				this.props.repoUrl = props.githubUsername + '/' + this.slugname;
 			} else {
-				this.repoUrl = 'user/repo';
+				this.props.repoUrl = 'user/repo';
 			}
 
-			this.keywords = props.keywords.split(',').map(function(el) {
+			this.props.keywords = props.keywords.split(',').map(function(el) {
 				return el.trim();
 			});
 
-			this.props = props;
-
-			cb();
+			done();
 		}.bind(this));
-	}
+	},
+  initializing: function () {
+    var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+    // We are reaching here even before the askFor is done!
+    this.fs.writeJSON('package.json', pkg);
+    this.fs.copyTpl('package.json', 'package.json', this.props);
+  }
 });
