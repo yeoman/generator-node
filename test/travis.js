@@ -1,5 +1,4 @@
 'use strict';
-
 var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
@@ -11,8 +10,6 @@ describe('node:travis', function () {
   });
 
   it('creates .travis.yml', function () {
-    assert.file([
-      '.travis.yml'
-    ]);
+    assert.file('.travis.yml');
   });
 });

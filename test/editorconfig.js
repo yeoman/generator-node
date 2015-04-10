@@ -10,8 +10,6 @@ describe('node:editorconfig', function () {
   });
 
   it('creates .editorconfig', function () {
-    assert.file([
-      '.editorconfig'
-    ]);
+    assert.file('.editorconfig');
   });
 });
