@@ -78,7 +78,7 @@ describe('node:package', function () {
         .withPrompts({
           name: 'generator-node'
         })
-        .on('ready', function(gen) {
+        .on('ready', function (gen) {
           gen.fs.writeJSON(gen.destinationPath('package.json'), this.pkg);
         }.bind(this))
         .on('end', done);

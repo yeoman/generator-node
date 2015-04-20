@@ -26,12 +26,13 @@ module.exports = generators.Base.extend({
         name: 'askAgain',
         message: 'The name above already exists on npm, choose another?',
         default: true,
-        when: function(answers) {
+        when: function (answers) {
           if (self.pkg.name) {
             return false;
           }
 
           var done = this.async();
+
           npmName(answers.name, function (err, available) {
             done(available);
           });
@@ -126,5 +127,4 @@ module.exports = generators.Base.extend({
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON('package.json', _.extend(pkgJsonFields, this.pkg));
   }
-
 });

@@ -30,7 +30,7 @@ describe('node:app', function () {
 describe('node:app --no-travis', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
-      .withOptions({ travis: false })
+      .withOptions({travis: false})
       .on('ready', function (gen) {
         gen.fs.copy(
           path.join(__dirname, '../package.json'),
