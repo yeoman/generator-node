@@ -4,6 +4,22 @@ var mockery = require('mockery');
 var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
+var fs = require('fs');
+
+function assertJSONFileContains(filename, content) {
+  var obj = JSON.parse(fs.readFileSync(filename, 'utf8'));
+  assertObjectContains(obj, content);
+}
+
+function assertObjectContains(obj, content) {
+  Object.keys(content).forEach(function (key) {
+    if (typeof content[key] === 'object') {
+      assertObjectContains(content[key], obj[key]);
+    } else {
+      assert.equal(content[key], obj[key]);
+    }
+  });
+}
 
 
 describe('node:app', function () {
@@ -51,7 +67,7 @@ describe('node:app', function () {
 
     it('creates package.json', function () {
       assert.file('package.json');
-      assert.fileContent('package.json', JSON.stringify({
+      assertJSONFileContains('package.json', {
         name: 'generator-node',
         version: '0.0.0',
         description: this.answers.description,
@@ -63,12 +79,9 @@ describe('node:app', function () {
           email: this.answers.authorEmail,
           url: this.answers.authorUrl
         },
-        scripts: {
-          test: 'mocha -R spec'
-        },
         files: ['lib'],
         keywords: this.answers.keywords
-      }, null, 2));
+      });
     });
   });
 
@@ -81,9 +94,6 @@ describe('node:app', function () {
         repository: 'yeoman/generator-node',
         license: 'BSD',
         author: 'The Yeoman Team',
-        scripts: {
-          test: 'mocha -R spec'
-        },
         files: ['lib'],
         keywords: ['bar']
       };
@@ -100,7 +110,7 @@ describe('node:app', function () {
 
     it('extends package.json keys with missing ones', function () {
       var pkg = _.extend({name: 'generator-node'}, this.pkg);
-      assert.fileContent('package.json', JSON.stringify(pkg, null, 2));
+      assertJSONFileContains('package.json', pkg);
     });
 
     it('does not overwrite previous README.md', function () {
