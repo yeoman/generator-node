@@ -63,9 +63,6 @@ describe('node:app', function () {
           email: this.answers.authorEmail,
           url: this.answers.authorUrl
         },
-        scripts: {
-          test: 'mocha -R spec'
-        },
         files: ['lib'],
         keywords: this.answers.keywords
       }, null, 2));
@@ -81,9 +78,6 @@ describe('node:app', function () {
         repository: 'yeoman/generator-node',
         license: 'BSD',
         author: 'The Yeoman Team',
-        scripts: {
-          test: 'mocha -R spec'
-        },
         files: ['lib'],
         keywords: ['bar']
       };

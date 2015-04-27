@@ -130,9 +130,6 @@ module.exports = generators.Base.extend({
         email: this.props.authorEmail,
         url: this.props.authorUrl
       },
-      scripts: {
-        test: 'mocha -R spec'
-      },
       files: ['lib'],
       keywords: this.props.keywords
     };
@@ -162,6 +159,10 @@ module.exports = generators.Base.extend({
 
     this.composeWith('node:jscs', {}, {
       local: require.resolve('../jscs')
+    });
+
+    this.composeWith('node:gulp', {}, {
+      local: require.resolve('../gulp')
     });
 
     if (!this.fs.exists(this.destinationPath('README.md'))) {
