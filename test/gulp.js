@@ -52,5 +52,4 @@ describe('node:gulp', function () {
       assert.noFileContent('package.json', 'gulp-coveralls');
     });
   });
-
 });

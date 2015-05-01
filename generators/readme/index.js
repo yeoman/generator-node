@@ -58,6 +58,6 @@ module.exports = generators.Base.extend({
         },
         license: this.options.license
       }
-    )
+    );
   }
 });

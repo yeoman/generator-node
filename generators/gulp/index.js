@@ -9,7 +9,6 @@ module.exports = generators.Base.extend({
     this.option('coveralls', {
       type: Boolean,
       required: false,
-      defaults: undefined,
       description: 'Send coverage reports to coveralls'
     });
   },
@@ -19,10 +18,11 @@ module.exports = generators.Base.extend({
       name: 'includeCoveralls',
       type: 'confirm',
       message: 'Send coverage reports to coveralls',
-      when: this.options.coveralls == null
+      when: this.options.coveralls === undefined
     }], function (props) {
       this.props = props;
-      if (this.options.coveralls != null) {
+
+      if (this.options.coveralls !== undefined) {
         this.props.includeCoveralls = this.options.coveralls;
       }
     }.bind(this));
@@ -35,7 +35,7 @@ module.exports = generators.Base.extend({
       // Include Gulp related dev dependencies
       pkg.devDependencies = pkg.devDependencies || {};
       _.extend(pkg.devDependencies, {
-        'gulp': '^3.6.0',
+        gulp: '^3.6.0',
         'gulp-eslint': '^0.8.0',
         'gulp-istanbul': '^0.8.1',
         'gulp-jscs': '^1.1.0',
@@ -44,6 +44,7 @@ module.exports = generators.Base.extend({
         'gulp-plumber': '^1.0.0',
         'jshint-stylish': '^1.0.0'
       });
+
       if (this.props.includeCoveralls) {
         pkg.devDependencies['gulp-coveralls'] = '^0.1.0';
       }
@@ -57,6 +58,7 @@ module.exports = generators.Base.extend({
 
     gulpfile: function () {
       var tasks = ['static', 'test'];
+
       if (this.props.includeCoveralls) {
         tasks.push('coveralls');
       }
