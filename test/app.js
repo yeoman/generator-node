@@ -61,7 +61,9 @@ describe('node:app', function () {
         '.gitignore',
         '.gitattributes',
         '.jscsrc',
-        'README.md'
+        'README.md',
+        'lib/index.js',
+        'test/index.js'
       ]);
     });
 
@@ -122,12 +124,6 @@ describe('node:app', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/app'))
         .withOptions({travis: false})
-        .on('ready', function (gen) {
-          gen.fs.copy(
-            path.join(__dirname, '../package.json'),
-            gen.destinationPath('package.json')
-          );
-        })
         .on('end', done);
     });
 

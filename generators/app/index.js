@@ -14,6 +14,13 @@ module.exports = generators.Base.extend({
       defaults: true,
       description: 'Include travis config'
     });
+
+    this.option('boilerplate', {
+      type: Boolean,
+      required: false,
+      defaults: true,
+      description: 'Include boilerplate files'
+    });
   },
 
   initializing: function () {
@@ -164,6 +171,14 @@ module.exports = generators.Base.extend({
     this.composeWith('node:gulp', {}, {
       local: require.resolve('../gulp')
     });
+
+    if (this.options.boilerplate) {
+      this.composeWith('node:boilerplate', {
+        options: {name: this.props.name}
+      }, {
+        local: require.resolve('../boilerplate')
+      });
+    }
 
     if (!this.fs.exists(this.destinationPath('README.md'))) {
       this.composeWith('node:readme', {
