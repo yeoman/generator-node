@@ -35,15 +35,10 @@ module.exports = generators.Base.extend({
       required: true,
       description: 'Author url'
     });
-
-    this.option('license', {
-      type: String,
-      required: true,
-      description: 'Project license'
-    });
   },
 
   writing: function () {
+    var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     this.fs.copyTpl(
       this.templatePath('README.md'),
       this.destinationPath('README.md'),
@@ -56,7 +51,7 @@ module.exports = generators.Base.extend({
           name: this.options.authorName,
           url: this.options.authorURL
         },
-        license: this.options.license
+        license: pkg.license
       }
     );
   }

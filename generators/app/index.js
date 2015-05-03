@@ -82,11 +82,6 @@ module.exports = generators.Base.extend({
         message: 'Project homepage url',
         when: !this.pkg.homepage
       }, {
-        name: 'license',
-        message: 'License',
-        when: !this.pkg.license,
-        default: 'MIT'
-      }, {
         name: 'githubUsername',
         message: 'GitHub username or organization',
         when: !this.pkg.repository
@@ -131,7 +126,6 @@ module.exports = generators.Base.extend({
       description: this.props.description,
       homepage: this.props.homepage,
       repository: this.props.repository,
-      license: this.props.license,
       author: {
         name: this.props.authorName,
         email: this.props.authorEmail,
@@ -180,6 +174,16 @@ module.exports = generators.Base.extend({
       });
     }
 
+    this.composeWith('license', {
+      options: {
+        name: this.props.authorName,
+        email: this.props.authorEmail,
+        website: this.props.authorWebsite
+      }
+    }, {
+      local: require.resolve('generator-license/app')
+    });
+
     if (!this.fs.exists(this.destinationPath('README.md'))) {
       this.composeWith('node:readme', {
         options: {
@@ -187,8 +191,7 @@ module.exports = generators.Base.extend({
           description: this.props.description,
           githubAccount: this.props.githubAccount,
           authorName: this.props.authorName,
-          authorURL: this.props.authorURL,
-          license: this.props.license
+          authorURL: this.props.authorURL
         }
       }, {
         local: require.resolve('../readme')

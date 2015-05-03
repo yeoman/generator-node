@@ -3,7 +3,7 @@ var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
-describe('node:travis', function () {
+describe('node:readme', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/readme'))
       .withOptions({
@@ -13,6 +13,11 @@ describe('node:travis', function () {
         authorName: 'Yeoman',
         authorURL: 'http://yeoman.io',
         license: 'MIT'
+      })
+      .on('ready', function (gen) {
+        gen.fs.writeJSON(gen.destinationPath('package.json'), {
+          license: 'MIT'
+        });
       })
       .on('end', done);
   });
