@@ -178,7 +178,7 @@ module.exports = generators.Base.extend({
       options: {
         name: this.props.authorName,
         email: this.props.authorEmail,
-        website: this.props.authorWebsite
+        website: this.props.authorUrl
       }
     }, {
       local: require.resolve('generator-license/app')
@@ -197,5 +197,9 @@ module.exports = generators.Base.extend({
         local: require.resolve('../readme')
       });
     }
+  },
+
+  installing: function () {
+    this.npmInstall();
   }
 });

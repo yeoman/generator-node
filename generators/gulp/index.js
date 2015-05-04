@@ -14,6 +14,7 @@ module.exports = generators.Base.extend({
   },
 
   prompting: function () {
+    var done = this.async();
     this.prompt([{
       name: 'includeCoveralls',
       type: 'confirm',
@@ -25,6 +26,8 @@ module.exports = generators.Base.extend({
       if (this.options.coveralls !== undefined) {
         this.props.includeCoveralls = this.options.coveralls;
       }
+
+      done();
     }.bind(this));
   },
 
@@ -68,7 +71,7 @@ module.exports = generators.Base.extend({
         this.destinationPath('gulpfile.js'),
         {
           includeCoveralls: this.props.includeCoveralls,
-          tasks: tasks.join(', ')
+          tasks: tasks.map(JSON.stringify).join(', ')
         }
       );
     }

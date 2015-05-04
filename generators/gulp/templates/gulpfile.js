@@ -14,7 +14,10 @@ var handleErr = function (err) {
 };
 
 gulp.task('static', function () {
-  return gulp.src('**/*.js')
+  return gulp.src([
+      '**/*.js',
+      '!node_modules/**'
+    ])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'))
