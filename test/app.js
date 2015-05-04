@@ -29,6 +29,11 @@ describe('node:app', function () {
     mockery.registerMock('npm-name', function (name, cb) {
       cb(true);
     });
+
+    mockery.registerMock(
+      require.resolve('generator-license/app'),
+      helpers.createDummyGenerator()
+    );
   });
 
   after(function () {
@@ -41,7 +46,6 @@ describe('node:app', function () {
         name: 'generator-node',
         description: 'A node generator',
         homepage: 'http://yeoman.io',
-        license: 'MIT',
         githubUsername: 'yeoman',
         authorName: 'The Yeoman Team',
         authorEmail: 'hi@yeoman.io',
@@ -75,7 +79,6 @@ describe('node:app', function () {
         description: this.answers.description,
         homepage: this.answers.homepage,
         repository: 'yeoman/generator-node',
-        license: this.answers.license,
         author: {
           name: this.answers.authorName,
           email: this.answers.authorEmail,
@@ -94,7 +97,6 @@ describe('node:app', function () {
         description: 'lots of fun',
         homepage: 'http://yeoman.io',
         repository: 'yeoman/generator-node',
-        license: 'BSD',
         author: 'The Yeoman Team',
         files: ['lib'],
         keywords: ['bar']
