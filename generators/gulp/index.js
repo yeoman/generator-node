@@ -9,7 +9,7 @@ module.exports = generators.Base.extend({
     this.option('coveralls', {
       type: Boolean,
       required: false,
-      description: 'Send coverage reports to coveralls'
+      desc: 'Send coverage reports to coveralls'
     });
   },
 

@@ -9,31 +9,31 @@ module.exports = generators.Base.extend({
     this.option('name', {
       type: String,
       required: true,
-      description: 'Project name'
+      desc: 'Project name'
     });
 
     this.option('description', {
       type: String,
       required: true,
-      description: 'Project description'
+      desc: 'Project description'
     });
 
     this.option('githubAccount', {
       type: String,
       required: true,
-      description: 'User github account'
+      desc: 'User github account'
     });
 
     this.option('authorName', {
       type: String,
       required: true,
-      description: 'Author name'
+      desc: 'Author name'
     });
 
     this.option('authorUrl', {
       type: String,
       required: true,
-      description: 'Author url'
+      desc: 'Author url'
     });
   },
 

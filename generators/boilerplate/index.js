@@ -8,7 +8,7 @@ module.exports = generators.Base.extend({
 
     this.option('name', {
       required: true,
-      description: 'The new module name.'
+      desc: 'The new module name.'
     });
   },
 

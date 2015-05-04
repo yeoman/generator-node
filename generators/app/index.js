@@ -12,14 +12,14 @@ module.exports = generators.Base.extend({
       type: Boolean,
       required: false,
       defaults: true,
-      description: 'Include travis config'
+      desc: 'Include travis config'
     });
 
     this.option('boilerplate', {
       type: Boolean,
       required: false,
       defaults: true,
-      description: 'Include boilerplate files'
+      desc: 'Include boilerplate files'
     });
   },
 
