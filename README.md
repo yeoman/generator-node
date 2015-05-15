@@ -1,6 +1,6 @@
 # Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node)
 
-`generator-node` creates a base template to start a new Node.js modules.
+`generator-node` creates a base template to start a new Node.js module.
 
 It is also easily composed into your own generators so you can only target your efforts at your generator's specific features.
 
@@ -27,10 +27,10 @@ That'll generate a project with all the common tools setup. This includes:
 - Filled `package.json` file
 - [gulp](http://gulpjs.com/) test runner
 - [mocha](http://mochajs.org/) unit test
-- [jshint](http://jshint.com/) linting
-- [jscs](http://jscs.info/) code style checking
+- [JSHint](http://jshint.com/) linting
+- [JSCS](http://jscs.info/) code style checking
 - [Istanbul](https://gotwarlost.github.io/istanbul/) code coverage (optionnally tracked on [Coveralls](https://coveralls.io/))
-- [TravisCI](https://travis-ci.org/) continuous integration (optionnal)
+- [Travis CI](https://travis-ci.org/) continuous integration (optional)
 - [License](https://spdx.org/licenses/)
 
 ### Running tests
@@ -50,7 +50,7 @@ $ mocha test/name.js
 
 ### Publishing your code
 
-Once you're tests are passing (ideally with a TravisCI green run), you might be ready to publish your code to npm. We recommend you using [npm version]() to tag release correctly.
+Once you're tests are passing (ideally with a Travis CI green run), you might be ready to publish your code to npm. We recommend you using [npm version]() to tag release correctly.
 
 ```
 $ npm version major
@@ -96,6 +96,7 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:jshint`
 - `node:readme`
 - `node:travis`
+
 
 ## License
 
