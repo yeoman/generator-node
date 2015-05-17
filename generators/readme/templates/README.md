@@ -1,4 +1,5 @@
-# <%= projectName %> [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# <%= projectName %> [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]<%
+if (includeCoveralls) { %> [![Coverage percentage][coveralls-image]][coveralls-url]<% } -%>
 
 > <%= description %>
 
@@ -29,3 +30,7 @@ var <%= safeProjectName %> = require('<%= projectName %>');
 [travis-url]: https://travis-ci.org/<%= githubAccount %>/<%= projectName %>
 [daviddm-image]: https://david-dm.org/<%= githubAccount %>/<%= projectName %>.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/<%= githubAccount %>/<%= projectName %>
+<% if (includeCoveralls) { -%>
+[coveralls-image]: https://coveralls.io/repos/<%= githubAccount %>/<%= projectName %>/badge.svg
+[coveralls-url]: https://coveralls.io/r/<%= githubAccount %>/<%= projectName %>
+<% } -%>

@@ -35,6 +35,12 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Author url'
     });
+
+    this.option('coveralls', {
+      type: Boolean,
+      required: true,
+      desc: 'Include coveralls badge'
+    });
   },
 
   writing: function () {
@@ -51,7 +57,8 @@ module.exports = generators.Base.extend({
           name: this.options.authorName,
           url: this.options.authorURL
         },
-        license: pkg.license
+        license: pkg.license,
+        includeCoveralls: this.options.coveralls
       }
     );
   }

@@ -12,7 +12,7 @@ describe('node:readme', function () {
         githubAccount: 'yeoman',
         authorName: 'Yeoman',
         authorURL: 'http://yeoman.io',
-        license: 'MIT'
+        coveralls: true
       })
       .on('ready', function (gen) {
         gen.fs.writeJSON(gen.destinationPath('package.json'), {
@@ -29,5 +29,30 @@ describe('node:readme', function () {
     assert.fileContent('README.md', '$ npm install --save my-project');
     assert.fileContent('README.md', 'MIT © [Yeoman](http://yeoman.io)');
     assert.fileContent('README.md', '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master');
+    assert.fileContent('README.md', 'coveralls');
+  });
+});
+
+describe('node:readme --no-coveralls', function () {
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../generators/readme'))
+      .withOptions({
+        name: 'my-project',
+        description: 'a cool project',
+        githubAccount: 'yeoman',
+        authorName: 'Yeoman',
+        authorURL: 'http://yeoman.io',
+        coveralls: false
+      })
+      .on('ready', function (gen) {
+        gen.fs.writeJSON(gen.destinationPath('package.json'), {
+          license: 'MIT'
+        });
+      })
+      .on('end', done);
+  });
+
+  it('does not include coveralls badge README.md', function () {
+    assert.noFileContent('README.md', 'coveralls');
   });
 });

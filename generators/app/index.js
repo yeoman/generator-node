@@ -105,6 +105,11 @@ module.exports = generators.Base.extend({
         message: 'Key your keywords (comma to split)',
         when: !this.pkg.keywords,
         filter: _.words
+      }, {
+        name: 'includeCoveralls',
+        type: 'confirm',
+        message: 'Send coverage reports to coveralls',
+        when: this.options.coveralls === undefined
       }];
 
       this.prompt(prompts, function (props) {
@@ -162,7 +167,11 @@ module.exports = generators.Base.extend({
       local: require.resolve('../jscs')
     });
 
-    this.composeWith('node:gulp', {}, {
+    this.composeWith('node:gulp', {
+      options: {
+        coveralls: this.props.includeCoveralls
+      }
+    }, {
       local: require.resolve('../gulp')
     });
 
@@ -191,7 +200,8 @@ module.exports = generators.Base.extend({
           description: this.props.description,
           githubAccount: this.props.githubAccount,
           authorName: this.props.authorName,
-          authorURL: this.props.authorURL
+          authorURL: this.props.authorURL,
+          coveralls: this.props.includeCoveralls
         }
       }, {
         local: require.resolve('../readme')

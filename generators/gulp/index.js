@@ -13,24 +13,6 @@ module.exports = generators.Base.extend({
     });
   },
 
-  prompting: function () {
-    var done = this.async();
-    this.prompt([{
-      name: 'includeCoveralls',
-      type: 'confirm',
-      message: 'Send coverage reports to coveralls',
-      when: this.options.coveralls === undefined
-    }], function (props) {
-      this.props = props;
-
-      if (this.options.coveralls !== undefined) {
-        this.props.includeCoveralls = this.options.coveralls;
-      }
-
-      done();
-    }.bind(this));
-  },
-
   writing: {
     package: function () {
       var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
@@ -48,7 +30,7 @@ module.exports = generators.Base.extend({
         'jshint-stylish': '^1.0.0'
       });
 
-      if (this.props.includeCoveralls) {
+      if (this.options.coveralls) {
         pkg.devDependencies['gulp-coveralls'] = '^0.1.0';
       }
 
@@ -62,7 +44,7 @@ module.exports = generators.Base.extend({
     gulpfile: function () {
       var tasks = ['static', 'test'];
 
-      if (this.props.includeCoveralls) {
+      if (this.options.coveralls) {
         tasks.push('coveralls');
       }
 
@@ -70,7 +52,7 @@ module.exports = generators.Base.extend({
         this.templatePath('gulpfile.js'),
         this.destinationPath('gulpfile.js'),
         {
-          includeCoveralls: this.props.includeCoveralls,
+          includeCoveralls: this.options.coveralls,
           tasks: tasks.map(JSON.stringify).join(', ')
         }
       );

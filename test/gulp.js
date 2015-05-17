@@ -7,7 +7,7 @@ describe('node:gulp', function () {
   describe('including coveralls', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/gulp'))
-        .withPrompts({includeCoveralls: true})
+        .withOptions({coveralls: true})
         .on('end', done);
     });
 
@@ -30,7 +30,7 @@ describe('node:gulp', function () {
   describe('excluding coveralls', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/gulp'))
-        .withPrompts({includeCoveralls: false})
+        .withOptions({coveralls: false})
         .on('end', done);
     });
 
