@@ -8,6 +8,9 @@ var istanbul = require('gulp-istanbul');
 <% if (includeCoveralls) { -%>
 var coveralls = require('gulp-coveralls');
 <% } -%>
+<% if (babel) { -%>
+var babel = require('gulp-babel');
+<% } -%>
 var plumber = require('gulp-plumber');
 
 var handleErr = function (err) {
@@ -28,7 +31,8 @@ gulp.task('static', function () {
 });
 
 gulp.task('pre-test', function () {
-  return gulp.src('lib/**/*.js')
+  return gulp.src('lib/**/*.js')<% if (babel) { %>
+    .pipe(babel())<% } %>
     .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire());
 });
@@ -47,8 +51,8 @@ gulp.task('test', ['pre-test'], function (cb) {
       cb(mochaErr);
     });
 });
-
 <% if (includeCoveralls) { -%>
+
 gulp.task('coveralls', ['test'], function () {
   if (!process.env.CI) {
     return;
@@ -56,6 +60,14 @@ gulp.task('coveralls', ['test'], function () {
 
   return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
     .pipe(coveralls());
+});
+<% } -%>
+<% if (babel) { -%>
+
+gulp.task('babel', function () {
+  return gulp.src('lib/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('dist'));
 });
 <% } -%>
 

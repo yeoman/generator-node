@@ -133,4 +133,16 @@ describe('node:app', function () {
       assert.noFile('.travis.yml');
     });
   });
+
+  describe('--no-babel', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../generators/app'))
+        .withOptions({babel: false})
+        .on('end', done);
+    });
+
+    it('skip .bablerc', function () {
+      assert.noFile('.babelrc');
+    });
+  });
 });

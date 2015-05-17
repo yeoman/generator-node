@@ -21,6 +21,13 @@ module.exports = generators.Base.extend({
       defaults: true,
       desc: 'Include boilerplate files'
     });
+
+    this.option('babel', {
+      type: Boolean,
+      required: false,
+      defaults: true,
+      desc: 'Compile ES6 using Babel'
+    });
   },
 
   initializing: function () {
@@ -170,7 +177,8 @@ module.exports = generators.Base.extend({
 
     this.composeWith('node:gulp', {
       options: {
-        coveralls: this.props.includeCoveralls
+        coveralls: this.props.includeCoveralls,
+        babel: this.options.babel
       }
     }, {
       local: require.resolve('../gulp')
@@ -178,9 +186,15 @@ module.exports = generators.Base.extend({
 
     if (this.options.boilerplate) {
       this.composeWith('node:boilerplate', {
-        options: {name: this.props.name}
+        options: {name: this.props.name, babel: this.options.babel}
       }, {
         local: require.resolve('../boilerplate')
+      });
+    }
+
+    if (this.options.babel) {
+      this.composeWith('node:babel', {}, {
+        local: require.resolve('../babel')
       });
     }
 
