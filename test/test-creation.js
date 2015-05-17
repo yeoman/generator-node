@@ -46,7 +46,8 @@ describe('node generator', function () {
       'authorUrl': 'http://yeoman.io',
       'keywords': 'keyword1,keyword2,keyword3',
       'cli': true,
-      'browser': true
+      'browser': true,
+      'babel': true
     });
 
     shelljs.exec('npm install meow', {silent: true});
@@ -84,7 +85,8 @@ describe('node generator', function () {
       'authorUrl': 'http://yeoman.io',
       'keywords': 'keyword1,keyword2,keyword3',
       'cli': false,
-      'browser': true
+      'browser': true,
+      'babel': true
     });
 
     this.app.run(function () {
