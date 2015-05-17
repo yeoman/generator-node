@@ -4,8 +4,10 @@ var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
-var istanbul = require('gulp-istanbul');<% if (includeCoveralls) { %>
-var coveralls = require('gulp-coveralls');<% } %>
+var istanbul = require('gulp-istanbul');
+<% if (includeCoveralls) { -%>
+var coveralls = require('gulp-coveralls');
+<% } -%>
 var plumber = require('gulp-plumber');
 
 var handleErr = function (err) {
@@ -45,7 +47,8 @@ gulp.task('test', ['pre-test'], function (cb) {
       cb(mochaErr);
     });
 });
-<% if (includeCoveralls) { %>
+
+<% if (includeCoveralls) { -%>
 gulp.task('coveralls', ['test'], function () {
   if (!process.env.CI) {
     return;
@@ -54,5 +57,6 @@ gulp.task('coveralls', ['test'], function () {
   return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
     .pipe(coveralls());
 });
-<% } %>
+<% } -%>
+
 gulp.task('default', [<%= tasks %>]);
