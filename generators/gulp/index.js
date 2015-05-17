@@ -11,6 +11,13 @@ module.exports = generators.Base.extend({
       required: false,
       desc: 'Send coverage reports to coveralls'
     });
+
+    this.option('babel', {
+      type: Boolean,
+      required: false,
+      defaults: true,
+      desc: 'Compile ES6 using Babel'
+    });
   },
 
   writing: {
@@ -34,6 +41,10 @@ module.exports = generators.Base.extend({
         pkg.devDependencies['gulp-coveralls'] = '^0.1.0';
       }
 
+      if (this.options.babel) {
+        pkg.devDependencies['gulp-babel'] = '^5.1.0';
+      }
+
       // Setup testing script
       pkg.scripts = pkg.scripts || {};
       pkg.scripts.test = 'gulp';
@@ -52,6 +63,7 @@ module.exports = generators.Base.extend({
         this.templatePath('gulpfile.js'),
         this.destinationPath('gulpfile.js'), {
           includeCoveralls: this.options.coveralls,
+          babel: this.options.babel,
           tasks: '\'' + tasks.join('\', \'') + '\''
         }
       );
