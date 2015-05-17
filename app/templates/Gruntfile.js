@@ -24,7 +24,8 @@ module.exports = function (grunt) {
     mochacli: {
       options: {
         reporter: 'nyan',
-        bail: true
+        bail: true<% if (props.babel) { %>,
+        compilers: ['js:babel-core/register']<% } %>
       },
       all: ['test/*.js']
     },

@@ -92,6 +92,10 @@ module.exports = yeoman.generators.Base.extend({
       type: 'confirm',
       name: 'browser',
       message: 'Do you need Browserify?'
+    }, {
+      type: 'confirm',
+      name: 'babel',
+      message: 'Would you like to use ES6 with Babel?'
     }];
 
     this.currentYear = (new Date()).getFullYear();
