@@ -27,7 +27,7 @@
     "yeoman-assert": "^2.0.0"
   },
   "files": [
-    "app"
+    "generators"
   ],
   "license": "MIT"
 }
