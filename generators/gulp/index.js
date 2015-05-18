@@ -53,7 +53,7 @@ module.exports = generators.Base.extend({
         this.destinationPath('gulpfile.js'),
         {
           includeCoveralls: this.options.coveralls,
-          tasks: tasks.map(JSON.stringify).join(', ')
+          tasks: '\'' + tasks.join('\', \'') + '\''
         }
       );
     }

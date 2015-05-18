@@ -59,4 +59,4 @@ gulp.task('coveralls', ['test'], function () {
 });
 <% } -%>
 
-gulp.task('default', [<%= tasks %>]);
+gulp.task('default', [<%- tasks %>]);
