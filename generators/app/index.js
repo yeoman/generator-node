@@ -61,7 +61,7 @@ module.exports = generators.Base.extend({
 
       this.prompt(prompts, function (props) {
         if (props.askAgain) {
-          return this.prompting.askForModuleName();
+          return this.prompting.askForModuleName.call(this);
         }
 
         this.props = _.extend(this.props, props);
