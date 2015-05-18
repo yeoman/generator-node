@@ -1,6 +1,7 @@
 {
   "name": "generator-node",
   "version": "0.7.0",
+  "main": "index.js",
   "description": "Create a Node.js module",
   "homepage": "https://github.com/yeoman/generator-node",
   "keywords": [
@@ -27,6 +28,7 @@
     "yeoman-assert": "^2.0.0"
   },
   "files": [
+    "index.js",
     "generators"
   ],
   "license": "MIT"
