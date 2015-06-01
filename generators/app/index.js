@@ -39,7 +39,7 @@ module.exports = generators.Base.extend({
         default: path.basename(process.cwd()),
         filter: _.kebabCase,
         validate: function (input) {
-          return !!input.length;
+          return input.length ? true : false;
         },
         when: !this.pkg.name
       }, {
@@ -53,6 +53,7 @@ module.exports = generators.Base.extend({
           }
 
           var done = this.async();
+
           npmName(answers.name, function (err, available) {
             done(available);
           });

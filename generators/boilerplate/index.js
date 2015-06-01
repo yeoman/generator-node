@@ -20,8 +20,7 @@ module.exports = generators.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath('test.js'),
-      this.destinationPath('test/index.js'),
-      {
+      this.destinationPath('test/index.js'), {
         pkgName: this.options.name,
         pkgSafeName: _.camelCase(this.options.name),
       }
