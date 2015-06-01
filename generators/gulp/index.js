@@ -50,8 +50,7 @@ module.exports = generators.Base.extend({
 
       this.fs.copyTpl(
         this.templatePath('gulpfile.js'),
-        this.destinationPath('gulpfile.js'),
-        {
+        this.destinationPath('gulpfile.js'), {
           includeCoveralls: this.options.coveralls,
           tasks: '\'' + tasks.join('\', \'') + '\''
         }

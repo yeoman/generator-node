@@ -6,21 +6,21 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 var fs = require('fs');
 
-function assertJSONFileContains(filename, content) {
-  var obj = JSON.parse(fs.readFileSync(filename, 'utf8'));
-  assertObjectContains(obj, content);
-}
-
 function assertObjectContains(obj, content) {
   Object.keys(content).forEach(function (key) {
     if (typeof content[key] === 'object') {
       assertObjectContains(content[key], obj[key]);
-    } else {
-      assert.equal(content[key], obj[key]);
+      return;
     }
+
+    assert.equal(content[key], obj[key]);
   });
 }
 
+function assertJSONFileContains(filename, content) {
+  var obj = JSON.parse(fs.readFileSync(filename, 'utf8'));
+  assertObjectContains(obj, content);
+}
 
 describe('node:app', function () {
   before(function () {
