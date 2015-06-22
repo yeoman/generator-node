@@ -25,7 +25,8 @@ $ yo node
 That'll generate a project with all the common tools setup. This includes:
 
 - Filled `package.json` file
-- [gulp](http://gulpjs.com/) test runner
+- [gulp](http://gulpjs.com/) task runner
+- [Babel](https://babeljs.io/) ES2015 transpiler
 - [mocha](http://mochajs.org/) unit test
 - [JSHint](http://jshint.com/) linting
 - [JSCS](http://jscs.info/) code style checking
@@ -89,6 +90,7 @@ If you don't need all the features provided by the main generator, you can still
 Remember you can see the options of each sub generators by running `yo node:sub --help`.
 
 - `node:boilerplate`
+- `node:babel`
 - `node:editorconfig`
 - `node:git`
 - `node:gulp`
