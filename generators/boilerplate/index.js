@@ -19,7 +19,7 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('index.js'),
       this.destinationPath('lib/index.js'), {
         babel: this.options.babel
