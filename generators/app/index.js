@@ -138,6 +138,7 @@ module.exports = generators.Base.extend({
         url: this.props.authorUrl
       },
       files: ['lib'],
+      main: './lib/index.js',
       keywords: this.props.keywords
     };
 
