@@ -28,7 +28,6 @@ module.exports = generators.Base.extend({
       pkg.devDependencies = pkg.devDependencies || {};
       _.extend(pkg.devDependencies, {
         gulp: '^3.6.0',
-        'gulp-eslint': '^0.8.0',
         'gulp-istanbul': '^0.8.1',
         'gulp-jscs': '^1.1.0',
         'gulp-jshint': '^1.5.3',
