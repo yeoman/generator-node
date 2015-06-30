@@ -51,7 +51,7 @@ $ mocha test/name.js
 
 ### Publishing your code
 
-Once you're tests are passing (ideally with a Travis CI green run), you might be ready to publish your code to npm. We recommend you using [npm version]() to tag release correctly.
+Once you're tests are passing (ideally with a Travis CI green run), you might be ready to publish your code to npm. We recommend you using [npm version](https://docs.npmjs.com/cli/version) to tag release correctly.
 
 ```
 $ npm version major
