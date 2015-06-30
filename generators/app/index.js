@@ -28,6 +28,13 @@ module.exports = generators.Base.extend({
       defaults: true,
       desc: 'Compile ES6 using Babel'
     });
+
+    this.option('cli', {
+      type: Boolean,
+      required: false,
+      defaults: true,
+      desc: 'Add a CLI'
+    });
   },
 
   initializing: function () {
@@ -196,6 +203,17 @@ module.exports = generators.Base.extend({
     if (this.options.babel) {
       this.composeWith('node:babel', {}, {
         local: require.resolve('../babel')
+      });
+    }
+
+    if (this.options.cli) {
+      this.composeWith('node:cli', {
+        options: {
+          name: this.props.name,
+          babel: this.options.babel
+        }
+      }, {
+        local: require.resolve('../cli')
       });
     }
 
