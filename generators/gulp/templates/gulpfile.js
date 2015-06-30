@@ -1,5 +1,7 @@
 'use strict';
+<% if (includeCoveralls) { -%>
 var path = require('path');
+<% } -%>
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
