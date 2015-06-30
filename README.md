@@ -98,6 +98,7 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:jshint`
 - `node:readme`
 - `node:travis`
+- `node:cli`
 
 
 ## License
