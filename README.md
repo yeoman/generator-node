@@ -80,8 +80,17 @@ module.exports = generators.Base.extend({
 
 Here's a list of our supported options:
 
+- `boilerplate` (Boolean, default true) include or not the boilerplate files (`lib/index.js`, `test/index.js`).
+- `babel` (Boolean, default true) include or not a `.babelrc` file.
+- `cli` (Boolean, default true) include or not a `lib/cli.js` file.
+- `editorconfig` (Boolean, default true) include or not a `.editorconfig` file.
+- `git` (Boolean, default true) include or not the git files (`.gitattributes`, `.gitignore`).
+- `gulp` (Boolean, default true) include or not a `gulpfile`.
+- `jscs` (Boolean, default true) include or not a `.jscsrc` file.
+- `jshint` (Boolean, default true) include or not a `.jshintrc` file.
+- `license` (Boolean, default true) include or not a `LICENSE` file.
+- `readme` (Boolean, default true) include or not a `README.md` file.
 - `travis` (Boolean, default true) include or not a `.travis.yml` file.
-- `boilerplate` (Boolean, default true) include or not the boilerplate files (`lib/index.js`, `test/index.js`)
 
 ### Sub generators
 
@@ -91,14 +100,15 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 
 - `node:boilerplate`
 - `node:babel`
+- `node:cli`
 - `node:editorconfig`
 - `node:git`
 - `node:gulp`
 - `node:jscs`
 - `node:jshint`
+- `node:license`
 - `node:readme`
 - `node:travis`
-- `node:cli`
 
 
 ## License
