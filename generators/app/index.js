@@ -72,7 +72,7 @@ module.exports = generators.Base.extend({
             if (available) {
               done();
             } else {
-              done(true); //re-prompt
+              done(true);
             }
           });
         }

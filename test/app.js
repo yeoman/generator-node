@@ -27,7 +27,7 @@ describe('node:app', function () {
     mockery.enable({warnOnUnregistered: false});
 
     mockery.registerMock('npm-name', function (name, cb) {
-      cb(null,true);//no errors, name available
+      cb(null, true);
     });
 
     mockery.registerMock(
