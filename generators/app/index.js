@@ -69,7 +69,11 @@ module.exports = generators.Base.extend({
           var done = this.async();
 
           npmName(answers.name, function (err, available) {
-            done(available);
+            if (available) {
+              done();
+            } else {
+              done(false);
+            }
           });
         }
       }];
