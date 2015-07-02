@@ -30,7 +30,7 @@ That'll generate a project with all the common tools setup. This includes:
 - [mocha](http://mochajs.org/) unit test
 - [JSHint](http://jshint.com/) linting
 - [JSCS](http://jscs.info/) code style checking
-- [Istanbul](https://gotwarlost.github.io/istanbul/) code coverage (optionnally tracked on [Coveralls](https://coveralls.io/))
+- [Istanbul](https://gotwarlost.github.io/istanbul/) code coverage (optionally tracked on [Coveralls](https://coveralls.io/))
 - [Travis CI](https://travis-ci.org/) continuous integration (optional)
 - [License](https://spdx.org/licenses/)
 
@@ -51,7 +51,7 @@ $ mocha test/name.js
 
 ### Publishing your code
 
-Once you're tests are passing (ideally with a Travis CI green run), you might be ready to publish your code to npm. We recommend you using [npm version](https://docs.npmjs.com/cli/version) to tag release correctly.
+Once your tests are passing (ideally with a Travis CI green run), you might be ready to publish your code to npm. We recommend you using [npm version](https://docs.npmjs.com/cli/version) to tag release correctly.
 
 ```
 $ npm version major
