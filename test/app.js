@@ -46,7 +46,7 @@ describe('node:app', function () {
         name: 'generator-node',
         description: 'A node generator',
         homepage: 'http://yeoman.io',
-        githubUsername: 'yeoman',
+        githubAccount: 'yeoman',
         authorName: 'The Yeoman Team',
         authorEmail: 'hi@yeoman.io',
         authorUrl: 'http://yeoman.io',
@@ -87,6 +87,16 @@ describe('node:app', function () {
         files: ['lib'],
         keywords: this.answers.keywords
       });
+    });
+
+    it('creates and fill contents in README.md', function () {
+      assert.file('README.md');
+      assert.fileContent('README.md', 'var generatorNode = require(\'generator-node\');');
+      assert.fileContent('README.md', '> A node generator');
+      assert.fileContent('README.md', '$ npm install --save generator-node');
+      assert.fileContent('README.md', '© [The Yeoman Team](http://yeoman.io)');
+      assert.fileContent('README.md', '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master');
+      assert.fileContent('README.md', 'coveralls');
     });
   });
 

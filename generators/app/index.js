@@ -101,7 +101,7 @@ module.exports = generators.Base.extend({
         message: 'Project homepage url',
         when: !this.pkg.homepage
       }, {
-        name: 'githubUsername',
+        name: 'githubAccount',
         message: 'GitHub username or organization',
         when: !this.pkg.repository
       }, {
@@ -134,8 +134,8 @@ module.exports = generators.Base.extend({
       this.prompt(prompts, function (props) {
         this.props = _.extend(this.props, props);
 
-        if (props.githubUsername) {
-          this.props.repository = props.githubUsername + '/' + this.props.name;
+        if (props.githubAccount) {
+          this.props.repository = props.githubAccount + '/' + this.props.name;
         }
 
         done();
@@ -238,7 +238,7 @@ module.exports = generators.Base.extend({
           description: this.props.description,
           githubAccount: this.props.githubAccount,
           authorName: this.props.authorName,
-          authorURL: this.props.authorURL,
+          authorUrl: this.props.authorUrl,
           coveralls: this.props.includeCoveralls
         }
       }, {

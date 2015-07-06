@@ -55,7 +55,7 @@ module.exports = generators.Base.extend({
         githubAccount: this.options.githubAccount,
         author: {
           name: this.options.authorName,
-          url: this.options.authorURL
+          url: this.options.authorUrl
         },
         license: pkg.license,
         includeCoveralls: this.options.coveralls
