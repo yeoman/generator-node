@@ -11,7 +11,7 @@ describe('node:readme', function () {
         description: 'a cool project',
         githubAccount: 'yeoman',
         authorName: 'Yeoman',
-        authorURL: 'http://yeoman.io',
+        authorUrl: 'http://yeoman.io',
         coveralls: true
       })
       .on('ready', function (gen) {
@@ -41,7 +41,7 @@ describe('node:readme --no-coveralls', function () {
         description: 'a cool project',
         githubAccount: 'yeoman',
         authorName: 'Yeoman',
-        authorURL: 'http://yeoman.io',
+        authorUrl: 'http://yeoman.io',
         coveralls: false
       })
       .on('ready', function (gen) {
