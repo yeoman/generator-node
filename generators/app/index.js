@@ -32,7 +32,7 @@ module.exports = generators.Base.extend({
     this.option('cli', {
       type: Boolean,
       required: false,
-      defaults: true,
+      defaults: false,
       desc: 'Add a CLI'
     });
   },
