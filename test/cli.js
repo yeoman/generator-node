@@ -15,6 +15,11 @@ describe('node:cli', function () {
     assert.fileContent('lib/cli.js', 'import meow from \'meow\'');
   });
 
+  it('Contains package name references', function() {
+    assert.noFileContent('lib/cli.js', 'var = require(\'./\');');
+    assert.noFileContent('lib/cli.js', 'import  from \'./\';');
+  });
+
   it('Extends package.json', function () {
     assert.fileContent('package.json', '"bin": "dist/cli.js"');
     assert.fileContent('package.json', '"meow"');

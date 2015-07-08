@@ -21,7 +21,7 @@ module.exports = generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('cli.js'),
         this.destinationPath('lib/cli.js'), {
-          pkgSafeName: _.camelCase(this.options.name),
+          pkgSafeName: _.camelCase(this.appname),
           babel: this.options.babel
         }
       );
