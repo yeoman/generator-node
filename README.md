@@ -82,7 +82,7 @@ Here's a list of our supported options:
 
 - `boilerplate` (Boolean, default true) include or not the boilerplate files (`lib/index.js`, `test/index.js`).
 - `babel` (Boolean, default true) include or not a `.babelrc` file.
-- `cli` (Boolean, default true) include or not a `lib/cli.js` file.
+- `cli` (Boolean, default false) include or not a `lib/cli.js` file.
 - `editorconfig` (Boolean, default true) include or not a `.editorconfig` file.
 - `git` (Boolean, default true) include or not the git files (`.gitattributes`, `.gitignore`).
 - `gulp` (Boolean, default true) include or not a `gulpfile`.
