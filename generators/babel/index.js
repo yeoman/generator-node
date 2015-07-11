@@ -11,6 +11,7 @@ module.exports = generators.Base.extend({
     var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     pkg.script = pkg.script || {};
     pkg.script.prepublish = 'gulp babel';
+    pkg.files.push('dist/');
 
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
   }
