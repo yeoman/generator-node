@@ -9,8 +9,8 @@ module.exports = generators.Base.extend({
     );
 
     var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-    pkg.script = pkg.script || {};
-    pkg.script.prepublish = 'gulp babel';
+    pkg.scripts = pkg.scripts || {};
+    pkg.scripts.prepublish = 'gulp babel';
 
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
   }
