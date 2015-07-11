@@ -12,4 +12,8 @@ describe('node:babel', function () {
   it('creates .babelrc', function () {
     assert.file('.babelrc');
   });
+
+  it('setup prepublish step', function () {
+    assert.fileContent('package.json', '"prepublish": "gulp babel"');
+  });
 });
