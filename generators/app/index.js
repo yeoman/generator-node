@@ -158,7 +158,7 @@ module.exports = generators.Base.extend({
       files: [
         this.options.babel ? 'dist' : 'lib'
       ],
-      main: './lib/index.js',
+      main: this.options.babel ? 'dist/index.js' : 'lib/index.js',
       keywords: this.props.keywords
     };
 

@@ -85,7 +85,8 @@ describe('node:app', function () {
           url: this.answers.authorUrl
         },
         files: ['dist'],
-        keywords: this.answers.keywords
+        keywords: this.answers.keywords,
+        main: 'dist/index.js'
       });
     });
 
@@ -157,7 +158,8 @@ describe('node:app', function () {
 
     it('include the raw files', function () {
       assertJSONFileContains('package.json', {
-        files: ['lib']
+        files: ['lib'],
+        main: 'lib/index.js'
       });
     });
   });
