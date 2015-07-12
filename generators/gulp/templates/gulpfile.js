@@ -12,6 +12,7 @@ var coveralls = require('gulp-coveralls');
 <% } -%>
 <% if (babel) { -%>
 var babel = require('gulp-babel');
+require('babel-core/register');
 <% } -%>
 var plumber = require('gulp-plumber');
 
@@ -44,11 +45,7 @@ gulp.task('test', ['pre-test'], function (cb) {
 
   gulp.src('test/**/*.js')
     .pipe(plumber())
-    <% if (babel) { -%>
-    .pipe(mocha({reporter: 'spec', require: ['babel-core/register']}))
-    <% } else { -%>
     .pipe(mocha({reporter: 'spec'}))
-    <% } %>
     .on('error', function (err) {
       mochaErr = err;
     })
