@@ -84,7 +84,7 @@ describe('node:app', function () {
           email: this.answers.authorEmail,
           url: this.answers.authorUrl
         },
-        files: ['lib'],
+        files: ['dist'],
         keywords: this.answers.keywords
       });
     });
@@ -153,6 +153,12 @@ describe('node:app', function () {
 
     it('skip .bablerc', function () {
       assert.noFile('.babelrc');
+    });
+
+    it('include the raw files', function () {
+      assertJSONFileContains('package.json', {
+        files: ['lib']
+      });
     });
   });
 });

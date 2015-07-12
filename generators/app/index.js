@@ -155,7 +155,9 @@ module.exports = generators.Base.extend({
         email: this.props.authorEmail,
         url: this.props.authorUrl
       },
-      files: ['lib'],
+      files: [
+        this.options.babel ? 'dist' : 'lib'
+      ],
       main: './lib/index.js',
       keywords: this.props.keywords
     };
