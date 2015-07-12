@@ -9,11 +9,15 @@ var jscs = require('gulp-jscs');
 var istanbul = require('gulp-istanbul');
 <% if (includeCoveralls) { -%>
 var coveralls = require('gulp-coveralls');
+var plumber = require('gulp-plumber');
 <% } -%>
 <% if (babel) { -%>
 var babel = require('gulp-babel');
+
+// Initialize the babel transpiler so es6 files gets compiled
+// when they're loaded
+require('babel-core/register');
 <% } -%>
-var plumber = require('gulp-plumber');
 
 var handleErr = function (err) {
   console.log(err.message);
@@ -44,11 +48,7 @@ gulp.task('test', ['pre-test'], function (cb) {
 
   gulp.src('test/**/*.js')
     .pipe(plumber())
-    <% if (babel) { -%>
-    .pipe(mocha({reporter: 'spec', require: ['babel-core/register']}))
-    <% } else { -%>
     .pipe(mocha({reporter: 'spec'}))
-    <% } %>
     .on('error', function (err) {
       mochaErr = err;
     })
