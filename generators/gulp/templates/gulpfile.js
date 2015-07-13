@@ -7,6 +7,7 @@ var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var istanbul = require('gulp-istanbul');
+var fs = require('fs');
 <% if (includeCoveralls) { -%>
 var coveralls = require('gulp-coveralls');
 var plumber = require('gulp-plumber');
@@ -24,11 +25,15 @@ var handleErr = function (err) {
   process.exit(1);
 };
 
+var ignoredFiles = fs.readFileSync(path.join(__dirname, '.gitignore'), 'utf8')
+  .split('\n')
+  .filter(Boolean)
+  .map(function (filename) {
+    return '!' + filename + '/**';
+  });
+
 gulp.task('static', function () {
-  return gulp.src([
-      '**/*.js',
-      '!node_modules/**'
-    ])
+  return gulp.src(['**/*.js'].concat(ignoredFiles))
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'))

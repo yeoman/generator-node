@@ -26,6 +26,8 @@ describe('node:gulp', function () {
       assert.fileContent('package.json', 'gulp-coveralls');
       assert.fileContent('package.json', 'gulp-babel');
       assert.fileContent('package.json', '"test": "gulp"');
+
+      assert.fileContent('.gitignore', 'dist');
     });
   });
 

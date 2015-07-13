@@ -67,6 +67,22 @@ module.exports = generators.Base.extend({
           tasks: '\'' + tasks.join('\', \'') + '\''
         }
       );
+    },
+
+    addDistToGitignore: function () {
+      if (!this.options.babel) {
+        return;
+      }
+
+      var gitignore = this.fs.read(
+        this.destinationPath('.gitignore'),
+        {defaults: ''}
+      ).split('\n').filter(Boolean);
+      gitignore.push('dist');
+      this.fs.write(
+        this.destinationPath('.gitignore'),
+        gitignore.join('\n') + '\n'
+      );
     }
   }
 });
