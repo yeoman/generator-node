@@ -12,6 +12,7 @@ var coveralls = require('gulp-coveralls');
 <% } -%>
 <% if (babel) { -%>
 var babel = require('gulp-babel');
+/* Initialise the babel transpiler so the instrumented files get included when mocha runs */
 require('babel-core/register');
 <% } -%>
 var plumber = require('gulp-plumber');
