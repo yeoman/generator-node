@@ -37,8 +37,17 @@ module.exports = generators.Base.extend({
   },
 
   initializing: function () {
-    this.props = {};
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+
+    // Pre set the default props from the information we have at this point
+    this.props = {
+      name: this.pkg.name,
+      description: this.pkg.description,
+      version: this.pkg.version,
+      homepage: this.pkg.homepage,
+      repository: this.pkg.repository,
+      babel: Boolean(this.options.babel)
+    };
   },
 
   prompting: {
@@ -142,10 +151,6 @@ module.exports = generators.Base.extend({
           this.props.repository = props.githubAccount + '/' + this.props.name;
         }
 
-        if (props.babel == null) {
-          this.props.babel = Boolean(this.options.babel);
-        }
-
         done();
       }.bind(this));
     }
@@ -189,7 +194,11 @@ module.exports = generators.Base.extend({
       local: require.resolve('../jshint')
     });
 
-    this.composeWith('node:git', {}, {
+    this.composeWith('node:git', {
+      options: {
+        repositoryPath: this.props.repository
+      }
+    }, {
       local: require.resolve('../git')
     });
 
