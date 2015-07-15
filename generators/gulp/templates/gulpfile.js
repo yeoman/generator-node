@@ -8,7 +8,6 @@ var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var istanbul = require('gulp-istanbul');
-var fs = require('fs');
 <% if (includeCoveralls) { -%>
 var coveralls = require('gulp-coveralls');
 var plumber = require('gulp-plumber');
