@@ -3,6 +3,7 @@
 var path = require('path');
 <% } -%>
 var gulp = require('gulp');
+var excludeGitignore = require('gulp-exclude-gitignore');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
@@ -25,15 +26,9 @@ var handleErr = function (err) {
   process.exit(1);
 };
 
-var ignoredFiles = fs.readFileSync(path.join(__dirname, '.gitignore'), 'utf8')
-  .split('\n')
-  .filter(Boolean)
-  .map(function (filename) {
-    return '!' + filename + '/**';
-  });
-
 gulp.task('static', function () {
-  return gulp.src(['**/*.js'].concat(ignoredFiles))
+  return gulp.src('**/*.js')
+    .pipe(excludeGitignore())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'))
