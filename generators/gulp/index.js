@@ -15,7 +15,7 @@ module.exports = generators.Base.extend({
     this.option('babel', {
       type: Boolean,
       required: false,
-      defaults: true,
+      defaults: false,
       desc: 'Compile ES6 using Babel'
     });
   },

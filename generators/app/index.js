@@ -25,7 +25,6 @@ module.exports = generators.Base.extend({
     this.option('babel', {
       type: Boolean,
       required: false,
-      defaults: true,
       desc: 'Compile ES6 using Babel'
     });
 
@@ -125,6 +124,11 @@ module.exports = generators.Base.extend({
         when: !this.pkg.keywords,
         filter: _.words
       }, {
+        name: 'babel',
+        type: 'confirm',
+        message: 'Use es2015 (precompiled with Babel)',
+        when: this.options.babel === undefined
+      }, {
         name: 'includeCoveralls',
         type: 'confirm',
         message: 'Send coverage reports to coveralls',
@@ -136,6 +140,10 @@ module.exports = generators.Base.extend({
 
         if (props.githubAccount) {
           this.props.repository = props.githubAccount + '/' + this.props.name;
+        }
+
+        if (props.babel == null) {
+          this.props.babel = Boolean(this.options.babel);
         }
 
         done();
@@ -156,9 +164,9 @@ module.exports = generators.Base.extend({
         url: this.props.authorUrl
       },
       files: [
-        this.options.babel ? 'dist' : 'lib'
+        this.props.babel ? 'dist' : 'lib'
       ],
-      main: this.options.babel ? 'dist/index.js' : 'lib/index.js',
+      main: this.props.babel ? 'dist/index.js' : 'lib/index.js',
       keywords: this.props.keywords
     };
 
@@ -192,7 +200,7 @@ module.exports = generators.Base.extend({
     this.composeWith('node:gulp', {
       options: {
         coveralls: this.props.includeCoveralls,
-        babel: this.options.babel
+        babel: this.props.babel
       }
     }, {
       local: require.resolve('../gulp')
@@ -200,13 +208,16 @@ module.exports = generators.Base.extend({
 
     if (this.options.boilerplate) {
       this.composeWith('node:boilerplate', {
-        options: {name: this.props.name, babel: this.options.babel}
+        options: {
+          name: this.props.name,
+          babel: this.props.babel
+        }
       }, {
         local: require.resolve('../boilerplate')
       });
     }
 
-    if (this.options.babel) {
+    if (this.props.babel) {
       this.composeWith('node:babel', {}, {
         local: require.resolve('../babel')
       });
@@ -216,7 +227,7 @@ module.exports = generators.Base.extend({
       this.composeWith('node:cli', {
         options: {
           name: this.props.name,
-          babel: this.options.babel
+          babel: this.props.babel
         }
       }, {
         local: require.resolve('../cli')

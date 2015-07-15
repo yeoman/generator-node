@@ -13,7 +13,7 @@ module.exports = generators.Base.extend({
 
     this.option('babel', {
       required: false,
-      defaults: true,
+      defaults: false,
       desc: 'Compile ES6 using Babel'
     });
   },

@@ -18,16 +18,17 @@ describe('node:gulp', function () {
       ]);
 
       assert.fileContent('gulpfile.js', 'gulp.task(\'coveralls\'');
-      assert.fileContent('gulpfile.js', 'gulp.task(\'babel\'');
       assert.fileContent('gulpfile.js', 'gulp.task(\'test\'');
       assert.fileContent('gulpfile.js', 'gulp.task(\'static\'');
 
       assert.fileContent('package.json', 'gulp');
       assert.fileContent('package.json', 'gulp-coveralls');
-      assert.fileContent('package.json', 'gulp-babel');
       assert.fileContent('package.json', '"test": "gulp"');
+    });
 
-      assert.fileContent('.gitignore', 'dist');
+    it('does not include babel configurations', function () {
+      assert.noFileContent('gulpfile.js', 'gulp.task(\'babel\'');
+      assert.noFileContent('package.json', 'gulp-babel');
     });
   });
 
@@ -57,16 +58,17 @@ describe('node:gulp', function () {
     });
   });
 
-  describe('--no-babel', function () {
+  describe('--babel', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/gulp'))
-        .withOptions({babel: false})
+        .withOptions({babel: true})
         .on('end', done);
     });
 
-    it('does not include babel configurations', function () {
-      assert.noFileContent('gulpfile.js', 'gulp.task(\'babel\'');
-      assert.noFileContent('package.json', 'gulp-babel');
+    it('includes babel configuration', function () {
+      assert.fileContent('gulpfile.js', 'gulp.task(\'babel\'');
+      assert.fileContent('package.json', 'gulp-babel');
+      assert.fileContent('.gitignore', 'dist');
     });
   });
 });
