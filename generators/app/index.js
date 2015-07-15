@@ -226,7 +226,6 @@ module.exports = generators.Base.extend({
     if (this.options.cli) {
       this.composeWith('node:cli', {
         options: {
-          name: this.props.name,
           babel: this.props.babel
         }
       }, {

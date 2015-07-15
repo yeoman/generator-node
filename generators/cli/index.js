@@ -6,12 +6,6 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
-    this.option('name', {
-      type: String,
-      required: true,
-      desc: 'The module name'
-    });
-
     this.option('babel', {
       type: Boolean,
       required: false,
@@ -24,9 +18,9 @@ module.exports = generators.Base.extend({
     package: function () {
       var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
-      pkg.devDependencies = pkg.devDependencies || {};
+      pkg.dependencies = pkg.dependencies || {};
 
-      _.extend(pkg.devDependencies, {meow: '^3.3.0'});
+      _.extend(pkg.dependencies, {meow: '^3.3.0'});
       _.extend(pkg, {
         bin: this.options.babel ? 'dist/cli.js' : 'lib/cli.js'
       });
@@ -35,10 +29,11 @@ module.exports = generators.Base.extend({
     },
 
     cli: function () {
+      var pkg = this.fs.readJSON(this.destinationPath('package.json'));
       this.fs.copyTpl(
         this.templatePath('cli.js'),
         this.destinationPath('lib/cli.js'), {
-          pkgSafeName: _.camelCase(this.options.name),
+          pkgSafeName: _.camelCase(pkg.name),
           babel: this.options.babel
         }
       );
