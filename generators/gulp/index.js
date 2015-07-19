@@ -34,8 +34,12 @@ module.exports = generators.Base.extend({
         'gulp-jshint': '^1.5.3',
         'gulp-mocha': '^2.0.0',
         'gulp-plumber': '^1.0.0',
+        'gulp-nsp': '^0.4.5',
         'jshint-stylish': '^1.0.0'
       });
+
+      pkg.scripts = pkg.scripts || {};
+      pkg.scripts.prepublish = 'gulp prepublish';
 
       if (this.options.coveralls) {
         pkg.devDependencies['gulp-coveralls'] = '^0.1.0';
@@ -55,17 +59,24 @@ module.exports = generators.Base.extend({
 
     gulpfile: function () {
       var tasks = ['static', 'test'];
+      var prepublishTasks = ['nsp'];
 
       if (this.options.coveralls) {
         tasks.push('coveralls');
       }
 
+      if (this.options.babel) {
+        prepublishTasks.push('babel');
+      }
+
       this.fs.copyTpl(
         this.templatePath('gulpfile.js'),
-        this.destinationPath('gulpfile.js'), {
+        this.destinationPath('gulpfile.js'),
+        {
           includeCoveralls: this.options.coveralls,
           babel: this.options.babel,
-          tasks: '\'' + tasks.join('\', \'') + '\''
+          tasks: stringifyArray(tasks),
+          prepublishTasks: stringifyArray(prepublishTasks)
         }
       );
     },
@@ -84,6 +95,21 @@ module.exports = generators.Base.extend({
         this.destinationPath('.gitignore'),
         gitignore.join('\n') + '\n'
       );
+    },
+
+    babelrc: function () {
+      if (!this.options.babel) {
+        return;
+      }
+
+      this.fs.copy(
+        this.templatePath('babelrc'),
+        this.destinationPath('.babelrc')
+      );
     }
   }
 });
+
+function stringifyArray(arr) {
+  return '\'' + arr.join('\', \'') + '\'';
+}

@@ -24,6 +24,7 @@ describe('node:gulp', function () {
       assert.fileContent('package.json', 'gulp');
       assert.fileContent('package.json', 'gulp-coveralls');
       assert.fileContent('package.json', '"test": "gulp"');
+      assert.fileContent('package.json', '"prepublish": "gulp prepublish"');
     });
 
     it('does not include babel configurations', function () {
@@ -67,6 +68,7 @@ describe('node:gulp', function () {
 
     it('includes babel configuration', function () {
       assert.fileContent('gulpfile.js', 'gulp.task(\'babel\'');
+      assert.fileContent('gulpfile.js', 'gulp.task(\'prepublish\', [\'nsp\', \'babel\']);');
       assert.fileContent('package.json', 'gulp-babel');
       assert.fileContent('.gitignore', 'dist');
     });

@@ -226,12 +226,6 @@ module.exports = generators.Base.extend({
       });
     }
 
-    if (this.props.babel) {
-      this.composeWith('node:babel', {}, {
-        local: require.resolve('../babel')
-      });
-    }
-
     if (this.options.cli) {
       this.composeWith('node:cli', {
         options: {

@@ -8,6 +8,7 @@ var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var istanbul = require('gulp-istanbul');
+var nsp = require('gulp-nsp');
 <% if (includeCoveralls) { -%>
 var coveralls = require('gulp-coveralls');
 var plumber = require('gulp-plumber');
@@ -33,6 +34,10 @@ gulp.task('static', function () {
     .pipe(jshint.reporter('fail'))
     .pipe(jscs())
     .on('error', handleErr);
+});
+
+gulp.task('nsp', function (cb) {
+  nsp('package.json', cb);
 });
 
 gulp.task('pre-test', function () {
@@ -76,4 +81,5 @@ gulp.task('babel', function () {
 });
 <% } -%>
 
+gulp.task('prepublish', [<%- prepublishTasks %>]);
 gulp.task('default', [<%- tasks %>]);
