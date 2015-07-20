@@ -16,7 +16,7 @@ var coveralls = require('gulp-coveralls');
 <% if (babel) { -%>
 var babel = require('gulp-babel');
 
-// Initialize the babel transpiler so es2015 files gets compiled
+// Initialize the babel transpiler so ES2015 files gets compiled
 // when they're loaded
 require('babel-core/register');
 <% } -%>
