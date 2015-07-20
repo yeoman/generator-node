@@ -9,9 +9,9 @@ var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var istanbul = require('gulp-istanbul');
 var nsp = require('gulp-nsp');
+var plumber = require('gulp-plumber');
 <% if (includeCoveralls) { -%>
 var coveralls = require('gulp-coveralls');
-var plumber = require('gulp-plumber');
 <% } -%>
 <% if (babel) { -%>
 var babel = require('gulp-babel');
@@ -41,8 +41,10 @@ gulp.task('nsp', function (cb) {
 });
 
 gulp.task('pre-test', function () {
-  return gulp.src('lib/**/*.js')<% if (babel) { %>
-    .pipe(babel())<% } %>
+  return gulp.src('lib/**/*.js')
+    <% if (babel) { -%>
+    .pipe(babel())
+    <% } -%>
     .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire());
 });
@@ -81,5 +83,5 @@ gulp.task('babel', function () {
 });
 <% } -%>
 
-gulp.task('prepublish', [<%- prepublishTasks %>]);
-gulp.task('default', [<%- tasks %>]);
+gulp.task('prepublish', <%- prepublishTasks %>);
+gulp.task('default', <%- tasks %>);

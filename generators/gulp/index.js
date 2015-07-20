@@ -1,5 +1,5 @@
 'use strict';
-var _ = require('lodash');
+var extend = require('deep-extend');
 var generators = require('yeoman-generator');
 
 module.exports = generators.Base.extend({
@@ -24,22 +24,23 @@ module.exports = generators.Base.extend({
     package: function () {
       var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
-      // Include Gulp related dev dependencies
-      pkg.devDependencies = pkg.devDependencies || {};
-      _.extend(pkg.devDependencies, {
-        gulp: '^3.6.0',
-        'gulp-exclude-gitignore': '^1.0.0',
-        'gulp-istanbul': '^0.8.1',
-        'gulp-jscs': '^1.1.0',
-        'gulp-jshint': '^1.5.3',
-        'gulp-mocha': '^2.0.0',
-        'gulp-plumber': '^1.0.0',
-        'gulp-nsp': '^0.4.5',
-        'jshint-stylish': '^1.0.0'
+      extend(pkg, {
+        devDependencies: {
+          gulp: '^3.6.0',
+          'gulp-exclude-gitignore': '^1.0.0',
+          'gulp-istanbul': '^0.8.1',
+          'gulp-jscs': '^1.1.0',
+          'gulp-jshint': '^1.5.3',
+          'gulp-mocha': '^2.0.0',
+          'gulp-plumber': '^1.0.0',
+          'gulp-nsp': '^0.4.5',
+          'jshint-stylish': '^1.0.0'
+        },
+        scripts: {
+          prepublish: 'gulp prepublish',
+          test: 'gulp'
+        }
       });
-
-      pkg.scripts = pkg.scripts || {};
-      pkg.scripts.prepublish = 'gulp prepublish';
 
       if (this.options.coveralls) {
         pkg.devDependencies['gulp-coveralls'] = '^0.1.0';
@@ -49,10 +50,6 @@ module.exports = generators.Base.extend({
         pkg.devDependencies['gulp-babel'] = '^5.1.0';
         pkg.devDependencies['babel-core'] = '^5.5.0';
       }
-
-      // Setup testing script
-      pkg.scripts = pkg.scripts || {};
-      pkg.scripts.test = 'gulp';
 
       this.fs.writeJSON(this.destinationPath('package.json'), pkg);
     },
@@ -81,11 +78,17 @@ module.exports = generators.Base.extend({
       );
     },
 
-    addDistToGitignore: function () {
+    babel: function () {
       if (!this.options.babel) {
         return;
       }
 
+      this.fs.copy(
+        this.templatePath('babelrc'),
+        this.destinationPath('.babelrc')
+      );
+
+      // Add dist/ to the .gitignore file
       var gitignore = this.fs.read(
         this.destinationPath('.gitignore'),
         {defaults: ''}
@@ -95,21 +98,10 @@ module.exports = generators.Base.extend({
         this.destinationPath('.gitignore'),
         gitignore.join('\n') + '\n'
       );
-    },
-
-    babelrc: function () {
-      if (!this.options.babel) {
-        return;
-      }
-
-      this.fs.copy(
-        this.templatePath('babelrc'),
-        this.destinationPath('.babelrc')
-      );
     }
   }
 });
 
 function stringifyArray(arr) {
-  return '\'' + arr.join('\', \'') + '\'';
+  return '[\'' + arr.join('\', \'') + '\']';
 }

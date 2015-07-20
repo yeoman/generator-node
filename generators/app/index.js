@@ -1,5 +1,6 @@
 'use strict';
 var _ = require('lodash');
+var extend = require('deep-extend');
 var generators = require('yeoman-generator');
 var npmName = require('npm-name');
 var path = require('path');
@@ -91,7 +92,7 @@ module.exports = generators.Base.extend({
           return this.prompting.askForModuleName.call(this);
         }
 
-        this.props = _.extend(this.props, props);
+        this.props = extend(this.props, props);
 
         done();
       }.bind(this));
@@ -145,7 +146,7 @@ module.exports = generators.Base.extend({
       }];
 
       this.prompt(prompts, function (props) {
-        this.props = _.extend(this.props, props);
+        this.props = extend(this.props, props);
 
         if (props.githubAccount) {
           this.props.repository = props.githubAccount + '/' + this.props.name;
@@ -157,7 +158,7 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    var pkgJsonFields = {
+    var pkg = {
       name: _.kebabCase(this.props.name),
       version: '0.0.0',
       description: this.props.description,
@@ -176,7 +177,7 @@ module.exports = generators.Base.extend({
     };
 
     // Let's extend package.json so we're not overwriting user previous fields
-    this.fs.writeJSON('package.json', _.extend(pkgJsonFields, this.pkg));
+    this.fs.writeJSON('package.json', extend(pkg, this.pkg));
   },
 
   default: function () {
