@@ -1,6 +1,7 @@
 {
   "node": true,
   "esnext": true,
+  "eqnull": true,
   "camelcase": true,
   "immed": true,
   "newcap": true,
