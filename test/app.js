@@ -61,10 +61,9 @@ describe('node:app', function () {
       assert.file([
         '.travis.yml',
         '.editorconfig',
-        '.jshintrc',
+        '.eslintrc',
         '.gitignore',
         '.gitattributes',
-        '.jscsrc',
         'README.md',
         'lib/index.js',
         'test/index.js'

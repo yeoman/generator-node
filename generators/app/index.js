@@ -91,7 +91,7 @@ module.exports = generators.Base.extend({
         }
       }, this, function (name) {
         this.props.name = name;
-        done()
+        done();
       }.bind(this));
     },
 
@@ -188,8 +188,12 @@ module.exports = generators.Base.extend({
       local: require.resolve('../editorconfig')
     });
 
-    this.composeWith('node:jshint', {}, {
-      local: require.resolve('../jshint')
+    this.composeWith('node:eslint', {
+      options: {
+        es2015: this.props.babel
+      }
+    }, {
+      local: require.resolve('../eslint')
     });
 
     this.composeWith('node:git', {
@@ -198,10 +202,6 @@ module.exports = generators.Base.extend({
       }
     }, {
       local: require.resolve('../git')
-    });
-
-    this.composeWith('node:jscs', {}, {
-      local: require.resolve('../jscs')
     });
 
     this.composeWith('node:gulp', {
