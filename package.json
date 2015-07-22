@@ -21,6 +21,7 @@
     "generator-license": "^2.0.0",
     "lodash": "^3.7.0",
     "npm-name": "^1.0.2",
+    "parse-author": "^0.2.0",
     "yeoman-generator": "^0.20.0"
   },
   "devDependencies": {

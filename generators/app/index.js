@@ -3,6 +3,7 @@ var _ = require('lodash');
 var extend = require('deep-extend');
 var generators = require('yeoman-generator');
 var npmName = require('npm-name');
+var parseAuthor = require('parse-author');
 var path = require('path');
 
 module.exports = generators.Base.extend({
@@ -55,6 +56,13 @@ module.exports = generators.Base.extend({
       this.props.authorName = this.pkg.author.name;
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
+    }
+
+    if (_.isString(this.pkg.author)) {
+      var info = parseAuthor(this.pkg.author);
+      this.props.authorName = info.name;
+      this.props.authorEmail = info.email;
+      this.props.authorUrl = info.url;
     }
   },
 
