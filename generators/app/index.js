@@ -252,15 +252,17 @@ module.exports = generators.Base.extend({
       });
     }
 
-    this.composeWith('license', {
-      options: {
-        name: this.props.authorName,
-        email: this.props.authorEmail,
-        website: this.props.authorUrl
-      }
-    }, {
-      local: require.resolve('generator-license/app')
-    });
+    if (!this.pkg.license) {
+      this.composeWith('license', {
+        options: {
+          name: this.props.authorName,
+          email: this.props.authorEmail,
+          website: this.props.authorUrl
+        }
+      }, {
+        local: require.resolve('generator-license/app')
+      });
+    }
 
     if (!this.fs.exists(this.destinationPath('README.md'))) {
       this.composeWith('node:readme', {
