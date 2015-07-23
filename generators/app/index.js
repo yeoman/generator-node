@@ -2,9 +2,9 @@
 var _ = require('lodash');
 var extend = require('deep-extend');
 var generators = require('yeoman-generator');
-var npmName = require('npm-name');
 var parseAuthor = require('parse-author');
 var path = require('path');
+var askName = require('./name');
 
 module.exports = generators.Base.extend({
   constructor: function () {
@@ -35,6 +35,12 @@ module.exports = generators.Base.extend({
       required: false,
       defaults: false,
       desc: 'Add a CLI'
+    });
+
+    this.option('name', {
+      type: String,
+      required: false,
+      desc: 'Project name'
     });
   },
 
@@ -68,48 +74,24 @@ module.exports = generators.Base.extend({
 
   prompting: {
     askForModuleName: function () {
-      var self = this;
+      if (this.pkg.name || this.options.name) {
+        this.props.name = this.pkg.name || _.kebabCase(this.options.name);
+        return;
+      }
+
       var done = this.async();
 
-      var prompts = [{
+      askName({
         name: 'name',
         message: 'Module Name',
         default: path.basename(process.cwd()),
         filter: _.kebabCase,
-        validate: function (input) {
-          return input.length ? true : false;
-        },
-        when: !this.pkg.name
-      }, {
-        type: 'confirm',
-        name: 'askAgain',
-        message: 'The name above already exists on npm, choose another?',
-        default: true,
-        when: function (answers) {
-          if (self.pkg.name) {
-            return false;
-          }
-
-          var done = this.async();
-
-          npmName(answers.name, function (err, available) {
-            if (available) {
-              done();
-            } else {
-              done(true);
-            }
-          });
+        validate: function (str) {
+          return str.length > 0;
         }
-      }];
-
-      this.prompt(prompts, function (props) {
-        if (props.askAgain) {
-          return this.prompting.askForModuleName.call(this);
-        }
-
-        this.props = extend(this.props, props);
-
-        done();
+      }, this, function (name) {
+        this.props.name = name;
+        done()
       }.bind(this));
     },
 
@@ -145,7 +127,7 @@ module.exports = generators.Base.extend({
         store: true
       }, {
         name: 'keywords',
-        message: 'Key your keywords (comma to split)',
+        message: 'Package keywords (comma to split)',
         when: !this.pkg.keywords,
         filter: _.words
       }, {
