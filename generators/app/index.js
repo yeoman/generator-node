@@ -174,7 +174,7 @@ module.exports = generators.Base.extend({
     };
 
     // Let's extend package.json so we're not overwriting user previous fields
-    this.fs.writeJSON('package.json', extend(pkg, this.pkg));
+    this.fs.writeJSON('package.json', extend(this.pkg, pkg));
   },
 
   default: function () {
