@@ -1,8 +1,9 @@
-'use strict';
 <% if (babel) { -%>
 import assert from 'assert';
 import <%= pkgSafeName %> from '../lib';
 <% } else { -%>
+'use strict';
+
 var assert = require('assert');
 var <%= pkgSafeName %> = require('../lib');
 <% } -%>

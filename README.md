@@ -28,8 +28,7 @@ That'll generate a project with all the common tools setup. This includes:
 - [gulp](http://gulpjs.com/) task runner
 - [Babel](https://babeljs.io/) ES2015 transpiler
 - [mocha](http://mochajs.org/) unit test
-- [JSHint](http://jshint.com/) linting
-- [JSCS](http://jscs.info/) code style checking
+- [ESLInt](http://eslint.org/) linting and code style checking
 - [Istanbul](https://gotwarlost.github.io/istanbul/) code coverage (optionally tracked on [Coveralls](https://coveralls.io/))
 - [Travis CI](https://travis-ci.org/) continuous integration (optional)
 - [License](https://spdx.org/licenses/)
@@ -86,8 +85,6 @@ Here's a list of our supported options:
 - `editorconfig` (Boolean, default true) include or not a `.editorconfig` file.
 - `git` (Boolean, default true) include or not the git files (`.gitattributes`, `.gitignore`).
 - `gulp` (Boolean, default true) include or not a `gulpfile`.
-- `jscs` (Boolean, default true) include or not a `.jscsrc` file.
-- `jshint` (Boolean, default true) include or not a `.jshintrc` file.
 - `license` (Boolean, default true) include or not a `LICENSE` file.
 - `readme` (Boolean, default true) include or not a `README.md` file.
 - `travis` (Boolean, default true) include or not a `.travis.yml` file.
@@ -102,10 +99,9 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:babel`
 - `node:cli`
 - `node:editorconfig`
+- `node:eslint`
 - `node:git`
 - `node:gulp`
-- `node:jscs`
-- `node:jshint`
 - `node:license`
 - `node:readme`
 - `node:travis`
