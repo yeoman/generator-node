@@ -4,3 +4,16 @@ node_js:
   - '0.10'
   - '0.12'
   - 'iojs'
+<% if (shrink) { %>
+cache:
+  directories:
+    - node_modules
+
+install:
+  # Check the size of caches
+  - du -sh ./node_modules || true
+  # Install last stable NPM
+  - npm install -g npm@latest
+  # Instal npm dependencies and ensure that npm cache is not stale
+  - ./scripts/travis-caching-dependencies.sh
+<% } -%>
