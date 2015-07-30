@@ -24,7 +24,7 @@ module.exports = function askName(prompt, generator, cb) {
 
   generator.prompt(prompts, function (props) {
     if (props.askAgain) {
-      return askName(generator);
+      return askName(prompt, generator, cb);
     }
 
     cb(props[prompt.name]);
