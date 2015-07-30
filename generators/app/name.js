@@ -1,6 +1,4 @@
 'use strict';
-var _ = require('lodash');
-var path = require('path');
 var npmName = require('npm-name');
 
 module.exports = function askName(prompt, generator, cb) {
