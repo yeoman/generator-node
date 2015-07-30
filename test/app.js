@@ -14,6 +14,10 @@ describe('node:app', function () {
       cb(null, true);
     });
 
+    mockery.registerMock('github-username', function (name, cb) {
+      cb(null, 'unicornUser');
+    });
+
     mockery.registerMock(
       require.resolve('generator-license/app'),
       helpers.createDummyGenerator()
