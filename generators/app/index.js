@@ -4,7 +4,7 @@ var extend = require('deep-extend');
 var generators = require('yeoman-generator');
 var parseAuthor = require('parse-author');
 var path = require('path');
-var askName = require('./name');
+var askName = require('inquirer-npm-name');
 
 module.exports = generators.Base.extend({
   constructor: function () {
