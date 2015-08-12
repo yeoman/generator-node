@@ -14,6 +14,7 @@ var coveralls = require('gulp-coveralls');
 <% } -%>
 <% if (babel) { -%>
 var babel = require('gulp-babel');
+var isparta = require('isparta');
 
 // Initialize the babel transpiler so ES2015 files gets compiled
 // when they're loaded
@@ -34,10 +35,12 @@ gulp.task('nsp', function (cb) {
 
 gulp.task('pre-test', function () {
   return gulp.src('lib/**/*.js')
-<% if (babel) { -%>
-    .pipe(babel())
+    .pipe(istanbul({
+      includeUntested: true
+<% if (babel) { -%>,
+      instrumenter: isparta.Instrumenter
 <% } -%>
-    .pipe(istanbul({includeUntested: true}))
+    }))
     .pipe(istanbul.hookRequire());
 });
 
