@@ -26,8 +26,11 @@
     "yeoman-generator": "^0.20.0"
   },
   "devDependencies": {
+    "chai": "^3.2.0",
     "mocha": "^2.2.3",
     "mockery": "^1.4.0",
+    "sinon": "^1.16.1",
+    "sinon-chai": "^2.8.0",
     "yeoman-assert": "^2.0.0"
   },
   "files": [
