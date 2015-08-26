@@ -8,7 +8,7 @@ chai.use(sinonChai);
 
 var yeoman = require('yeoman-generator');
 
-var Generator = require('../generators/app/index.js');
+var Generator = require('../../generators/app/index.js');
 
 describe('node:app', function () {
 
@@ -73,6 +73,25 @@ describe('node:app', function () {
         authorName: 'Unicorn team',
         authorUrl: '',
         babel: true
+      });
+    });
+  });
+
+  describe('prompting', function () {
+    describe('askForModuleName', function () {
+
+      it('should define name props', function() {
+        var context = {
+          pkg: {
+            name: null
+          },
+          options: {
+            name: null
+          },
+          async: sinon.stub()
+        };
+
+        Generator.prototype.prompting.askForModuleName.call(context);
       });
     });
   });
