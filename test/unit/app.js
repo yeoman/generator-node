@@ -82,16 +82,22 @@ describe('node:app', function () {
 
       it('should define name props', function() {
         var context = {
+          props: {},
+          prompt: sinon.stub().yields({name: 'unicorn-module'}),
           pkg: {
             name: null
           },
           options: {
             name: null
           },
-          async: sinon.stub()
+          async: function () {return function () {}; }
         };
 
         Generator.prototype.prompting.askForModuleName.call(context);
+        context.props.should.be.deep.equal({
+          name: 'unicorn-module'
+        });
+
       });
     });
   });
