@@ -5,7 +5,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('node:git', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/git'))
+    helpers.run(path.join(__dirname, '../../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node'
       })

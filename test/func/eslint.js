@@ -5,7 +5,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('node:eslint', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/eslint'))
+    helpers.run(path.join(__dirname, '../../generators/eslint'))
       .on('end', done);
   });
 
@@ -22,7 +22,7 @@ describe('node:eslint', function () {
 
   describe('--es2015', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/eslint'))
+      helpers.run(path.join(__dirname, '../../generators/eslint'))
         .withOptions({es2015: true})
         .on('end', done);
     });

@@ -5,7 +5,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('node:editorconfig', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/editorconfig'))
+    helpers.run(path.join(__dirname, '../../generators/editorconfig'))
       .on('end', done);
   });
 

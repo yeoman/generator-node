@@ -6,7 +6,7 @@ var helpers = require('yeoman-generator').test;
 describe('node:gulp', function () {
   describe('including coveralls', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+      helpers.run(path.join(__dirname, '../../generators/gulp'))
         .withOptions({coveralls: true})
         .on('end', done);
     });
@@ -35,7 +35,7 @@ describe('node:gulp', function () {
 
   describe('excluding coveralls', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+      helpers.run(path.join(__dirname, '../../generators/gulp'))
         .withOptions({coveralls: false})
         .on('end', done);
     });
@@ -48,7 +48,7 @@ describe('node:gulp', function () {
 
   describe('--no-coveralls', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+      helpers.run(path.join(__dirname, '../../generators/gulp'))
         .withOptions({coveralls: false})
         .on('end', done);
     });
@@ -61,7 +61,7 @@ describe('node:gulp', function () {
 
   describe('--babel', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+      helpers.run(path.join(__dirname, '../../generators/gulp'))
         .withOptions({babel: true})
         .on('end', done);
     });
