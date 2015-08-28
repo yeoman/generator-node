@@ -16,27 +16,31 @@ module.exports = generators.Base.extend({
   writing: function () {
     var eslintrc = {
       extends: 'eslint:recommended',
+      env: {
+        node: true,
+        mocha: true
+      },
       rules: {
-        indent: [2, 2],
-        strict: [2, 'global'],
-        quotes: [2, 'single'],
-        'consistent-return': 0,
-        'one-var': [2, 'never'],
-        'no-use-before-define': [2, 'nofunc'],
-        'space-before-function-paren': [2, {anonymous: 'always', named: 'never'}],
-        'space-after-keywords': [2, 'always'],
         'array-bracket-spacing': [2, 'never'],
-        'space-in-parens': [2, 'never'],
-        'quote-props': [2, 'as-needed'],
-        'no-multiple-empty-lines': [2, {max: 2}],
         'brace-style': [2, '1tbs'],
+        'consistent-return': 0,
+        indent: [2, 2],
+        'no-multiple-empty-lines': [2, {max: 2}],
+        'no-use-before-define': [2, 'nofunc'],
+        'one-var': [2, 'never'],
+        'quote-props': [2, 'as-needed'],
+        quotes: [2, 'single'],
+        'space-after-keywords': [2, 'always'],
+        'space-before-function-paren': [2, {anonymous: 'always', named: 'never'}],
+        'space-in-parens': [2, 'never'],
+        strict: [2, 'global'],
         // Rules relative to Yeoman JSCS configuration
         curly: [2, 'all'],
+        'eol-last': 2,
         'key-spacing': [2, { beforeColon: false, afterColon: true }],
-        'space-infix-ops': 2,
         'no-eval': 2,
         'no-with': 2,
-        'eol-last': 2,
+        'space-infix-ops': 2,
         // Best Practices
         'dot-notation': [2, { allowKeywords: true }],
         eqeqeq: 2,
@@ -74,18 +78,14 @@ module.exports = generators.Base.extend({
         'new-cap': 2,
         'new-parens': 2,
         'no-array-constructor': 2,
+        'no-extra-parens': 2,
         'no-new-object': 2,
         'no-spaced-func': 2,
         'no-trailing-spaces': 2,
         'no-underscore-dangle': 2,
-        'no-extra-parens': 2,
-        'semi-spacing': [2, {before: false, after: true}],
         semi: 2,
+        'semi-spacing': [2, {before: false, after: true}],
         'space-return-throw-case': 2
-      },
-      env: {
-        node: true,
-        mocha: true
       }
     };
 
