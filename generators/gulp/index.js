@@ -47,7 +47,7 @@ module.exports = generators.Base.extend({
       if (this.options.babel) {
         pkg.devDependencies['gulp-babel'] = '^5.1.0';
         pkg.devDependencies['babel-core'] = '^5.5.0';
-        pkg.devDependencies['isparta'] = '^3.0.3';
+        pkg.devDependencies.isparta = '^3.0.3';
       }
 
       this.fs.writeJSON(this.destinationPath('package.json'), pkg);
