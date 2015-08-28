@@ -110,7 +110,7 @@ module.exports = generators.Base.extend({
         'no-spaced-func': 2,
         'no-trailing-spaces': 2,
         'no-underscore-dangle': 2,
-        'no-wrap-func': 2,
+        'no-extra-parens': 2,
         'semi-spacing': [2, {before: false, after: true}],
         semi: 2,
         'space-return-throw-case': 2
