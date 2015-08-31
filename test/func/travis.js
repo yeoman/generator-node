@@ -3,13 +3,13 @@ var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 
-describe('node:editorconfig', function () {
+describe('node:travis', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/editorconfig'))
+    helpers.run(path.join(__dirname, '../../generators/travis'))
       .on('end', done);
   });
 
-  it('creates .editorconfig', function () {
-    assert.file('.editorconfig');
+  it('creates .travis.yml', function () {
+    assert.file('.travis.yml');
   });
 });

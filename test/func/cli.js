@@ -5,7 +5,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('node:cli', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/cli'))
+    helpers.run(path.join(__dirname, '../../generators/cli'))
       .withOptions({babel: true})
       .on('ready', function (generator) {
         generator.fs.write(
@@ -29,7 +29,7 @@ describe('node:cli', function () {
 
   describe('--no-babel', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/cli'))
+      helpers.run(path.join(__dirname, '../../generators/cli'))
         .withOptions({babel: false})
         .on('end', done);
     });

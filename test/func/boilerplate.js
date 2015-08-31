@@ -5,7 +5,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('node:boilerplate', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/boilerplate'))
+    helpers.run(path.join(__dirname, '../../generators/boilerplate'))
       .withOptions({name: 'my-module'})
       .on('end', done);
   });
@@ -21,7 +21,7 @@ describe('node:boilerplate', function () {
 
 describe('node:boilerplate', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/boilerplate'))
+    helpers.run(path.join(__dirname, '../../generators/boilerplate'))
       .withOptions({name: 'my-module', babel: true})
       .on('end', done);
   });

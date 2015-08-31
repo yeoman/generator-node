@@ -14,7 +14,7 @@
   "author": "Yeoman team",
   "repository": "yeoman/generator-node",
   "scripts": {
-    "test": "mocha test -R spec"
+    "test": "istanbul cover _mocha -- test/unit -R spec && _mocha test/func -R spec"
   },
   "dependencies": {
     "deep-extend": "^0.4.0",
@@ -26,8 +26,12 @@
     "yeoman-generator": "^0.20.0"
   },
   "devDependencies": {
+    "chai": "^3.2.0",
+    "istanbul": "^0.3.18",
     "mocha": "^2.2.3",
     "mockery": "^1.4.0",
+    "sinon": "^1.16.1",
+    "sinon-chai": "^2.8.0",
     "yeoman-assert": "^2.0.0"
   },
   "files": [

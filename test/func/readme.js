@@ -5,7 +5,7 @@ var helpers = require('yeoman-generator').test;
 
 describe('node:readme', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/readme'))
+    helpers.run(path.join(__dirname, '../../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -35,7 +35,7 @@ describe('node:readme', function () {
 
 describe('node:readme --no-coveralls', function () {
   before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/readme'))
+    helpers.run(path.join(__dirname, '../../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',

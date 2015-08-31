@@ -52,7 +52,7 @@ describe('node:app', function () {
         authorUrl: 'http://yeoman.io',
         keywords: ['foo', 'bar']
       };
-      helpers.run(path.join(__dirname, '../generators/app'))
+      helpers.run(path.join(__dirname, '../../generators/app'))
         .withPrompts(this.answers)
         .on('end', done);
     });
@@ -111,7 +111,7 @@ describe('node:app', function () {
         files: ['lib'],
         keywords: ['bar']
       };
-      helpers.run(path.join(__dirname, '../generators/app'))
+      helpers.run(path.join(__dirname, '../../generators/app'))
         .withPrompts({
           name: 'generator-node'
         })
@@ -134,7 +134,7 @@ describe('node:app', function () {
 
   describe('--no-travis', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
+      helpers.run(path.join(__dirname, '../../generators/app'))
         .withOptions({travis: false})
         .on('end', done);
     });
@@ -146,7 +146,7 @@ describe('node:app', function () {
 
   describe('--no-babel', function () {
     before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
+      helpers.run(path.join(__dirname, '../../generators/app'))
         .withOptions({babel: false})
         .on('end', done);
     });
