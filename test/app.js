@@ -6,22 +6,6 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 var fs = require('fs');
 
-function assertObjectContains(obj, content) {
-  Object.keys(content).forEach(function (key) {
-    if (typeof content[key] === 'object') {
-      assertObjectContains(content[key], obj[key]);
-      return;
-    }
-
-    assert.equal(content[key], obj[key]);
-  });
-}
-
-function assertJSONFileContains(filename, content) {
-  var obj = JSON.parse(fs.readFileSync(filename, 'utf8'));
-  assertObjectContains(obj, content);
-}
-
 describe('node:app', function () {
   before(function () {
     mockery.enable({warnOnUnregistered: false});
@@ -72,7 +56,7 @@ describe('node:app', function () {
 
     it('creates package.json', function () {
       assert.file('package.json');
-      assertJSONFileContains('package.json', {
+      assert.JSONFileContent('package.json', {
         name: 'generator-node',
         version: '0.0.0',
         description: this.answers.description,
@@ -124,7 +108,7 @@ describe('node:app', function () {
 
     it('extends package.json keys with missing ones', function () {
       var pkg = _.extend({name: 'generator-node'}, this.pkg);
-      assertJSONFileContains('package.json', pkg);
+      assert.JSONFileContent('package.json', pkg);
     });
 
     it('does not overwrite previous README.md', function () {
@@ -156,7 +140,7 @@ describe('node:app', function () {
     });
 
     it('include the raw files', function () {
-      assertJSONFileContains('package.json', {
+      assert.JSONFileContent('package.json', {
         files: ['lib'],
         main: 'lib/index.js'
       });
