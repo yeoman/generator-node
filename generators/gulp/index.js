@@ -34,7 +34,7 @@ module.exports = generators.Base.extend({
       extend(pkg, {
         devDependencies: {
           gulp: '^3.6.0',
-          'gulp-eslint': '^0.15.0',
+          'gulp-eslint': '^1.0.0',
           'gulp-exclude-gitignore': '^1.0.0',
           'gulp-istanbul': '^0.9.0',
           'gulp-mocha': '^2.0.0',
