@@ -7,7 +7,10 @@ describe('node:gulp', function () {
   describe('including coveralls', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/gulp'))
-        .withOptions({coveralls: true})
+        .withOptions({
+          coveralls: true,
+          projectRoot: 'lib'
+        })
         .on('end', done);
     });
 
@@ -36,7 +39,10 @@ describe('node:gulp', function () {
   describe('excluding coveralls', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/gulp'))
-        .withOptions({coveralls: false})
+        .withOptions({
+          coveralls: false,
+          projectRoot: 'lib'
+        })
         .on('end', done);
     });
 
@@ -49,7 +55,10 @@ describe('node:gulp', function () {
   describe('--no-coveralls', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/gulp'))
-        .withOptions({coveralls: false})
+        .withOptions({
+          coveralls: false,
+          projectRoot: 'lib'
+        })
         .on('end', done);
     });
 
@@ -62,7 +71,10 @@ describe('node:gulp', function () {
   describe('--babel', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/gulp'))
-        .withOptions({babel: true})
+        .withOptions({
+          babel: true,
+          projectRoot: 'lib'
+        })
         .on('end', done);
     });
 
@@ -71,6 +83,21 @@ describe('node:gulp', function () {
       assert.fileContent('gulpfile.js', 'gulp.task(\'prepublish\', [\'nsp\', \'babel\']);');
       assert.fileContent('package.json', 'gulp-babel');
       assert.fileContent('.gitignore', 'dist');
+    });
+  });
+
+  describe('--projectRoot', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../generators/gulp'))
+        .withOptions({
+          projectRoot: 'generators'
+        })
+        .on('end', done);
+    });
+
+    it('define a custom root', function () {
+      assert.fileContent('gulpfile.js', 'gulp.src(\'generators/**/*.js\')');
+      assert.noFileContent('gulpfile.js', 'gulp.src(\'lib/**/*.js\')');
     });
   });
 });

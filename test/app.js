@@ -146,4 +146,19 @@ describe('node:app', function () {
       });
     });
   });
+
+  describe('--projectRoot', function () {
+    before(function (done) {
+      helpers.run(path.join(__dirname, '../generators/app'))
+        .withOptions({projectRoot: 'generators', babel: false})
+        .on('end', done);
+    });
+
+    it('include the raw files', function () {
+      assert.JSONFileContent('package.json', {
+        files: ['generators'],
+        main: 'generators/index.js'
+      });
+    });
+  });
 });

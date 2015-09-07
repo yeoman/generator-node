@@ -42,6 +42,13 @@ module.exports = generators.Base.extend({
       required: false,
       desc: 'Project name'
     });
+
+    this.option('projectRoot', {
+      type: String,
+      required: false,
+      defaults: 'lib',
+      desc: 'Relative path to the project code root'
+    });
   },
 
   initializing: function () {
@@ -167,9 +174,12 @@ module.exports = generators.Base.extend({
         url: this.props.authorUrl
       },
       files: [
-        this.props.babel ? 'dist' : 'lib'
+        this.props.babel ? 'dist' : this.options.projectRoot
       ],
-      main: this.props.babel ? 'dist/index.js' : 'lib/index.js',
+      main: this.props.babel ? 'dist/index.js' : path.join(
+        this.options.projectRoot,
+        'index.js'
+      ),
       keywords: this.props.keywords
     };
 
@@ -207,7 +217,8 @@ module.exports = generators.Base.extend({
     this.composeWith('node:gulp', {
       options: {
         coveralls: this.props.includeCoveralls,
-        babel: this.props.babel
+        babel: this.props.babel,
+        projectRoot: this.options.projectRoot
       }
     }, {
       local: require.resolve('../gulp')

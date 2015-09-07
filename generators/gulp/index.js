@@ -1,4 +1,5 @@
 'use strict';
+var path = require('path');
 var extend = require('deep-extend');
 var generators = require('yeoman-generator');
 
@@ -17,6 +18,12 @@ module.exports = generators.Base.extend({
       required: false,
       defaults: false,
       desc: 'Compile ES2015 using Babel'
+    });
+
+    this.option('projectRoot', {
+      type: String,
+      required: true,
+      desc: 'Relative path to the project code root'
     });
   },
 
@@ -72,7 +79,8 @@ module.exports = generators.Base.extend({
           includeCoveralls: this.options.coveralls,
           babel: this.options.babel,
           tasks: stringifyArray(tasks),
-          prepublishTasks: stringifyArray(prepublishTasks)
+          prepublishTasks: stringifyArray(prepublishTasks),
+          projectRoot: path.join(this.options.projectRoot, '**/*.js')
         }
       );
     },

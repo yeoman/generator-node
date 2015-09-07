@@ -34,7 +34,7 @@ gulp.task('nsp', function (cb) {
 });
 
 gulp.task('pre-test', function () {
-  return gulp.src('lib/**/*.js')
+  return gulp.src('<%- projectRoot %>')
     .pipe(istanbul({
       includeUntested: true
 <% if (babel) { -%>,
@@ -72,7 +72,7 @@ gulp.task('coveralls', ['test'], function () {
 <% if (babel) { -%>
 
 gulp.task('babel', function () {
-  return gulp.src('lib/**/*.js')
+  return gulp.src('<%- projectRoot %>')
     .pipe(babel())
     .pipe(gulp.dest('dist'));
 });
