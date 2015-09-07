@@ -162,6 +162,8 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
+    // Re-read the content at this point because a composed generator might modify it.
+    var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     var pkg = {
       name: _.kebabCase(this.props.name),
       version: '0.0.0',
@@ -184,7 +186,7 @@ module.exports = generators.Base.extend({
     };
 
     // Let's extend package.json so we're not overwriting user previous fields
-    this.fs.writeJSON('package.json', extend(pkg, this.pkg));
+    this.fs.writeJSON('package.json', extend(pkg, currentPkg));
   },
 
   default: function () {
