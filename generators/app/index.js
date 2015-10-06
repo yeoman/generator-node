@@ -3,6 +3,7 @@ var _ = require('lodash');
 var extend = require('deep-extend');
 var generators = require('yeoman-generator');
 var parseAuthor = require('parse-author');
+var githubUsername = require('github-username');
 var path = require('path');
 var askName = require('inquirer-npm-name');
 
@@ -60,7 +61,6 @@ module.exports = generators.Base.extend({
       description: this.pkg.description,
       version: this.pkg.version,
       homepage: this.pkg.homepage,
-      repository: this.pkg.repository,
       babel: Boolean(this.options.babel)
     };
 
@@ -111,18 +111,16 @@ module.exports = generators.Base.extend({
         message: 'Project homepage url',
         when: !this.pkg.homepage
       }, {
-        name: 'githubAccount',
-        message: 'GitHub username or organization',
-        when: !this.pkg.repository
-      }, {
         name: 'authorName',
         message: 'Author\'s Name',
         when: !this.pkg.author,
+        default: this.user.git.name(),
         store: true
       }, {
         name: 'authorEmail',
         message: 'Author\'s Email',
         when: !this.pkg.author,
+        default: this.user.git.email(),
         store: true
       }, {
         name: 'authorUrl',
@@ -148,12 +146,22 @@ module.exports = generators.Base.extend({
 
       this.prompt(prompts, function (props) {
         this.props = extend(this.props, props);
-
-        if (props.githubAccount) {
-          this.props.repository = props.githubAccount + '/' + this.props.name;
-        }
-
         done();
+      }.bind(this));
+    },
+
+    askForGithubAccount: function () {
+      var done = this.async();
+
+      githubUsername(this.props.authorEmail, function (err, username) {
+        this.prompt({
+          name: 'githubAccount',
+          message: 'GitHub username or organization',
+          default: username
+        }, function (prompt) {
+          this.props.githubAccount = prompt.githubAccount;
+          done();
+        }.bind(this));
       }.bind(this));
     }
   },
@@ -166,7 +174,6 @@ module.exports = generators.Base.extend({
       version: '0.0.0',
       description: this.props.description,
       homepage: this.props.homepage,
-      repository: this.props.repository,
       author: {
         name: this.props.authorName,
         email: this.props.authorEmail,
@@ -207,7 +214,8 @@ module.exports = generators.Base.extend({
 
     this.composeWith('node:git', {
       options: {
-        repositoryPath: this.props.repository
+        name: this.props.name,
+        githubAccount: this.props.githubAccount
       }
     }, {
       local: require.resolve('../git')
