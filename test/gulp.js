@@ -80,7 +80,7 @@ describe('node:gulp', function () {
 
     it('includes babel configuration', function () {
       assert.fileContent('gulpfile.js', 'gulp.task(\'babel\'');
-      assert.fileContent('gulpfile.js', 'gulp.task(\'prepublish\', [\'nsp\', \'babel\']);');
+      assert.fileContent('gulpfile.js', 'gulp.task(\'prepublish\', [\'nsp\', \'clean\', \'babel\']);');
       assert.fileContent('package.json', 'gulp-babel');
       assert.fileContent('.gitignore', 'dist');
     });
