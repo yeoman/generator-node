@@ -72,7 +72,7 @@ gulp.task('coveralls', ['test'], function () {
 <% } -%>
 <% if (babel) { -%>
 
-gulp.task('babel', function () {
+gulp.task('babel', ['clean'], function () {
   return gulp.src('<%- projectRoot %>')
     .pipe(babel())
     .pipe(gulp.dest('dist'));
