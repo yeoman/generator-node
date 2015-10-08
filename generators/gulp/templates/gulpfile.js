@@ -14,6 +14,7 @@ var coveralls = require('gulp-coveralls');
 <% } -%>
 <% if (babel) { -%>
 var babel = require('gulp-babel');
+var del = require('del');
 var isparta = require('isparta');
 
 // Initialize the babel transpiler so ES2015 files gets compiled
@@ -72,6 +73,8 @@ gulp.task('coveralls', ['test'], function () {
 <% if (babel) { -%>
 
 gulp.task('babel', function () {
+  del(['dist/**/*']);
+
   return gulp.src('<%- projectRoot %>')
     .pipe(babel())
     .pipe(gulp.dest('dist'));
