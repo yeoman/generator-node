@@ -73,11 +73,13 @@ gulp.task('coveralls', ['test'], function () {
 <% if (babel) { -%>
 
 gulp.task('babel', function () {
-  del(['dist/**/*']);
-
   return gulp.src('<%- projectRoot %>')
     .pipe(babel())
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('clean', function() {
+  return del('dist/**/*');
 });
 <% } -%>
 
