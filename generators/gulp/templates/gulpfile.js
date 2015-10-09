@@ -78,7 +78,7 @@ gulp.task('babel', ['clean'], function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', function() {
+gulp.task('clean', function () {
   return del('dist');
 });
 <% } -%>
