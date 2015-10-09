@@ -70,7 +70,6 @@ module.exports = generators.Base.extend({
       }
 
       if (this.options.babel) {
-        prepublishTasks.push('clean');
         prepublishTasks.push('babel');
       }
 
