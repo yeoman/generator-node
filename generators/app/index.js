@@ -195,8 +195,8 @@ module.exports = generators.Base.extend({
 
   default: function () {
     if (this.options.travis) {
-      this.composeWith('node:travis', {}, {
-        local: require.resolve('../travis')
+      this.composeWith('travis', {}, {
+        local: require.resolve('generator-travis/generators/app')
       });
     }
 

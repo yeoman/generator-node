@@ -104,7 +104,6 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:gulp`
 - `node:license`
 - `node:readme`
-- `node:travis`
 
 
 ## License

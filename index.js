@@ -7,6 +7,5 @@ module.exports = {
   eslint: require.resolve('./generators/eslint'),
   git: require.resolve('./generators/git'),
   gulp: require.resolve('./generators/gulp'),
-  readme: require.resolve('./generators/readme'),
-  travis: require.resolve('./generators/travis')
+  readme: require.resolve('./generators/readme')
 };
