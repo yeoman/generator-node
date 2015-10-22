@@ -1,4 +1,6 @@
+<% if (!babel) { -%>
 'use strict';
+<% } -%>
 <% if (includeCoveralls) { -%>
 var path = require('path');
 <% } -%>
@@ -37,10 +39,8 @@ gulp.task('nsp', function (cb) {
 gulp.task('pre-test', function () {
   return gulp.src('<%- projectRoot %>')
     .pipe(istanbul({
-      includeUntested: true
-<% if (babel) { -%>,
-      instrumenter: isparta.Instrumenter
-<% } -%>
+      includeUntested: true<% if (babel) { %>,
+      instrumenter: isparta.Instrumenter<% } %>
     }))
     .pipe(istanbul.hookRequire());
 });
