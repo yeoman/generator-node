@@ -39,7 +39,7 @@ module.exports = generators.Base.extend({
           'gulp-istanbul': '^0.9.0',
           'gulp-mocha': '^2.0.0',
           'gulp-plumber': '^1.0.0',
-          'gulp-nsp': '^0.4.5'
+          'gulp-nsp': '^2.1.0'
         },
         scripts: {
           prepublish: 'gulp prepublish',
