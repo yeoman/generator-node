@@ -1,9 +1,7 @@
 <% if (!babel) { -%>
 'use strict';
 <% } -%>
-<% if (includeCoveralls) { -%>
 var path = require('path');
-<% } -%>
 var gulp = require('gulp');
 var eslint = require('gulp-eslint');
 var excludeGitignore = require('gulp-exclude-gitignore');
@@ -33,7 +31,7 @@ gulp.task('static', function () {
 });
 
 gulp.task('nsp', function (cb) {
-  nsp({package: __dirname + '/package.json'}, cb);
+  nsp({package: path.resolve('package.json')}, cb);
 });
 
 gulp.task('pre-test', function () {
