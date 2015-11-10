@@ -86,8 +86,8 @@ Here's a list of our supported options:
 - `git` (Boolean, default true) include or not the git files (`.gitattributes`, `.gitignore`).
 - `gulp` (Boolean, default true) include or not a `gulpfile`.
 - `license` (Boolean, default true) include or not a `LICENSE` file.
-- `readme` (Boolean, default true) include or not a `README.md` file.
 - `travis` (Boolean, default true) include or not a `.travis.yml` file.
+- `readme` (String) content of the `README.md` file. Given this option, generator-node will still generate the title (with badges) and the license section.
 
 ### Sub generators
 
