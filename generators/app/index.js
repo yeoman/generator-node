@@ -50,6 +50,12 @@ module.exports = generators.Base.extend({
       defaults: 'lib',
       desc: 'Relative path to the project code root'
     });
+
+    this.option('readme', {
+      type: String,
+      required: false,
+      desc: 'Content to insert in the README.md file'
+    });
   },
 
   initializing: function () {
@@ -272,7 +278,8 @@ module.exports = generators.Base.extend({
           githubAccount: this.props.githubAccount,
           authorName: this.props.authorName,
           authorUrl: this.props.authorUrl,
-          coveralls: this.props.includeCoveralls
+          coveralls: this.props.includeCoveralls,
+          content: this.options.readme
         }
       }, {
         local: require.resolve('../readme')

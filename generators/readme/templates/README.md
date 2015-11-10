@@ -3,13 +3,12 @@ if (includeCoveralls) { %> [![Coverage percentage][coveralls-image]][coveralls-u
 
 > <%= description %>
 
-
-## Install
+<% if (!content) { -%>
+## Installation
 
 ```sh
 $ npm install --save <%= projectName %>
 ```
-
 
 ## Usage
 
@@ -18,7 +17,9 @@ var <%= safeProjectName %> = require('<%= projectName %>');
 
 <%= safeProjectName %>('Rainbow');
 ```
-
+<% } else { -%>
+<%= content %>
+<% } -%>
 ## License
 
 <%= license %> © [<%= author.name %>](<%= author.url %>)

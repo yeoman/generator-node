@@ -41,6 +41,12 @@ module.exports = generators.Base.extend({
       required: true,
       desc: 'Include coveralls badge'
     });
+
+    this.option('content', {
+      type: String,
+      required: false,
+      desc: 'Readme content'
+    });
   },
 
   writing: function () {
@@ -58,7 +64,8 @@ module.exports = generators.Base.extend({
           url: this.options.authorUrl
         },
         license: pkg.license,
-        includeCoveralls: this.options.coveralls
+        includeCoveralls: this.options.coveralls,
+        content: this.options.content
       }
     );
   }
