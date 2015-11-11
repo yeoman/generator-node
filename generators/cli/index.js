@@ -38,6 +38,14 @@ module.exports = generators.Base.extend({
           babel: this.options.babel
         }
       );
+    },
+
+    gitignore: function () {
+      this.fs.copy(
+        this.templatePath('_gitignore'),
+        this.destinationPath('.gitignore')
+      )
     }
+
   }
 });
