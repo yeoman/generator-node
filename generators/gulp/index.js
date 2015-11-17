@@ -7,6 +7,13 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
+    this.option('generateInto', {
+      type: String,
+      required: false,
+      defaults: '',
+      desc: 'Relocate the location of the generated files.'
+    });
+
     this.option('coveralls', {
       type: Boolean,
       required: false,
@@ -29,7 +36,7 @@ module.exports = generators.Base.extend({
 
   writing: {
     package: function () {
-      var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+      var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
       extend(pkg, {
         devDependencies: {
@@ -58,7 +65,7 @@ module.exports = generators.Base.extend({
         pkg.devDependencies.isparta = '^3.0.3';
       }
 
-      this.fs.writeJSON(this.destinationPath('package.json'), pkg);
+      this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), pkg);
     },
 
     gulpfile: function () {
@@ -75,7 +82,7 @@ module.exports = generators.Base.extend({
 
       this.fs.copyTpl(
         this.templatePath('gulpfile.js'),
-        this.destinationPath('gulpfile.js'),
+        this.destinationPath(this.options.generateInto, 'gulpfile.js'),
         {
           includeCoveralls: this.options.coveralls,
           babel: this.options.babel,
@@ -93,17 +100,17 @@ module.exports = generators.Base.extend({
 
       this.fs.copy(
         this.templatePath('babelrc'),
-        this.destinationPath('.babelrc')
+        this.destinationPath(this.options.generateInto, '.babelrc')
       );
 
       // Add dist/ to the .gitignore file
       var gitignore = this.fs.read(
-        this.destinationPath('.gitignore'),
+        this.destinationPath(this.options.generateInto, '.gitignore'),
         {defaults: ''}
       ).split('\n').filter(Boolean);
       gitignore.push('dist');
       this.fs.write(
-        this.destinationPath('.gitignore'),
+        this.destinationPath(this.options.generateInto, '.gitignore'),
         gitignore.join('\n') + '\n'
       );
     }

@@ -31,3 +31,19 @@ describe('node:boilerplate', function () {
     assert.fileContent('test/index.js', 'import myModule');
   });
 });
+
+describe('node:boilerplate', function () {
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../generators/boilerplate'))
+      .withOptions({name: 'my-module', generateInto: 'other/'})
+      .on('end', done);
+  });
+
+  it('creates boilerplate files using another path', function () {
+    assert.file('other/lib/index.js');
+    assert.file('other/test/index.js');
+    assert.fileContent('other/lib/index.js', 'module.exports = {};');
+    assert.fileContent('other/test/index.js', 'var myModule');
+    assert.fileContent('other/test/index.js', 'describe(\'my-module\'');
+  });
+});

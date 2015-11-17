@@ -13,3 +13,15 @@ describe('node:editorconfig', function () {
     assert.file('.editorconfig');
   });
 });
+
+describe('node:editorconfig', function () {
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../generators/editorconfig'))
+      .withOptions({generateInto: 'other/'})
+      .on('end', done);
+  });
+
+  it('creates .editorconfig with generate-into option', function () {
+    assert.file('other/.editorconfig');
+  });
+});

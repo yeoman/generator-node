@@ -6,6 +6,13 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
+    this.option('generateInto', {
+      type: String,
+      required: false,
+      defaults: '',
+      desc: 'Relocate the location of the generated files.'
+    });
+
     this.option('es2015', {
       required: false,
       defaults: false,
@@ -100,6 +107,6 @@ module.exports = generators.Base.extend({
       });
     }
 
-    this.fs.writeJSON(this.destinationPath('.eslintrc'), eslintrc);
+    this.fs.writeJSON(this.destinationPath(this.options.generateInto, '.eslintrc'), eslintrc);
   }
 });

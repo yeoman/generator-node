@@ -6,6 +6,13 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
+    this.option('generateInto', {
+      type: String,
+      required: false,
+      defaults: '',
+      desc: 'Relocate the location of the generated files.'
+    });
+
     this.option('name', {
       required: true,
       desc: 'The new module name.'
@@ -21,14 +28,14 @@ module.exports = generators.Base.extend({
   writing: function () {
     this.fs.copyTpl(
       this.templatePath('index.js'),
-      this.destinationPath('lib/index.js'), {
+      this.destinationPath(this.options.generateInto, 'lib/index.js'), {
         babel: this.options.babel
       }
     );
 
     this.fs.copyTpl(
       this.templatePath('test.js'),
-      this.destinationPath('test/index.js'), {
+      this.destinationPath(this.options.generateInto, 'test/index.js'), {
         pkgName: this.options.name,
         pkgSafeName: _.camelCase(this.options.name),
         babel: this.options.babel

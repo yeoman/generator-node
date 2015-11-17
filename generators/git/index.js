@@ -6,6 +6,13 @@ module.exports = generators.Base.extend({
   constructor: function () {
     generators.Base.apply(this, arguments);
 
+    this.option('generateInto', {
+      type: String,
+      required: false,
+      defaults: '',
+      desc: 'Relocate the location of the generated files.'
+    });
+
     this.option('name', {
       type: String,
       required: true,
@@ -22,17 +29,17 @@ module.exports = generators.Base.extend({
   initializing: function () {
     this.fs.copy(
       this.templatePath('gitattributes'),
-      this.destinationPath('.gitattributes')
+      this.destinationPath(this.options.generateInto, '.gitattributes')
     );
 
     this.fs.copy(
       this.templatePath('gitignore'),
-      this.destinationPath('.gitignore')
+      this.destinationPath(this.options.generateInto, '.gitignore')
     );
 
     var done = this.async();
 
-    originUrl(this.destinationPath(), function (err, url) {
+    originUrl(this.destinationPath(this.options.generateInto), function (err, url) {
       this.originUrl = url;
       done();
     }.bind(this));
@@ -40,7 +47,7 @@ module.exports = generators.Base.extend({
   },
 
   writing: function () {
-    this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+    this.pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
     var repository = '';
     if (this.originUrl) {
@@ -51,18 +58,22 @@ module.exports = generators.Base.extend({
 
     this.pkg.repository = this.pkg.repository || repository;
 
-    this.fs.writeJSON('package.json', this.pkg);
+    this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), this.pkg);
   },
 
   end: function () {
-    this.spawnCommandSync('git', ['init']);
+    this.spawnCommandSync('git', ['init'], {
+      cwd: this.destinationPath(this.options.generateInto)
+    });
 
     if (!this.originUrl) {
       var repoSSH = this.pkg.repository;
       if (this.pkg.repository.indexOf('.git') === -1) {
         repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
       }
-      this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH]);
+      this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH], {
+        cwd: this.destinationPath(this.options.generateInto)
+      });
     }
   }
 });
