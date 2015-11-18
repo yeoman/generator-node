@@ -111,27 +111,27 @@ module.exports = generators.Base.extend({
       var prompts = [{
         name: 'description',
         message: 'Description',
-        when: !this.pkg.description
+        when: !this.props.description
       }, {
         name: 'homepage',
         message: 'Project homepage url',
-        when: !this.pkg.homepage
+        when: !this.props.homepage
       }, {
         name: 'authorName',
         message: 'Author\'s Name',
-        when: !this.pkg.author,
+        when: !this.props.authorName,
         default: this.user.git.name(),
         store: true
       }, {
         name: 'authorEmail',
         message: 'Author\'s Email',
-        when: !this.pkg.author,
+        when: !this.props.authorEmail,
         default: this.user.git.email(),
         store: true
       }, {
         name: 'authorUrl',
         message: 'Author\'s Homepage',
-        when: !this.pkg.author,
+        when: !this.props.authorUrl,
         store: true
       }, {
         name: 'keywords',
