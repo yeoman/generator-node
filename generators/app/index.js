@@ -221,7 +221,7 @@ module.exports = generators.Base.extend({
     this.composeWith('node:git', {
       options: {
         name: this.props.name,
-        githubAccount: this.props.githubAccount
+        account: this.props.githubAccount
       }
     }, {
       local: require.resolve('../git')
