@@ -13,16 +13,23 @@ module.exports = generators.Base.extend({
       desc: 'Relocate the location of the generated files.'
     });
 
+    this.option('repoBaseUrl', {
+      type: String,
+      required: false,
+      defaults: 'git@github.com:',
+      desc: 'Base url of the git repository'
+    });
+
     this.option('name', {
       type: String,
       required: true,
       desc: 'Module name'
     });
 
-    this.option('github-account', {
+    this.option('account', {
       type: String,
       required: true,
-      desc: 'GitHub username or organization'
+      desc: 'Username or organization (probably Github)'
     });
   },
 
@@ -53,7 +60,7 @@ module.exports = generators.Base.extend({
     if (this.originUrl) {
       repository = this.originUrl;
     } else {
-      repository = this.options.githubAccount + '/' + this.options.name;
+      repository = this.options.account + '/' + this.options.name;
     }
 
     this.pkg.repository = this.pkg.repository || repository;
@@ -69,7 +76,7 @@ module.exports = generators.Base.extend({
     if (!this.originUrl) {
       var repoSSH = this.pkg.repository;
       if (this.pkg.repository.indexOf('.git') === -1) {
-        repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
+        repoSSH = this.options.repoBaseUrl + this.pkg.repository + '.git';
       }
       this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH], {
         cwd: this.destinationPath(this.options.generateInto)
