@@ -38,6 +38,12 @@ module.exports = generators.Base.extend({
       desc: 'Add a CLI'
     });
 
+    this.option('coveralls', {
+      type: Boolean,
+      required: false,
+      desc: 'Include coveralls config'
+    });
+
     this.option('gulp', {
       type: Boolean,
       required: false,
