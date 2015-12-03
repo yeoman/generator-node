@@ -36,10 +36,6 @@ module.exports = generators.Base.extend({
 
   writing: {
     package: function () {
-      if (!this.options.gulp) {
-        return;
-      }
-
       var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
       extend(pkg, {
@@ -73,10 +69,6 @@ module.exports = generators.Base.extend({
     },
 
     gulpfile: function () {
-      if (!this.options.gulp) {
-        return;
-      }
-
       var tasks = ['static', 'test'];
       var prepublishTasks = ['nsp'];
 
