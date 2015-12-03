@@ -1,6 +1,6 @@
 {
   "name": "generator-node",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "main": "index.js",
   "description": "Create a Node.js module",
   "homepage": "https://github.com/yeoman/generator-node",
