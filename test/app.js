@@ -4,7 +4,6 @@ var mockery = require('mockery');
 var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
-var fs = require('fs');
 
 describe('node:app', function () {
   before(function () {
@@ -60,7 +59,7 @@ describe('node:app', function () {
 
     it('creates package.json', function () {
       assert.file('package.json');
-      assert.JSONFileContent('package.json', {
+      assert.JSONFileContent('package.json', { // eslint-disable-line new-cap
         name: 'generator-node',
         version: '0.0.0',
         description: this.answers.description,
@@ -112,7 +111,7 @@ describe('node:app', function () {
 
     it('extends package.json keys with missing ones', function () {
       var pkg = _.extend({name: 'generator-node'}, this.pkg);
-      assert.JSONFileContent('package.json', pkg);
+      assert.JSONFileContent('package.json', pkg); // eslint-disable-line new-cap
     });
 
     it('does not overwrite previous README.md', function () {
@@ -144,7 +143,7 @@ describe('node:app', function () {
     });
 
     it('include the raw files', function () {
-      assert.JSONFileContent('package.json', {
+      assert.JSONFileContent('package.json', { // eslint-disable-line new-cap
         files: ['lib'],
         main: 'lib/index.js'
       });
@@ -159,7 +158,7 @@ describe('node:app', function () {
     });
 
     it('include the raw files', function () {
-      assert.JSONFileContent('package.json', {
+      assert.JSONFileContent('package.json', { // eslint-disable-line new-cap
         files: ['generators'],
         main: 'generators/index.js'
       });

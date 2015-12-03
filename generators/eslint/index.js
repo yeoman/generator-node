@@ -31,7 +31,7 @@ module.exports = generators.Base.extend({
         'array-bracket-spacing': [2, 'never'],
         'brace-style': [2, '1tbs'],
         'consistent-return': 0,
-        indent: [2, 2, {'SwitchCase': 1}],
+        indent: [2, 2, {SwitchCase: 1}],
         'no-multiple-empty-lines': [2, {max: 2}],
         'no-use-before-define': [2, 'nofunc'],
         'one-var': [2, 'never'],
