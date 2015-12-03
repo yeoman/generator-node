@@ -234,7 +234,7 @@ module.exports = generators.Base.extend({
       local: require.resolve('../git')
     });
 
-    if (this.options.gulp !== false) {
+    if (this.options.gulp) {
       this.composeWith('node:gulp', {
         options: {
           coveralls: this.props.includeCoveralls,
