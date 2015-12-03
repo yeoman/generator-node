@@ -40,7 +40,7 @@ module.exports = generators.Base.extend({
       var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'));
       this.fs.copyTpl(
         this.templatePath('cli.js'),
-        this.destinationPath(this.options.generateInto,  'lib/cli.js'), {
+        this.destinationPath(this.options.generateInto, 'lib/cli.js'), {
           pkgSafeName: _.camelCase(pkg.name),
           babel: this.options.babel
         }
