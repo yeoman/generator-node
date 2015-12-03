@@ -227,15 +227,17 @@ module.exports = generators.Base.extend({
       local: require.resolve('../git')
     });
 
-    this.composeWith('node:gulp', {
-      options: {
-        coveralls: this.props.includeCoveralls,
-        babel: this.props.babel,
-        projectRoot: this.options.projectRoot
-      }
-    }, {
-      local: require.resolve('../gulp')
-    });
+    if (this.options.gulp !== false) {
+      this.composeWith('node:gulp', {
+        options: {
+          coveralls: this.props.includeCoveralls,
+          babel: this.props.babel,
+          projectRoot: this.options.projectRoot
+        }
+      }, {
+        local: require.resolve('../gulp')
+      });
+    }
 
     if (this.options.boilerplate) {
       this.composeWith('node:boilerplate', {
