@@ -31,7 +31,7 @@ module.exports = generators.Base.extend({
         'array-bracket-spacing': [2, 'never'],
         'brace-style': [2, '1tbs'],
         'consistent-return': 0,
-        indent: [2, 2],
+        indent: [2, 2, {'SwitchCase': 1}],
         'no-multiple-empty-lines': [2, {max: 2}],
         'no-use-before-define': [2, 'nofunc'],
         'one-var': [2, 'never'],
@@ -50,9 +50,10 @@ module.exports = generators.Base.extend({
         'space-infix-ops': 2,
         // Best Practices
         'dot-notation': [2, { allowKeywords: true }],
-        eqeqeq: 2,
+        eqeqeq: [2, 'allow-null'],
         'no-alert': 2,
         'no-caller': 2,
+        'no-console': 0,
         'no-empty-label': 2,
         'no-extend-native': 2,
         'no-extra-bind': 2,
@@ -89,7 +90,6 @@ module.exports = generators.Base.extend({
         'no-new-object': 2,
         'no-spaced-func': 2,
         'no-trailing-spaces': 2,
-        'no-underscore-dangle': 2,
         semi: 2,
         'semi-spacing': [2, {before: false, after: true}],
         'space-return-throw-case': 2
