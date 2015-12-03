@@ -37,6 +37,7 @@ module.exports = generators.Base.extend({
         'one-var': [2, 'never'],
         'quote-props': [2, 'as-needed'],
         quotes: [2, 'single'],
+        'space-before-blocks': [2, 'always'],
         'space-after-keywords': [2, 'always'],
         'space-before-function-paren': [2, {anonymous: 'always', named: 'never'}],
         'space-in-parens': [2, 'never'],
