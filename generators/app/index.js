@@ -37,6 +37,13 @@ module.exports = generators.Base.extend({
       defaults: false,
       desc: 'Add a CLI'
     });
+    
+    this.option('gulp', {
+      type: Boolean,
+      required: false,
+      defaults: false,
+      desc: 'Include or not a gulpfile.js'
+    });
 
     this.option('name', {
       type: String,
