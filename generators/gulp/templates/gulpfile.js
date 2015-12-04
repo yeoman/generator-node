@@ -57,6 +57,10 @@ gulp.task('test', ['pre-test'], function (cb) {
       cb(mochaErr);
     });
 });
+
+gulp.task('watch', function () {
+  gulp.watch(['<%- projectRoot %>', 'test/**'], ['test']);
+});
 <% if (includeCoveralls) { -%>
 
 gulp.task('coveralls', ['test'], function () {
