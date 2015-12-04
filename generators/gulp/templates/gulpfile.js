@@ -36,6 +36,7 @@ gulp.task('nsp', function (cb) {
 
 gulp.task('pre-test', function () {
   return gulp.src('<%- projectRoot %>')
+    .pipe(excludeGitignore())
     .pipe(istanbul({
       includeUntested: true<% if (babel) { %>,
       instrumenter: isparta.Instrumenter<% } %>
