@@ -14,7 +14,8 @@
   "author": "Yeoman team",
   "repository": "yeoman/generator-node",
   "scripts": {
-    "test": "mocha test -R spec"
+    "test": "gulp",
+    "prepublish": "gulp prepublish"
   },
   "dependencies": {
     "deep-extend": "^0.4.0",
@@ -28,12 +29,13 @@
     "yeoman-generator": "^0.21.1"
   },
   "devDependencies": {
-    "gulp-eslint": "^1.1.1",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0",
     "gulp-exclude-gitignore": "^1.0.0",
     "gulp-istanbul": "^0.10.3",
-    "gulp-mocha": "^2.2.0",
+    "gulp-mocha": "^2.0.0",
     "gulp-nsp": "^2.1.0",
-    "gulp-plumber": "^1.0.1",
+    "gulp-plumber": "^1.0.0",
     "mocha": "^2.2.3",
     "mockery": "^1.4.0",
     "yeoman-assert": "^2.0.0"

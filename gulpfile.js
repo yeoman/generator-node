@@ -9,7 +9,7 @@ var nsp = require('gulp-nsp');
 var plumber = require('gulp-plumber');
 
 gulp.task('static', function () {
-  return gulp.src(['**/*.js', '!**/templates/**'])
+  return gulp.src('**/*.js')
     .pipe(excludeGitignore())
     .pipe(eslint())
     .pipe(eslint.format())
@@ -21,7 +21,7 @@ gulp.task('nsp', function (cb) {
 });
 
 gulp.task('pre-test', function () {
-  return gulp.src(['**/*.js', '!**/templates/**'])
+  return gulp.src('generators/**/*.js')
     .pipe(excludeGitignore())
     .pipe(istanbul({
       includeUntested: true
@@ -42,6 +42,10 @@ gulp.task('test', ['pre-test'], function (cb) {
     .on('end', function () {
       cb(mochaErr);
     });
+});
+
+gulp.task('watch', function () {
+  gulp.watch(['generators/**/*.js', 'test/**'], ['test']);
 });
 
 gulp.task('prepublish', ['nsp']);
