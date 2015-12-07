@@ -29,6 +29,7 @@
     "yeoman-generator": "^0.21.1"
   },
   "devDependencies": {
+    "eslint-config-xo-space": "^0.7.0",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
     "gulp-exclude-gitignore": "^1.0.0",
@@ -39,6 +40,12 @@
     "mocha": "^2.2.3",
     "mockery": "^1.4.0",
     "yeoman-assert": "^2.0.0"
+  },
+  "eslintConfig": {
+    "extends": "xo-space",
+    "env": {
+      "mocha": true
+    }
   },
   "files": [
     "index.js",

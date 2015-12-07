@@ -9,16 +9,17 @@ describe('node:eslint', function () {
       .on('end', done);
   });
 
-  it('creates .eslintrc', function () {
-    assert.file('.eslintrc');
+  it('fill package.json', function () {
+    assert.fileContent('package.json', /"eslint-config-xo-space":/);
+    assert.jsonFileContent('package.json', {
+      eslintConfig: {
+        extends: 'xo-space',
+        env: {
+          mocha: true
+        }
+      }
+    });
   });
-
-  it('fill env .eslintrc', function () {
-    assert.fileContent('.eslintrc', /"env": {/);
-    assert.fileContent('.eslintrc', /"node": true/);
-    assert.fileContent('.eslintrc', /"mocha": true/);
-  });
-
 
   describe('--es2015', function () {
     before(function (done) {
@@ -27,41 +28,31 @@ describe('node:eslint', function () {
         .on('end', done);
     });
 
-    it('fill .eslintrc for ES2015', function () {
-      assert.fileContent('.eslintrc', /"es6": true/);
-      assert.fileContent('.eslintrc', /"ecmaFeatures": {\s*"modules": true\s*}/);
+    it('fill package.json for ES2015', function () {
+      assert.fileContent('package.json', /"babel-eslint":/);
+      assert.fileContent('package.json', /"eslint-plugin-babel":/);
+      assert.jsonFileContent('package.json', {
+        eslintConfig: {
+          extends: 'xo-space/esnext'
+        }
+      });
     });
   });
-});
 
-describe('node:eslint', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/eslint'))
-      .withOptions({generateInto: 'other/'})
-      .on('end', done);
-  });
-
-  it('creates .eslintrc with generate-into option', function () {
-    assert.file('other/.eslintrc');
-  });
-
-  it('fill env .eslintrc with generate-into option', function () {
-    assert.fileContent('other/.eslintrc', /"env": {/);
-    assert.fileContent('other/.eslintrc', /"node": true/);
-    assert.fileContent('other/.eslintrc', /"mocha": true/);
-  });
-
-
-  describe('--es2015 and --option', function () {
+  describe('--generate-into', function () {
     before(function (done) {
       helpers.run(path.join(__dirname, '../generators/eslint'))
-        .withOptions({es2015: true, generateInto: 'other/'})
+        .withOptions({generateInto: 'other/'})
         .on('end', done);
     });
 
-    it('fill .eslintrc for ES2015', function () {
-      assert.fileContent('other/.eslintrc', /"es6": true/);
-      assert.fileContent('other/.eslintrc', /"ecmaFeatures": {\s*"modules": true\s*}/);
+    it('fill env .eslintrc with generate-into option', function () {
+      assert.fileContent('other/package.json', /"eslint-config-xo-space":/);
+      assert.jsonFileContent('other/package.json', {
+        eslintConfig: {
+          extends: 'xo-space'
+        }
+      });
     });
   });
 });

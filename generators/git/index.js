@@ -43,7 +43,6 @@ module.exports = generators.Base.extend({
       this.originUrl = url;
       done();
     }.bind(this));
-
   },
 
   writing: function () {
