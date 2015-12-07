@@ -36,6 +36,7 @@ gulp.task('nsp', function (cb) {
 
 gulp.task('pre-test', function () {
   return gulp.src('<%- projectRoot %>')
+    .pipe(excludeGitignore())
     .pipe(istanbul({
       includeUntested: true<% if (babel) { %>,
       instrumenter: isparta.Instrumenter<% } %>
@@ -56,6 +57,10 @@ gulp.task('test', ['pre-test'], function (cb) {
     .on('end', function () {
       cb(mochaErr);
     });
+});
+
+gulp.task('watch', function () {
+  gulp.watch(['<%- projectRoot %>', 'test/**'], ['test']);
 });
 <% if (includeCoveralls) { -%>
 
