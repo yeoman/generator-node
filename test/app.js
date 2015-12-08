@@ -48,7 +48,6 @@ describe('node:app', function () {
       assert.file([
         '.travis.yml',
         '.editorconfig',
-        '.eslintrc',
         '.gitignore',
         '.gitattributes',
         'README.md',
@@ -59,7 +58,7 @@ describe('node:app', function () {
 
     it('creates package.json', function () {
       assert.file('package.json');
-      assert.JSONFileContent('package.json', { // eslint-disable-line new-cap
+      assert.jsonFileContent('package.json', {
         name: 'generator-node',
         version: '0.0.0',
         description: this.answers.description,
@@ -111,7 +110,7 @@ describe('node:app', function () {
 
     it('extends package.json keys with missing ones', function () {
       var pkg = _.extend({name: 'generator-node'}, this.pkg);
-      assert.JSONFileContent('package.json', pkg); // eslint-disable-line new-cap
+      assert.jsonFileContent('package.json', pkg);
     });
 
     it('does not overwrite previous README.md', function () {
@@ -143,7 +142,7 @@ describe('node:app', function () {
     });
 
     it('include the raw files', function () {
-      assert.JSONFileContent('package.json', { // eslint-disable-line new-cap
+      assert.jsonFileContent('package.json', {
         files: ['lib'],
         main: 'lib/index.js'
       });
@@ -158,7 +157,7 @@ describe('node:app', function () {
     });
 
     it('include the raw files', function () {
-      assert.JSONFileContent('package.json', { // eslint-disable-line new-cap
+      assert.jsonFileContent('package.json', {
         files: ['generators'],
         main: 'generators/index.js'
       });
