@@ -256,7 +256,8 @@ module.exports = generators.Base.extend({
         options: {
           coveralls: this.props.includeCoveralls,
           babel: this.props.babel,
-          projectRoot: this.options.projectRoot
+          projectRoot: this.options.projectRoot,
+          cli: this.options.cli
         }
       }, {
         local: require.resolve('../gulp')

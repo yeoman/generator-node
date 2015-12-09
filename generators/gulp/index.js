@@ -27,6 +27,13 @@ module.exports = generators.Base.extend({
       desc: 'Compile ES2015 using Babel'
     });
 
+    this.option('cli', {
+      type: Boolean,
+      required: false,
+      defaults: false,
+      desc: 'Add a CLI'
+    });
+
     this.option('projectRoot', {
       type: String,
       required: true,
@@ -43,6 +50,7 @@ module.exports = generators.Base.extend({
           'gulp': '^3.9.0',
           'gulp-eslint': '^1.0.0',
           'gulp-exclude-gitignore': '^1.0.0',
+          'gulp-line-ending-corrector': '^1.0.1',
           'gulp-istanbul': '^0.10.3',
           'gulp-mocha': '^2.0.0',
           'gulp-plumber': '^1.0.0',
@@ -65,6 +73,10 @@ module.exports = generators.Base.extend({
         pkg.devDependencies.isparta = '^3.0.3';
       }
 
+      if (this.options.cli) {
+        pkg.devDependencies['gulp-line-ending-corrector'] = '^1.0.1';
+      }
+
       this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), pkg);
     },
 
@@ -76,6 +88,10 @@ module.exports = generators.Base.extend({
         tasks.push('coveralls');
       }
 
+      if (this.options.cli) {
+        prepublishTasks.push('line-ending-corrector');
+      }
+
       if (this.options.babel) {
         prepublishTasks.push('babel');
       }
@@ -85,6 +101,7 @@ module.exports = generators.Base.extend({
         this.destinationPath(this.options.generateInto, 'gulpfile.js'),
         {
           includeCoveralls: this.options.coveralls,
+          cli: this.options.cli,
           babel: this.options.babel,
           tasks: stringifyArray(tasks),
           prepublishTasks: stringifyArray(prepublishTasks),
