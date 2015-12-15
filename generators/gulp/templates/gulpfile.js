@@ -58,7 +58,7 @@ gulp.task('test', ['pre-test'], function (cb) {
     var text = String(fs.readFileSync(optFile));
     text = text.replace(/\n/g, ' ');
     var opt = minimist(text.split(' '));
-    delete opt['_'];
+    delete opt._;
     options = opt;
   }
 
