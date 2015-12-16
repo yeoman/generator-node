@@ -7,7 +7,10 @@ var helpers = require('yeoman-generator').test;
 
 describe('node:app', function () {
   before(function () {
-    mockery.enable({warnOnUnregistered: false});
+    mockery.enable({
+      warnOnReplace: false,
+      warnOnUnregistered: false
+    });
 
     mockery.registerMock('npm-name', function (name, cb) {
       cb(null, true);
