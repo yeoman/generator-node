@@ -150,7 +150,9 @@ module.exports = generators.Base.extend({
         name: 'keywords',
         message: 'Package keywords (comma to split)',
         when: !this.pkg.keywords,
-        filter: _.words
+        filter: function (words) {
+          return words.split(/\s*,\s*/g);
+        }
       }, {
         name: 'babel',
         type: 'confirm',
