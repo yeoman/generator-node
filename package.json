@@ -18,7 +18,6 @@
     "prepublish": "gulp prepublish"
   },
   "dependencies": {
-    "deep-extend": "^0.4.0",
     "generator-license": "^2.0.0",
     "generator-travis": "^1.1.3",
     "git-remote-origin-url": "^1.1.1",
