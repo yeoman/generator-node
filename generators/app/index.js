@@ -173,6 +173,9 @@ module.exports = generators.Base.extend({
       var done = this.async();
 
       githubUsername(this.props.authorEmail, function (err, username) {
+        if (err) {
+          username = username || '';
+        }
         this.prompt({
           name: 'githubAccount',
           message: 'GitHub username or organization',
