@@ -193,7 +193,8 @@ module.exports = generators.Base.extend({
   writing: function () {
     // Re-read the content at this point because a composed generator might modify it.
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-    var pkg = {
+
+    var pkg = extend({
       name: _.kebabCase(this.props.name),
       version: '0.0.0',
       description: this.props.description,
@@ -210,11 +211,16 @@ module.exports = generators.Base.extend({
         this.options.projectRoot,
         'index.js'
       ),
-      keywords: this.props.keywords
-    };
+      keywords: []
+    }, currentPkg);
+
+    // Combine the keywords
+    if (this.props.keywords) {
+      pkg.keywords = _.uniq(this.props.keywords.concat(pkg.keywords));
+    }
 
     // Let's extend package.json so we're not overwriting user previous fields
-    this.fs.writeJSON('package.json', extend(pkg, currentPkg));
+    this.fs.writeJSON(this.destinationPath('package.json'), pkg);
   },
 
   default: function () {
