@@ -1,6 +1,6 @@
 'use strict';
 var generators = require('yeoman-generator');
-var extend = require('deep-extend');
+var extend = require('lodash').merge;
 
 module.exports = generators.Base.extend({
   constructor: function () {
