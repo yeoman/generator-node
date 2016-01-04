@@ -1,6 +1,8 @@
 sudo: false
 language: node_js
 node_js:
-  - '0.10'
-  - '0.12'
-  - 'iojs'
+  - stable
+  - v0.10
+  - v0.12
+  - v4
+  - v5
