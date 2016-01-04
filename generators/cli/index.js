@@ -29,7 +29,7 @@ module.exports = generators.Base.extend({
       extend(pkg, {
         bin: this.options.babel ? 'dist/cli.js' : 'lib/cli.js',
         dependencies: {
-          meow: '^3.3.0'
+          meow: '^3.7.0'
         }
       });
 
@@ -41,6 +41,7 @@ module.exports = generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('cli.js'),
         this.destinationPath(this.options.generateInto, 'lib/cli.js'), {
+          pkgName: pkg.name,
           pkgSafeName: _.camelCase(pkg.name),
           babel: this.options.babel
         }
