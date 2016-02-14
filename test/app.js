@@ -3,7 +3,7 @@ var _ = require('lodash');
 var mockery = require('mockery');
 var path = require('path');
 var assert = require('yeoman-assert');
-var helpers = require('yeoman-generator').test;
+var helpers = require('yeoman-test');
 
 describe('node:app', function () {
   before(function () {

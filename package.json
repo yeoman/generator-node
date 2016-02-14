@@ -38,7 +38,8 @@
     "gulp-plumber": "^1.0.0",
     "mocha": "^2.2.3",
     "mockery": "^1.4.0",
-    "yeoman-assert": "^2.0.0"
+    "yeoman-assert": "^2.0.0",
+    "yeoman-test": "^1.0.0"
   },
   "eslintConfig": {
     "extends": "xo-space",
