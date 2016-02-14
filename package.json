@@ -23,7 +23,7 @@
     "git-remote-origin-url": "^1.1.1",
     "github-username": "^2.0.0",
     "inquirer-npm-name": "^1.0.0",
-    "lodash": "^3.7.0",
+    "lodash": "^4.3.0",
     "parse-author": "^0.2.0",
     "yeoman-generator": "^0.22.2"
   },
