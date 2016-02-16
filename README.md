@@ -102,7 +102,6 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:eslint`
 - `node:git`
 - `node:gulp`
-- `node:license`
 - `node:readme`
 
 ## Sponsors
