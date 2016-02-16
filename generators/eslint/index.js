@@ -30,12 +30,13 @@ module.exports = generators.Base.extend({
       }
     };
     var devDep = {
-      'eslint-config-xo-space': '^0.7.0'
+      'eslint': '^2.1.0',
+      'eslint-config-xo-space': '^0.10.0'
     };
 
     if (this.options.es2015) {
-      devDep['babel-eslint'] = '^4.1.6';
-      devDep['eslint-plugin-babel'] = '^3.0.0';
+      devDep['babel-eslint'] = '^4.1.8';
+      devDep['eslint-plugin-babel'] = '^3.1.0';
       eslintConfig.extends = 'xo-space/esnext';
     }
 
