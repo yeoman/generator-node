@@ -51,6 +51,13 @@ module.exports = generators.Base.extend({
       desc: 'Include or not a gulpfile.js'
     });
 
+    this.option('license', {
+      type: Boolean,
+      required: false,
+      defaults: true,
+      desc: 'Include a license'
+    });
+
     this.option('name', {
       type: String,
       required: false,
@@ -285,7 +292,7 @@ module.exports = generators.Base.extend({
       });
     }
 
-    if (!this.pkg.license) {
+    if (this.options.license && !this.pkg.license) {
       this.composeWith('license', {
         options: {
           name: this.props.authorName,
