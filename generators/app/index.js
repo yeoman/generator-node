@@ -64,6 +64,12 @@ module.exports = generators.Base.extend({
       desc: 'Project name'
     });
 
+    this.option('githubAccount', {
+      type: String,
+      required: false,
+      desc: 'GitHub username or organization'
+    });
+
     this.option('projectRoot', {
       type: String,
       required: false,
@@ -179,21 +185,25 @@ module.exports = generators.Base.extend({
     },
 
     askForGithubAccount: function () {
-      var done = this.async();
+      if (this.options.githubAccount) {
+        this.props.githubAccount = this.options.githubAccount;
+      } else {
+        var done = this.async();
 
-      githubUsername(this.props.authorEmail, function (err, username) {
-        if (err) {
-          username = username || '';
-        }
-        this.prompt({
-          name: 'githubAccount',
-          message: 'GitHub username or organization',
-          default: username
-        }, function (prompt) {
-          this.props.githubAccount = prompt.githubAccount;
-          done();
+        githubUsername(this.props.authorEmail, function (err, username) {
+          if (err) {
+            username = username || '';
+          }
+          this.prompt({
+            name: 'githubAccount',
+            message: 'GitHub username or organization',
+            default: username
+          }, function (prompt) {
+            this.props.githubAccount = prompt.githubAccount;
+            done();
+          }.bind(this));
         }.bind(this));
-      }.bind(this));
+      }
     }
   },
 
