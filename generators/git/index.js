@@ -70,7 +70,7 @@ module.exports = generators.Base.extend({
 
     if (!this.originUrl) {
       var repoSSH = this.pkg.repository;
-      if (this.pkg.repository.indexOf('.git') === -1) {
+      if (this.pkg.repository && this.pkg.repository.indexOf('.git') === -1) {
         repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
       }
       this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH], {
