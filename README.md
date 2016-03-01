@@ -1,4 +1,4 @@
-# Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node) [![Gitter](https://img.shields.io/badge/Gitter-Join_the_Yeoman_chat_%E2%86%92-00d06f.svg)](https://gitter.im/yeoman/yeoman)
+# Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node) [![Gitter](https://img.shields.io/badge/Gitter-Join_the_Yeoman_chat_%E2%86%92-00d06f.svg)](https://gitter.im/yeoman/yeoman) [![OpenCollective](https://opencollective.com/yeoman/badge/backers.svg)](https://opencollective.com/yeoman#support)
 
 `generator-node` creates a base template to start a new Node.js module.
 
@@ -105,9 +105,9 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:gulp`
 - `node:readme`
 
-## Sponsors
+## Backers
 Love Yeoman work and community? Help us keep it alive by donating funds to cover project expenses! <br />
-[[Become a sponsor](https://opencollective.com/yeoman#support)]
+[[Become a backer](https://opencollective.com/yeoman#support)]
 
   <a href="https://opencollective.com/yeoman/backers/0/website" target="_blank">
     <img src="https://opencollective.com/yeoman/backers/0/avatar">
