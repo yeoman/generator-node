@@ -37,15 +37,12 @@ module.exports = generators.Base.extend({
       this.destinationPath(this.options.generateInto, '.gitignore')
     );
 
-    var done = this.async();
-
-    originUrl(this.destinationPath(this.options.generateInto), function (err, url) {
-      if (err) {
-        url = url || '';
-      }
-      this.originUrl = url;
-      done();
-    }.bind(this));
+    return originUrl(this.destinationPath(this.options.generateInto))
+      .then(function (url) {
+        this.originUrl = url;
+      }.bind(this), function () {
+        this.originUrl = '';
+      }.bind(this));
   },
 
   writing: function () {
