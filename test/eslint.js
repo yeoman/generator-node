@@ -31,11 +31,6 @@ describe('node:eslint', function () {
     it('fill package.json for ES2015', function () {
       assert.fileContent('package.json', /"babel-eslint":/);
       assert.fileContent('package.json', /"eslint-plugin-babel":/);
-      assert.jsonFileContent('package.json', {
-        eslintConfig: {
-          extends: 'xo-space/esnext'
-        }
-      });
     });
   });
 
