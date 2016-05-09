@@ -4,8 +4,8 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('node:cli', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/cli'))
+  before(function () {
+    return helpers.run(path.join(__dirname, '../generators/cli'))
       .withOptions({babel: true})
       .on('ready', function (generator) {
         generator.fs.write(
@@ -13,7 +13,7 @@ describe('node:cli', function () {
           '{"name": "my-lib"}'
         );
       })
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates cli.js', function () {
@@ -28,10 +28,10 @@ describe('node:cli', function () {
   });
 
   describe('--no-babel', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/cli'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/cli'))
         .withOptions({babel: false})
-        .on('end', done);
+        .toPromise();
     });
 
     it('does not use any ES2015 syntax', function () {
@@ -41,8 +41,8 @@ describe('node:cli', function () {
 });
 
 describe('node:cli', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/cli'))
+  before(function () {
+    return helpers.run(path.join(__dirname, '../generators/cli'))
       .withOptions({babel: true, generateInto: 'other/'})
       .on('ready', function (generator) {
         generator.fs.write(
@@ -50,7 +50,7 @@ describe('node:cli', function () {
           '{"name": "my-lib"}'
         );
       })
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates cli.js with path option', function () {
@@ -65,10 +65,10 @@ describe('node:cli', function () {
   });
 
   describe('--no-babel and --generate-into', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/cli'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/cli'))
         .withOptions({babel: false, generateInto: 'other/'})
-        .on('end', done);
+        .toPromise();
     });
 
     it('does not use any ES2015 syntax', function () {

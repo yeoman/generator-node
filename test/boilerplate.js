@@ -4,10 +4,10 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('node:boilerplate', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/boilerplate'))
+  before(function () {
+    return helpers.run(path.join(__dirname, '../generators/boilerplate'))
       .withOptions({name: 'my-module'})
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates boilerplate files', function () {
@@ -20,10 +20,10 @@ describe('node:boilerplate', function () {
 });
 
 describe('node:boilerplate', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/boilerplate'))
+  before(function () {
+    return helpers.run(path.join(__dirname, '../generators/boilerplate'))
       .withOptions({name: 'my-module', babel: true})
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates boilerplate files in ES2015', function () {
@@ -33,10 +33,10 @@ describe('node:boilerplate', function () {
 });
 
 describe('node:boilerplate', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/boilerplate'))
+  before(function () {
+    return helpers.run(path.join(__dirname, '../generators/boilerplate'))
       .withOptions({name: 'my-module', generateInto: 'other/'})
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates boilerplate files using another path', function () {

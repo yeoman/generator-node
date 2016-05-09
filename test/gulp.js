@@ -5,13 +5,13 @@ var helpers = require('yeoman-test');
 
 describe('node:gulp', function () {
   describe('including coveralls', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           coveralls: true,
           projectRoot: 'lib'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates files and configuration', function () {
@@ -37,13 +37,13 @@ describe('node:gulp', function () {
   });
 
   describe('excluding coveralls', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           coveralls: false,
           projectRoot: 'lib'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('does not include coveralls configurations', function () {
@@ -53,13 +53,13 @@ describe('node:gulp', function () {
   });
 
   describe('--no-coveralls', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           coveralls: false,
           projectRoot: 'lib'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('does not include coveralls configurations', function () {
@@ -69,13 +69,13 @@ describe('node:gulp', function () {
   });
 
   describe('--babel', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           babel: true,
           projectRoot: 'lib'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('includes babel configuration', function () {
@@ -87,12 +87,12 @@ describe('node:gulp', function () {
   });
 
   describe('--projectRoot', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           projectRoot: 'generators'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('define a custom root', function () {
@@ -104,14 +104,14 @@ describe('node:gulp', function () {
 
 describe('node:gulp', function () {
   describe('including coveralls with generate-into option', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           coveralls: true,
           projectRoot: 'lib',
           generateInto: 'other/'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates files and configuration', function () {
@@ -137,14 +137,14 @@ describe('node:gulp', function () {
   });
 
   describe('excluding coveralls with generate-into option', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           coveralls: false,
           projectRoot: 'lib',
           generateInto: 'other/'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('does not include coveralls configurations', function () {
@@ -154,14 +154,14 @@ describe('node:gulp', function () {
   });
 
   describe('--no-coveralls and --generate-into', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           coveralls: false,
           projectRoot: 'lib',
           generateInto: 'other/'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('does not include coveralls configurations', function () {
@@ -171,14 +171,14 @@ describe('node:gulp', function () {
   });
 
   describe('--babel and --generate-into', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           babel: true,
           projectRoot: 'lib',
           generateInto: 'other/'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('includes babel configuration', function () {
@@ -190,13 +190,13 @@ describe('node:gulp', function () {
   });
 
   describe('--projectRoot and --generate-into', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/gulp'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           projectRoot: 'generators',
           generateInto: 'other/'
         })
-        .on('end', done);
+        .toPromise();
     });
 
     it('define a custom root', function () {

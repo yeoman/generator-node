@@ -115,9 +115,7 @@ module.exports = generators.Base.extend({
         return;
       }
 
-      var done = this.async();
-
-      askName({
+      return askName({
         name: 'name',
         message: 'Module Name',
         default: path.basename(process.cwd()),
@@ -125,15 +123,12 @@ module.exports = generators.Base.extend({
         validate: function (str) {
           return str.length > 0;
         }
-      }, this, function (name) {
-        this.props.name = name;
-        done();
+      }, this).then(function (answer) {
+        this.props.name = answer.name;
       }.bind(this));
     },
 
     askFor: function () {
-      var done = this.async();
-
       var prompts = [{
         name: 'description',
         message: 'Description',
@@ -178,32 +173,31 @@ module.exports = generators.Base.extend({
         when: this.options.coveralls === undefined
       }];
 
-      this.prompt(prompts, function (props) {
+      return this.prompt(prompts).then(function (props) {
         this.props = extend(this.props, props);
-        done();
       }.bind(this));
     },
 
     askForGithubAccount: function () {
       if (this.options.githubAccount) {
         this.props.githubAccount = this.options.githubAccount;
-      } else {
-        var done = this.async();
-
-        githubUsername(this.props.authorEmail, function (err, username) {
-          if (err) {
-            username = username || '';
-          }
-          this.prompt({
-            name: 'githubAccount',
-            message: 'GitHub username or organization',
-            default: username
-          }, function (prompt) {
-            this.props.githubAccount = prompt.githubAccount;
-            done();
-          }.bind(this));
-        }.bind(this));
+        return;
       }
+      var done = this.async();
+
+      githubUsername(this.props.authorEmail, function (err, username) {
+        if (err) {
+          username = username || '';
+        }
+        this.prompt({
+          name: 'githubAccount',
+          message: 'GitHub username or organization',
+          default: username
+        }).then(function (prompt) {
+          this.props.githubAccount = prompt.githubAccount;
+          done();
+        }.bind(this));
+      }.bind(this));
     }
   },
 

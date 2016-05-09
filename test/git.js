@@ -4,12 +4,12 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('node:git', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/git'))
+  before(function () {
+    return helpers.run(path.join(__dirname, '../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node'
       })
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates .gitignore', function () {
@@ -26,13 +26,13 @@ describe('node:git', function () {
 });
 
 describe('node:git', function () {
-  before(function (done) {
-    helpers.run(path.join(__dirname, '../generators/git'))
+  before(function () {
+    return helpers.run(path.join(__dirname, '../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node',
         generateInto: 'other/'
       })
-      .on('end', done);
+      .toPromise();
   });
 
   it('creates .gitignore with generate-into option', function () {

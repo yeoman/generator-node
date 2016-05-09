@@ -4,6 +4,7 @@ var mockery = require('mockery');
 var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
+var Promise = require('pinkie-promise');
 
 describe('node:app', function () {
   before(function () {
@@ -12,8 +13,8 @@ describe('node:app', function () {
       warnOnUnregistered: false
     });
 
-    mockery.registerMock('npm-name', function (name, cb) {
-      cb(null, true);
+    mockery.registerMock('npm-name', function () {
+      return Promise.resolve(true);
     });
 
     mockery.registerMock('github-username', function (name, cb) {
@@ -31,7 +32,7 @@ describe('node:app', function () {
   });
 
   describe('running on new project', function () {
-    before(function (done) {
+    before(function () {
       this.answers = {
         name: 'generator-node',
         description: 'A node generator',
@@ -42,9 +43,9 @@ describe('node:app', function () {
         authorUrl: 'http://yeoman.io',
         keywords: ['foo', 'bar']
       };
-      helpers.run(path.join(__dirname, '../generators/app'))
+      return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts(this.answers)
-        .on('end', done);
+        .toPromise();
     });
 
     it('creates files', function () {
@@ -90,7 +91,7 @@ describe('node:app', function () {
   });
 
   describe('running on existing project', function () {
-    before(function (done) {
+    before(function () {
       this.pkg = {
         version: '1.0.34',
         description: 'lots of fun',
@@ -100,7 +101,7 @@ describe('node:app', function () {
         files: ['lib'],
         keywords: ['bar']
       };
-      helpers.run(path.join(__dirname, '../generators/app'))
+      return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts({
           name: 'generator-node'
         })
@@ -108,7 +109,7 @@ describe('node:app', function () {
           gen.fs.writeJSON(gen.destinationPath('package.json'), this.pkg);
           gen.fs.write(gen.destinationPath('README.md'), 'foo');
         }.bind(this))
-        .on('end', done);
+        .toPromise();
     });
 
     it('extends package.json keys with missing ones', function () {
@@ -122,10 +123,10 @@ describe('node:app', function () {
   });
 
   describe('--no-travis', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/app'))
         .withOptions({travis: false})
-        .on('end', done);
+        .toPromise();
     });
 
     it('skip .travis.yml', function () {
@@ -134,10 +135,10 @@ describe('node:app', function () {
   });
 
   describe('--no-babel', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/app'))
         .withOptions({babel: false})
-        .on('end', done);
+        .toPromise();
     });
 
     it('skip .bablerc', function () {
@@ -153,10 +154,10 @@ describe('node:app', function () {
   });
 
   describe('--projectRoot', function () {
-    before(function (done) {
-      helpers.run(path.join(__dirname, '../generators/app'))
+    before(function () {
+      return helpers.run(path.join(__dirname, '../generators/app'))
         .withOptions({projectRoot: 'generators', babel: false})
-        .on('end', done);
+        .toPromise();
     });
 
     it('include the raw files', function () {

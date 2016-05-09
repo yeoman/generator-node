@@ -22,10 +22,10 @@
     "generator-travis": "^1.1.3",
     "git-remote-origin-url": "^2.0.0",
     "github-username": "^2.0.0",
-    "inquirer-npm-name": "^1.0.0",
+    "inquirer-npm-name": "^2.0.0",
     "lodash": "^4.3.0",
     "parse-author": "^1.0.0",
-    "yeoman-generator": "^0.22.2"
+    "yeoman-generator": "^0.23.3"
   },
   "devDependencies": {
     "eslint": "^2.0.0",
@@ -40,6 +40,7 @@
     "gulp-plumber": "^1.0.0",
     "mocha": "^2.2.3",
     "mockery": "^1.4.0",
+    "pinkie-promise": "^2.0.1",
     "yeoman-assert": "^2.0.0",
     "yeoman-test": "^1.0.0"
   },
