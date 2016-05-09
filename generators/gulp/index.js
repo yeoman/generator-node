@@ -67,10 +67,11 @@ module.exports = generators.Base.extend({
       }
 
       if (this.options.babel) {
-        pkg.devDependencies['gulp-babel'] = '^5.1.0';
+        pkg.devDependencies['gulp-babel'] = '^6.1.2';
         pkg.devDependencies.del = '^2.0.2';
-        pkg.devDependencies['babel-core'] = '^5.5.0';
-        pkg.devDependencies.isparta = '^3.0.3';
+        pkg.devDependencies['babel-core'] = '^6.7.7';
+        pkg.devDependencies['babel-register'] = '^6.7.2';
+        pkg.devDependencies.isparta = '^4.0.0';
       }
 
       if (this.options.cli) {

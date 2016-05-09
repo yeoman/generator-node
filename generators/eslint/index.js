@@ -36,7 +36,7 @@ module.exports = generators.Base.extend({
 
     if (this.options.es2015) {
       devDep['babel-eslint'] = '^4.1.8';
-      devDep['eslint-plugin-babel'] = '^3.1.0';
+      devDep['eslint-plugin-babel'] = '^6.0.4';
     }
 
     extend(pkg, {
