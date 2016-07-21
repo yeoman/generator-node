@@ -30,13 +30,13 @@ module.exports = generators.Base.extend({
       }
     };
     var devDep = {
-      'eslint': '^2.1.0',
-      'eslint-config-xo-space': '^0.13.0'
+      'eslint': '^3.1.1',
+      'eslint-config-xo-space': '^0.14.0'
     };
 
     if (this.options.es2015) {
-      devDep['babel-eslint'] = '^4.1.8';
-      devDep['eslint-plugin-babel'] = '^3.1.0';
+      devDep['babel-eslint'] = '^6.1.2';
+      devDep['eslint-plugin-babel'] = '^3.3.0';
     }
 
     extend(pkg, {

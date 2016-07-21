@@ -22,7 +22,7 @@ var isparta = require('isparta');
 
 // Initialize the babel transpiler so ES2015 files gets compiled
 // when they're loaded
-require('babel-core/register');
+require('babel-register');
 <% } -%>
 
 gulp.task('static', function () {
@@ -88,7 +88,7 @@ gulp.task('line-ending-corrector', function () {
 
 gulp.task('babel', ['clean'], function () {
   return gulp.src('<%- projectRoot %>')
-    .pipe(babel())
+    .pipe(babel({presets: ['es2015']}))
     .pipe(gulp.dest('dist'));
 });
 
