@@ -221,7 +221,7 @@ module.exports = generators.Base.extend({
       main: this.props.babel ? 'dist/index.js' : path.join(
         this.options.projectRoot,
         'index.js'
-      ),
+      ).replace(/\\/g, '/'),
       keywords: []
     }, currentPkg);
 

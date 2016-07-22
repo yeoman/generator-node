@@ -107,7 +107,7 @@ module.exports = generators.Base.extend({
           babel: this.options.babel,
           tasks: stringifyArray(tasks),
           prepublishTasks: stringifyArray(prepublishTasks),
-          projectRoot: path.join(this.options.projectRoot, '**/*.js')
+          projectRoot: path.join(this.options.projectRoot, '**/*.js').replace(/\\/g, '/')
         }
       );
     },
