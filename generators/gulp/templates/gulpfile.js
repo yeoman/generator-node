@@ -88,7 +88,7 @@ gulp.task('line-ending-corrector', function () {
 
 gulp.task('babel', ['clean'], function () {
   return gulp.src('<%- projectRoot %>')
-    .pipe(babel({presets: ['es2015']}))
+    .pipe(babel())
     .pipe(gulp.dest('dist'));
 });
 
