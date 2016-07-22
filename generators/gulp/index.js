@@ -51,7 +51,7 @@ module.exports = generators.Base.extend({
           'gulp-eslint': '^2.0.0',
           'gulp-exclude-gitignore': '^1.0.0',
           'gulp-line-ending-corrector': '^1.0.1',
-          'gulp-istanbul': '^0.10.3',
+          'gulp-istanbul': '^1.0.0',
           'gulp-mocha': '^2.0.0',
           'gulp-plumber': '^1.0.0',
           'gulp-nsp': '^2.1.0'
@@ -67,10 +67,12 @@ module.exports = generators.Base.extend({
       }
 
       if (this.options.babel) {
-        pkg.devDependencies['gulp-babel'] = '^5.1.0';
+        pkg.devDependencies['gulp-babel'] = '^6.1.2';
         pkg.devDependencies.del = '^2.0.2';
-        pkg.devDependencies['babel-core'] = '^5.5.0';
-        pkg.devDependencies.isparta = '^3.0.3';
+        pkg.devDependencies['babel-core'] = '^6.11.4';
+        pkg.devDependencies['babel-register'] = '^6.9.0';
+        pkg.devDependencies['babel-preset-es2015'] = '6.9.0';
+        pkg.devDependencies.isparta = '^4.0.0';
       }
 
       if (this.options.cli) {
