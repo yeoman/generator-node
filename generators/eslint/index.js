@@ -30,7 +30,7 @@ module.exports = generators.Base.extend({
       }
     };
     var devDep = {
-      'eslint': '^3.1.1',
+      eslint: '^3.1.1',
       'eslint-config-xo-space': '^0.15.0'
     };
 
