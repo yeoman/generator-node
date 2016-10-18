@@ -183,19 +183,17 @@ module.exports = generators.Base.extend({
         this.props.githubAccount = this.options.githubAccount;
         return;
       }
-      var done = this.async();
 
-      githubUsername(this.props.authorEmail, function (err, username) {
+      return githubUsername(this.props.authorEmail).then(function (err, username) {
         if (err) {
           username = username || '';
         }
-        this.prompt({
+        return this.prompt({
           name: 'githubAccount',
           message: 'GitHub username or organization',
           default: username
         }).then(function (prompt) {
           this.props.githubAccount = prompt.githubAccount;
-          done();
         }.bind(this));
       }.bind(this));
     }

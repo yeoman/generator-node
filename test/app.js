@@ -17,8 +17,8 @@ describe('node:app', function () {
       return Promise.resolve(true);
     });
 
-    mockery.registerMock('github-username', function (name, cb) {
-      cb(null, 'unicornUser');
+    mockery.registerMock('github-username', function () {
+      return Promise.resolve('unicornUser');
     });
 
     mockery.registerMock(
