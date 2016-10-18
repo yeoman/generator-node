@@ -195,6 +195,12 @@ module.exports = generators.Base.extend({
         }).then(function (prompt) {
           this.props.githubAccount = prompt.githubAccount;
         }.bind(this));
+      }.bind(this)).catch(function(error) {
+        return this.prompt({
+          name: 'githubAccount',
+          message: 'GitHub username or organization',
+          default: ''
+        })
       }.bind(this));
     }
   },
