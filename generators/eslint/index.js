@@ -31,7 +31,7 @@ module.exports = generators.Base.extend({
     };
     var devDep = {
       'eslint': '^3.1.1',
-      'eslint-config-xo-space': '^0.14.0'
+      'eslint-config-xo-space': '^0.15.0'
     };
 
     if (this.options.es2015) {
