@@ -46,7 +46,7 @@ module.exports = generators.Base.extend({
       var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
       extend(pkg, {
-        devDependencies: {
+        devDependencies: JSON.parse({
           "gulp": "3.9.1",
           "gulp-coveralls": "^0.1.4",
           "gulp-eslint": "^3.0.1",
@@ -56,7 +56,7 @@ module.exports = generators.Base.extend({
           "gulp-mocha": "^3.0.1",
           "gulp-nsp": "^2.4.2",
           "gulp-plumber": "^1.1.0",
-        },
+        }),
         scripts: {
           prepublish: 'gulp prepublish',
           test: 'gulp'
