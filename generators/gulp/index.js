@@ -55,7 +55,7 @@ module.exports = generators.Base.extend({
           "gulp-line-ending-corrector": "^1.0.1",
           "gulp-mocha": "^3.0.1",
           "gulp-nsp": "^2.4.2",
-          "gulp-plumber": "^1.1.0",
+          "gulp-plumber": "^1.1.0"
         }),
         scripts: {
           prepublish: 'gulp prepublish',
