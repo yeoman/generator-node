@@ -47,14 +47,14 @@ module.exports = generators.Base.extend({
 
       extend(pkg, {
         devDependencies: {
-          gulp: '^3.9.0',
+          gulp: '3.9.1',
           'gulp-eslint': '^3.0.1',
           'gulp-exclude-gitignore': '^1.0.0',
+          'gulp-istanbul': '^1.1.1',
           'gulp-line-ending-corrector': '^1.0.1',
-          'gulp-istanbul': '^1.0.0',
           'gulp-mocha': '^3.0.1',
-          'gulp-plumber': '^1.0.0',
-          'gulp-nsp': '^2.1.0'
+          'gulp-nsp': '^2.4.2',
+          'gulp-plumber': '^1.1.0'
         },
         scripts: {
           prepublish: 'gulp prepublish',
