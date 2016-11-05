@@ -46,17 +46,17 @@ module.exports = generators.Base.extend({
       var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
       extend(pkg, {
-        devDependencies: JSON.parse({
-          "gulp": "3.9.1",
-          "gulp-coveralls": "^0.1.4",
-          "gulp-eslint": "^3.0.1",
-          "gulp-exclude-gitignore": "^1.0.0",
-          "gulp-istanbul": "^1.1.1",
-          "gulp-line-ending-corrector": "^1.0.1",
-          "gulp-mocha": "^3.0.1",
-          "gulp-nsp": "^2.4.2",
-          "gulp-plumber": "^1.1.0"
-        }),
+        devDependencies: {
+          gulp: "3.9.1",
+          'gulp-coveralls': '^0.1.4',
+          'gulp-eslint': '^3.0.1',
+          'gulp-exclude-gitignore': '^1.0.0',
+          'gulp-istanbul': '^1.1.1',
+          'gulp-line-ending-corrector': '^1.0.1',
+          'gulp-mocha': '^3.0.1',
+          'gulp-nsp': '^2.4.2',
+          'gulp-plumber': '^1.1.0'
+        },
         scripts: {
           prepublish: 'gulp prepublish',
           test: 'gulp'
