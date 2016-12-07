@@ -4,8 +4,6 @@
 
 It is also easily composed into your own generators so you can only target your efforts at your generator's specific features.
 
-Maintained by [Hemanth.HM](http://github.com/hemanth).
-
 
 ## Install
 
@@ -33,6 +31,7 @@ That'll generate a project with all the common tools setup. This includes:
 - [Travis CI](https://travis-ci.org/) continuous integration (optional)
 - [License](https://spdx.org/licenses/)
 
+
 ### Running tests
 
 Once the project is scaffolded, inside the project folder run:
@@ -48,6 +47,7 @@ $ npm -g install mocha
 $ mocha test/name.js
 ```
 
+
 ### Publishing your code
 
 Once your tests are passing (ideally with a Travis CI green run), you might be ready to publish your code to npm. We recommend you using [npm version](https://docs.npmjs.com/cli/version) to tag release correctly.
@@ -58,6 +58,7 @@ $ git push --follow-tags
 # ATTENTION: There is no turning back here.
 $ npm publish
 ```
+
 
 ## Extend this generator
 
@@ -75,6 +76,7 @@ module.exports = generators.Base.extend({
 });
 ```
 
+
 ### Options
 
 Here's a list of our supported options:
@@ -90,6 +92,7 @@ Here's a list of our supported options:
 - `githubAccount` (String) Account name for GitHub repo location.
 - `readme` (String) content of the `README.md` file. Given this option, generator-node will still generate the title (with badges) and the license section.
 
+
 ### Sub generators
 
 If you don't need all the features provided by the main generator, you can still use a limited set of features by composing with our sub generators directly.
@@ -104,6 +107,7 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:git`
 - `node:gulp`
 - `node:readme`
+
 
 ## Backers
 Love Yeoman work and community? Help us keep it alive by donating funds to cover project expenses! <br />
