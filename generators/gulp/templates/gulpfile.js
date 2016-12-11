@@ -19,6 +19,8 @@ var lec = require('gulp-line-ending-corrector');
 var babel = require('gulp-babel');
 var del = require('del');
 var isparta = require('isparta');
+var fs = require('fs');
+var minimist = require('minimist');
 
 // Initialize the babel transpiler so ES2015 files gets compiled
 // when they're loaded
@@ -50,11 +52,25 @@ gulp.task('pre-test', function () {
 gulp.task('test', ['pre-test'], function (cb) {
   var mochaErr;
 
+  var optFile = path.resolve(__dirname, 'test/mocha.opts');
+
+  var options = {
+    reporter: 'spec'
+  };
+  if (fs.existsSync(optFile)) {
+    var text = String(fs.readFileSync(optFile));
+    text = text.replace(/\n/g, ' ');
+    var opt = minimist(text.split(' '));
+    delete opt._;
+    options = opt;
+  }
+
   gulp.src('test/**/*.js')
     .pipe(plumber())
-    .pipe(mocha({reporter: 'spec'}))
+    .pipe(mocha(options))
     .on('error', function (err) {
       mochaErr = err;
+      throw err;
     })
     .pipe(istanbul.writeReports())
     .on('end', function () {
