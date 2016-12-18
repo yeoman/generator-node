@@ -1,9 +1,9 @@
 'use strict';
-var generators = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments);
+    Generator.apply(this, arguments);
 
     this.option('generateInto', {
       type: String,

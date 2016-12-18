@@ -6,8 +6,7 @@ var helpers = require('yeoman-test');
 describe('node:boilerplate', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/boilerplate'))
-      .withOptions({name: 'my-module'})
-      .toPromise();
+      .withOptions({name: 'my-module'});
   });
 
   it('creates boilerplate files', function () {
@@ -22,8 +21,7 @@ describe('node:boilerplate', function () {
 describe('node:boilerplate', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/boilerplate'))
-      .withOptions({name: 'my-module', babel: true})
-      .toPromise();
+      .withOptions({name: 'my-module', babel: true});
   });
 
   it('creates boilerplate files in ES2015', function () {
@@ -35,8 +33,7 @@ describe('node:boilerplate', function () {
 describe('node:boilerplate', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/boilerplate'))
-      .withOptions({name: 'my-module', generateInto: 'other/'})
-      .toPromise();
+      .withOptions({name: 'my-module', generateInto: 'other/'});
   });
 
   it('creates boilerplate files using another path', function () {

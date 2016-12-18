@@ -41,11 +41,11 @@ describe('node:app', function () {
         authorName: 'The Yeoman Team',
         authorEmail: 'hi@yeoman.io',
         authorUrl: 'http://yeoman.io',
-        keywords: ['foo', 'bar']
+        keywords: ['foo', 'bar'],
+        babel: true
       };
       return helpers.run(path.join(__dirname, '../generators/app'))
-        .withPrompts(this.answers)
-        .toPromise();
+        .withPrompts(this.answers);
     });
 
     it('creates files', function () {
@@ -108,8 +108,7 @@ describe('node:app', function () {
         .on('ready', function (gen) {
           gen.fs.writeJSON(gen.destinationPath('package.json'), this.pkg);
           gen.fs.write(gen.destinationPath('README.md'), 'foo');
-        }.bind(this))
-        .toPromise();
+        }.bind(this));
     });
 
     it('extends package.json keys with missing ones', function () {
@@ -125,8 +124,7 @@ describe('node:app', function () {
   describe('--no-travis', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
-        .withOptions({travis: false})
-        .toPromise();
+        .withOptions({travis: false});
     });
 
     it('skip .travis.yml', function () {
@@ -137,8 +135,7 @@ describe('node:app', function () {
   describe('--no-babel', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
-        .withOptions({babel: false})
-        .toPromise();
+        .withOptions({babel: false});
     });
 
     it('skip .bablerc', function () {
@@ -156,8 +153,7 @@ describe('node:app', function () {
   describe('--projectRoot', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
-        .withOptions({projectRoot: 'generators', babel: false})
-        .toPromise();
+        .withOptions({projectRoot: 'generators', babel: false});
     });
 
     it('include the raw files', function () {

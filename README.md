@@ -65,12 +65,10 @@ $ npm publish
 First of all, make sure you're comfortable with [Yeoman composability](http://yeoman.io/authoring/composability.html) feature. Then in your own generator:
 
 ```js
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   default: function () {
-    this.composeWith('node:app', {
-      options: {/* provide the options you want */}
-    }, {
-      local: require.resolve('generator-node/generators/app')
+    this.composeWith(require.resolve('generator-node/generators/app'), {
+      /* provide the options you want */
     });
   }
 });
