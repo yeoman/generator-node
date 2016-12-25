@@ -241,6 +241,7 @@ module.exports = Generator.extend({
     }
 
     this.composeWith(require.resolve('../editorconfig'));
+    this.composeWith(require.resolve('../nsp'));
 
     this.composeWith(require.resolve('../eslint'), {
       es2015: this.props.babel

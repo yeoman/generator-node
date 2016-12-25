@@ -53,7 +53,6 @@ module.exports = Generator.extend({
           'gulp-istanbul': '^1.1.1',
           'gulp-line-ending-corrector': '^1.0.1',
           'gulp-mocha': '^3.0.1',
-          'gulp-nsp': '^2.4.2',
           'gulp-plumber': '^1.1.0'
         },
         scripts: {
@@ -84,7 +83,7 @@ module.exports = Generator.extend({
 
     gulpfile: function () {
       var tasks = ['static', 'test'];
-      var prepublishTasks = ['nsp'];
+      var prepublishTasks = [];
 
       if (this.options.coveralls) {
         tasks.push('coveralls');

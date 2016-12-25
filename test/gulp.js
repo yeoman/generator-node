@@ -76,7 +76,7 @@ describe('node:gulp', function () {
 
     it('includes babel configuration', function () {
       assert.fileContent('gulpfile.js', 'gulp.task(\'babel\'');
-      assert.fileContent('gulpfile.js', 'gulp.task(\'prepublish\', [\'nsp\', \'babel\']);');
+      assert.fileContent('gulpfile.js', 'gulp.task(\'prepublish\', [\'babel\']);');
       assert.fileContent('package.json', 'gulp-babel');
       assert.fileContent('.gitignore', 'dist');
     });
@@ -174,7 +174,7 @@ describe('node:gulp', function () {
 
     it('includes babel configuration', function () {
       assert.fileContent('other/gulpfile.js', 'gulp.task(\'babel\'');
-      assert.fileContent('other/gulpfile.js', 'gulp.task(\'prepublish\', [\'nsp\', \'babel\']);');
+      assert.fileContent('other/gulpfile.js', 'gulp.task(\'prepublish\', [\'babel\']);');
       assert.fileContent('other/package.json', 'gulp-babel');
       assert.fileContent('other/.gitignore', 'dist');
     });

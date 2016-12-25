@@ -27,6 +27,7 @@ That'll generate a project with all the common tools setup. This includes:
 - [Babel](https://babeljs.io/) ES2015 transpiler
 - [mocha](http://mochajs.org/) unit test
 - [ESLint](http://eslint.org/) linting and code style checking
+- [nsp](https://nodesecurity.io/) known vulnerability check
 - [Istanbul](https://gotwarlost.github.io/istanbul/) code coverage (optionally tracked on [Coveralls](https://coveralls.io/))
 - [Travis CI](https://travis-ci.org/) continuous integration (optional)
 - [License](https://spdx.org/licenses/)
