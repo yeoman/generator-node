@@ -12,8 +12,7 @@ describe('node:cli', function () {
           generator.destinationPath('package.json'),
           '{"name": "my-lib"}'
         );
-      })
-      .toPromise();
+      });
   });
 
   it('creates cli.js', function () {
@@ -30,8 +29,7 @@ describe('node:cli', function () {
   describe('--no-babel', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/cli'))
-        .withOptions({babel: false})
-        .toPromise();
+        .withOptions({babel: false});
     });
 
     it('does not use any ES2015 syntax', function () {
@@ -49,8 +47,7 @@ describe('node:cli', function () {
           generator.destinationPath('other/package.json'),
           '{"name": "my-lib"}'
         );
-      })
-      .toPromise();
+      });
   });
 
   it('creates cli.js with path option', function () {
@@ -67,8 +64,7 @@ describe('node:cli', function () {
   describe('--no-babel and --generate-into', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/cli'))
-        .withOptions({babel: false, generateInto: 'other/'})
-        .toPromise();
+        .withOptions({babel: false, generateInto: 'other/'});
     });
 
     it('does not use any ES2015 syntax', function () {

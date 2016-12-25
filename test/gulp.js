@@ -10,8 +10,7 @@ describe('node:gulp', function () {
         .withOptions({
           coveralls: true,
           projectRoot: 'lib'
-        })
-        .toPromise();
+        });
     });
 
     it('creates files and configuration', function () {
@@ -42,8 +41,7 @@ describe('node:gulp', function () {
         .withOptions({
           coveralls: false,
           projectRoot: 'lib'
-        })
-        .toPromise();
+        });
     });
 
     it('does not include coveralls configurations', function () {
@@ -58,8 +56,7 @@ describe('node:gulp', function () {
         .withOptions({
           coveralls: false,
           projectRoot: 'lib'
-        })
-        .toPromise();
+        });
     });
 
     it('does not include coveralls configurations', function () {
@@ -74,8 +71,7 @@ describe('node:gulp', function () {
         .withOptions({
           babel: true,
           projectRoot: 'lib'
-        })
-        .toPromise();
+        });
     });
 
     it('includes babel configuration', function () {
@@ -91,8 +87,7 @@ describe('node:gulp', function () {
       return helpers.run(path.join(__dirname, '../generators/gulp'))
         .withOptions({
           projectRoot: 'generators'
-        })
-        .toPromise();
+        });
     });
 
     it('define a custom root', function () {
@@ -110,8 +105,7 @@ describe('node:gulp', function () {
           coveralls: true,
           projectRoot: 'lib',
           generateInto: 'other/'
-        })
-        .toPromise();
+        });
     });
 
     it('creates files and configuration', function () {
@@ -143,8 +137,7 @@ describe('node:gulp', function () {
           coveralls: false,
           projectRoot: 'lib',
           generateInto: 'other/'
-        })
-        .toPromise();
+        });
     });
 
     it('does not include coveralls configurations', function () {
@@ -160,8 +153,7 @@ describe('node:gulp', function () {
           coveralls: false,
           projectRoot: 'lib',
           generateInto: 'other/'
-        })
-        .toPromise();
+        });
     });
 
     it('does not include coveralls configurations', function () {
@@ -177,8 +169,7 @@ describe('node:gulp', function () {
           babel: true,
           projectRoot: 'lib',
           generateInto: 'other/'
-        })
-        .toPromise();
+        });
     });
 
     it('includes babel configuration', function () {
@@ -195,8 +186,7 @@ describe('node:gulp', function () {
         .withOptions({
           projectRoot: 'generators',
           generateInto: 'other/'
-        })
-        .toPromise();
+        });
     });
 
     it('define a custom root', function () {

@@ -5,8 +5,7 @@ var helpers = require('yeoman-test');
 
 describe('node:eslint', function () {
   before(function () {
-    return helpers.run(path.join(__dirname, '../generators/eslint'))
-      .toPromise();
+    return helpers.run(path.join(__dirname, '../generators/eslint'));
   });
 
   it('fill package.json', function () {
@@ -24,8 +23,7 @@ describe('node:eslint', function () {
   describe('--es2015', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/eslint'))
-        .withOptions({es2015: true})
-        .toPromise();
+        .withOptions({es2015: true});
     });
 
     it('fill package.json for ES2015', function () {
@@ -37,8 +35,7 @@ describe('node:eslint', function () {
   describe('--generate-into', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/eslint'))
-        .withOptions({generateInto: 'other/'})
-        .toPromise();
+        .withOptions({generateInto: 'other/'});
     });
 
     it('fill env .eslintrc with generate-into option', function () {

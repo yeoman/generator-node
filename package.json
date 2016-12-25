@@ -25,7 +25,7 @@
     "inquirer-npm-name": "^2.0.0",
     "lodash": "^4.3.0",
     "parse-author": "^1.0.0",
-    "yeoman-generator": "^0.24.1"
+    "yeoman-generator": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "^3.8.1",

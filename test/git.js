@@ -8,8 +8,7 @@ describe('node:git', function () {
     return helpers.run(path.join(__dirname, '../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node'
-      })
-      .toPromise();
+      });
   });
 
   it('creates .gitignore', function () {
@@ -31,8 +30,7 @@ describe('node:git', function () {
       .withOptions({
         repositoryPath: 'yeoman/generator-node',
         generateInto: 'other/'
-      })
-      .toPromise();
+      });
   });
 
   it('creates .gitignore with generate-into option', function () {

@@ -1,26 +1,27 @@
 'use strict';
 var _ = require('lodash');
-var generators = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments);
+    Generator.apply(this, arguments);
 
     this.option('generateInto', {
       type: String,
       required: false,
-      defaults: '',
+      default: '',
       desc: 'Relocate the location of the generated files.'
     });
 
     this.option('name', {
+      type: String,
       required: true,
       desc: 'The new module name.'
     });
 
     this.option('babel', {
       required: false,
-      defaults: false,
+      default: false,
       desc: 'Compile ES2015 using Babel'
     });
   },

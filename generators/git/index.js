@@ -1,10 +1,10 @@
 'use strict';
-var generators = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var originUrl = require('git-remote-origin-url');
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments);
+    Generator.apply(this, arguments);
 
     this.option('generateInto', {
       type: String,

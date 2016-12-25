@@ -1,27 +1,27 @@
 'use strict';
 var _ = require('lodash');
 var extend = _.merge;
-var generators = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var parseAuthor = require('parse-author');
 var githubUsername = require('github-username');
 var path = require('path');
 var askName = require('inquirer-npm-name');
 
-module.exports = generators.Base.extend({
+module.exports = Generator.extend({
   constructor: function () {
-    generators.Base.apply(this, arguments);
+    Generator.apply(this, arguments);
 
     this.option('travis', {
       type: Boolean,
       required: false,
-      defaults: true,
+      default: true,
       desc: 'Include travis config'
     });
 
     this.option('boilerplate', {
       type: Boolean,
       required: false,
-      defaults: true,
+      default: true,
       desc: 'Include boilerplate files'
     });
 
@@ -34,7 +34,7 @@ module.exports = generators.Base.extend({
     this.option('cli', {
       type: Boolean,
       required: false,
-      defaults: false,
+      default: false,
       desc: 'Add a CLI'
     });
 
@@ -47,14 +47,14 @@ module.exports = generators.Base.extend({
     this.option('gulp', {
       type: Boolean,
       required: false,
-      defaults: true,
+      default: true,
       desc: 'Include or not a gulpfile.js'
     });
 
     this.option('license', {
       type: Boolean,
       required: false,
-      defaults: true,
+      default: true,
       desc: 'Include a license'
     });
 
@@ -73,7 +73,7 @@ module.exports = generators.Base.extend({
     this.option('projectRoot', {
       type: String,
       required: false,
-      defaults: 'lib',
+      default: 'lib',
       desc: 'Relative path to the project code root'
     });
 
@@ -237,91 +237,59 @@ module.exports = generators.Base.extend({
 
   default: function () {
     if (this.options.travis) {
-      this.composeWith('travis', {}, {
-        local: require.resolve('generator-travis/generators/app')
-      });
+      this.composeWith(require.resolve('generator-travis/generators/app'));
     }
 
-    this.composeWith('node:editorconfig', {}, {
-      local: require.resolve('../editorconfig')
+    this.composeWith(require.resolve('../editorconfig'));
+
+    this.composeWith(require.resolve('../eslint'), {
+      es2015: this.props.babel
     });
 
-    this.composeWith('node:eslint', {
-      options: {
-        es2015: this.props.babel
-      }
-    }, {
-      local: require.resolve('../eslint')
-    });
-
-    this.composeWith('node:git', {
-      options: {
-        name: this.props.name,
-        githubAccount: this.props.githubAccount
-      }
-    }, {
-      local: require.resolve('../git')
+    this.composeWith(require.resolve('../git'), {
+      name: this.props.name,
+      githubAccount: this.props.githubAccount
     });
 
     if (this.options.gulp) {
-      this.composeWith('node:gulp', {
-        options: {
-          coveralls: this.props.includeCoveralls,
-          babel: this.props.babel,
-          projectRoot: this.options.projectRoot,
-          cli: this.options.cli
-        }
-      }, {
-        local: require.resolve('../gulp')
+      this.composeWith(require.resolve('../gulp'), {
+        coveralls: this.props.includeCoveralls,
+        babel: this.props.babel,
+        projectRoot: this.options.projectRoot,
+        cli: this.options.cli
       });
     }
 
     if (this.options.boilerplate) {
-      this.composeWith('node:boilerplate', {
-        options: {
-          name: this.props.name,
-          babel: this.props.babel
-        }
-      }, {
-        local: require.resolve('../boilerplate')
+      this.composeWith(require.resolve('../boilerplate'), {
+        name: this.props.name,
+        babel: this.props.babel
       });
     }
 
     if (this.options.cli) {
-      this.composeWith('node:cli', {
-        options: {
-          babel: this.props.babel
-        }
-      }, {
-        local: require.resolve('../cli')
+      this.composeWith(require.resolve('../cli'), {
+        babel: this.props.babel
       });
     }
 
     if (this.options.license && !this.pkg.license) {
-      this.composeWith('license', {
-        options: {
-          name: this.props.authorName,
-          email: this.props.authorEmail,
-          website: this.props.authorUrl
-        }
-      }, {
-        local: require.resolve('generator-license/app')
+      this.composeWith(require.resolve('generator-license/app'), {
+        name: this.props.authorName,
+        email: this.props.authorEmail,
+        website: this.props.authorUrl
       });
     }
 
     if (!this.fs.exists(this.destinationPath('README.md'))) {
-      this.composeWith('node:readme', {
-        options: {
-          name: this.props.name,
-          description: this.props.description,
-          githubAccount: this.props.githubAccount,
-          authorName: this.props.authorName,
-          authorUrl: this.props.authorUrl,
-          coveralls: this.props.includeCoveralls,
-          content: this.options.readme
-        }
-      }, {
-        local: require.resolve('../readme')
+      this.composeWith(require.resolve('../readme'), {
+        name: this.props.name,
+        description: this.props.description,
+        githubAccount: this.props.githubAccount,
+        authorName: this.props.authorName,
+        authorUrl: this.props.authorUrl,
+        coveralls: this.props.includeCoveralls,
+        content: this.options.readme
       });
     }
   },
