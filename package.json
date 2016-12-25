@@ -16,7 +16,7 @@
   "scripts": {
     "pretest": "eslint **/*.js --fix",
     "test": "gulp",
-    "prepublish": "nsp"
+    "prepublish": "nsp check"
   },
   "dependencies": {
     "generator-license": "^4.0.0",

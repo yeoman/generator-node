@@ -12,7 +12,7 @@ describe('node:nsp', function () {
           nsp: rootPkg.devDependencies.nsp
         },
         scripts: {
-          prepublish: 'nsp'
+          prepublish: 'nsp check'
         }
       });
     });
