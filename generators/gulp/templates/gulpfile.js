@@ -3,7 +3,6 @@
 <% } -%>
 var path = require('path');
 var gulp = require('gulp');
-var eslint = require('gulp-eslint');
 var excludeGitignore = require('gulp-exclude-gitignore');
 var mocha = require('gulp-mocha');
 var istanbul = require('gulp-istanbul');
@@ -23,14 +22,6 @@ var isparta = require('isparta');
 // when they're loaded
 require('babel-register');
 <% } -%>
-
-gulp.task('static', function () {
-  return gulp.src('**/*.js')
-    .pipe(excludeGitignore())
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
 
 gulp.task('pre-test', function () {
   return gulp.src('<%- projectRoot %>')

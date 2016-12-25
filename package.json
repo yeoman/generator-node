@@ -14,6 +14,7 @@
   "author": "Yeoman team",
   "repository": "yeoman/generator-node",
   "scripts": {
+    "pretest": "eslint **/*.js --fix",
     "test": "gulp",
     "prepublish": "nsp"
   },
@@ -28,11 +29,12 @@
     "yeoman-generator": "^1.0.1"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "eslint": "^3.8.1",
     "eslint-config-xo": "^0.17.0",
     "eslint-config-xo-space": "^0.15.0",
+    "eslint-plugin-babel": "^4.0.0",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
     "gulp-exclude-gitignore": "^1.0.0",
     "gulp-istanbul": "^1.1.1",
     "gulp-mocha": "^3.0.1",

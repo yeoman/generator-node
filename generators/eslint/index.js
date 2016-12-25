@@ -1,49 +1,50 @@
 'use strict';
 var Generator = require('yeoman-generator');
-var extend = require('lodash').merge;
+var rootPkg = require('../../package.json');
 
-module.exports = Generator.extend({
-  constructor: function () {
-    Generator.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('generateInto', {
       type: String,
       required: false,
-      defaults: '',
+      default: '',
       desc: 'Relocate the location of the generated files.'
     });
 
     this.option('es2015', {
       required: false,
-      defaults: false,
+      default: false,
       desc: 'Allow ES2015 syntax'
     });
-  },
+  }
 
-  writing: function () {
-    var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
-
-    var eslintConfig = {
-      extends: 'xo-space',
-      env: {
-        mocha: true
+  writing() {
+    var pkgJson = {
+      devDependencies: {
+        eslint: rootPkg.devDependencies.eslint,
+        'eslint-config-xo-space': rootPkg.devDependencies['eslint-config-xo-space']
+      },
+      eslintConfig: {
+        extends: 'xo-space',
+        env: {
+          mocha: true
+        }
+      },
+      scripts: {
+        pretest: 'eslint **/*.js --fix'
       }
-    };
-    var devDep = {
-      eslint: '^3.1.1',
-      'eslint-config-xo-space': '^0.15.0'
     };
 
     if (this.options.es2015) {
-      devDep['babel-eslint'] = '^6.1.2';
-      devDep['eslint-plugin-babel'] = '^3.3.0';
+      pkgJson.devDependencies['babel-eslint'] = rootPkg.devDependencies['babel-eslint'];
+      pkgJson.devDependencies['eslint-plugin-babel'] = rootPkg.devDependencies['eslint-plugin-babel'];
     }
 
-    extend(pkg, {
-      devDependencies: devDep,
-      eslintConfig: eslintConfig
-    });
-
-    this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), pkg);
+    this.fs.extendJSON(
+      this.destinationPath(this.options.generateInto, 'package.json'),
+      pkgJson
+    );
   }
-});
+};

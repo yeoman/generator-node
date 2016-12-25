@@ -21,7 +21,6 @@ describe('node:gulp', function () {
 
       assert.fileContent('gulpfile.js', 'gulp.task(\'coveralls\'');
       assert.fileContent('gulpfile.js', 'gulp.task(\'test\'');
-      assert.fileContent('gulpfile.js', 'gulp.task(\'static\'');
 
       assert.fileContent('package.json', 'gulp');
       assert.fileContent('package.json', 'gulp-coveralls');
@@ -116,7 +115,6 @@ describe('node:gulp', function () {
 
       assert.fileContent('other/gulpfile.js', 'gulp.task(\'coveralls\'');
       assert.fileContent('other/gulpfile.js', 'gulp.task(\'test\'');
-      assert.fileContent('other/gulpfile.js', 'gulp.task(\'static\'');
 
       assert.fileContent('other/package.json', 'gulp');
       assert.fileContent('other/package.json', 'gulp-coveralls');

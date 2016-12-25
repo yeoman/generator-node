@@ -48,7 +48,6 @@ module.exports = Generator.extend({
       extend(pkg, {
         devDependencies: {
           gulp: '3.9.1',
-          'gulp-eslint': '^3.0.1',
           'gulp-exclude-gitignore': '^1.0.0',
           'gulp-istanbul': '^1.1.1',
           'gulp-line-ending-corrector': '^1.0.1',
@@ -82,7 +81,7 @@ module.exports = Generator.extend({
     },
 
     gulpfile: function () {
-      var tasks = ['static', 'test'];
+      var tasks = ['test'];
       var prepublishTasks = [];
 
       if (this.options.coveralls) {
