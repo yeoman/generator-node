@@ -14,13 +14,6 @@ module.exports = Generator.extend({
       desc: 'Relocate the location of the generated files.'
     });
 
-    this.option('babel', {
-      type: Boolean,
-      required: false,
-      defaults: false,
-      desc: 'Compile ES2015 using Babel'
-    });
-
     this.option('cli', {
       type: Boolean,
       required: false,
@@ -54,15 +47,6 @@ module.exports = Generator.extend({
         }
       });
 
-      if (this.options.babel) {
-        pkg.devDependencies['gulp-babel'] = '^6.1.2';
-        pkg.devDependencies.del = '^2.0.2';
-        pkg.devDependencies['babel-core'] = '^6.11.4';
-        pkg.devDependencies['babel-register'] = '^6.9.0';
-        pkg.devDependencies['babel-preset-es2015'] = '6.9.0';
-        pkg.devDependencies.isparta = '^4.0.0';
-      }
-
       if (this.options.cli) {
         pkg.devDependencies['gulp-line-ending-corrector'] = '^1.0.1';
       }
@@ -78,42 +62,15 @@ module.exports = Generator.extend({
         prepublishTasks.push('line-ending-corrector');
       }
 
-      if (this.options.babel) {
-        prepublishTasks.push('babel');
-      }
-
       this.fs.copyTpl(
         this.templatePath('gulpfile.js'),
         this.destinationPath(this.options.generateInto, 'gulpfile.js'),
         {
           cli: this.options.cli,
-          babel: this.options.babel,
           tasks: stringifyArray(tasks),
           prepublishTasks: stringifyArray(prepublishTasks),
           projectRoot: path.join(this.options.projectRoot, '**/*.js').replace(/\\/g, '/')
         }
-      );
-    },
-
-    babel: function () {
-      if (!this.options.babel) {
-        return;
-      }
-
-      this.fs.copy(
-        this.templatePath('babelrc'),
-        this.destinationPath(this.options.generateInto, '.babelrc')
-      );
-
-      // Add dist/ to the .gitignore file
-      var gitignore = this.fs.read(
-        this.destinationPath(this.options.generateInto, '.gitignore'),
-        {defaults: ''}
-      ).split('\n').filter(Boolean);
-      gitignore.push('dist');
-      this.fs.write(
-        this.destinationPath(this.options.generateInto, '.gitignore'),
-        gitignore.join('\n') + '\n'
       );
     }
   }

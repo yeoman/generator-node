@@ -13,13 +13,6 @@ module.exports = Generator.extend({
       defaults: '',
       desc: 'Relocate the location of the generated files.'
     });
-
-    this.option('babel', {
-      type: Boolean,
-      required: false,
-      defaults: false,
-      desc: 'pre-compile with Babel'
-    });
   },
 
   writing: {
@@ -27,7 +20,7 @@ module.exports = Generator.extend({
       var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
       extend(pkg, {
-        bin: this.options.babel ? 'dist/cli.js' : 'lib/cli.js',
+        bin: 'lib/cli.js',
         dependencies: {
           meow: '^3.7.0'
         }
@@ -42,8 +35,7 @@ module.exports = Generator.extend({
         this.templatePath('cli.js'),
         this.destinationPath(this.options.generateInto, 'lib/cli.js'), {
           pkgName: pkg.name,
-          pkgSafeName: _.camelCase(pkg.name),
-          babel: this.options.babel
+          pkgSafeName: _.camelCase(pkg.name)
         }
       );
     }

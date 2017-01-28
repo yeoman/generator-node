@@ -18,28 +18,19 @@ module.exports = Generator.extend({
       required: true,
       desc: 'The new module name.'
     });
-
-    this.option('babel', {
-      required: false,
-      default: false,
-      desc: 'Compile ES2015 using Babel'
-    });
   },
 
   writing: function () {
     this.fs.copyTpl(
       this.templatePath('index.js'),
-      this.destinationPath(this.options.generateInto, 'lib/index.js'), {
-        babel: this.options.babel
-      }
+      this.destinationPath(this.options.generateInto, 'lib/index.js')
     );
 
     this.fs.copyTpl(
       this.templatePath('test.js'),
       this.destinationPath(this.options.generateInto, 'test/index.js'), {
         pkgName: this.options.name,
-        pkgSafeName: _.camelCase(this.options.name),
-        babel: this.options.babel
+        pkgSafeName: _.camelCase(this.options.name)
       }
     );
   }

@@ -21,18 +21,6 @@ describe('node:boilerplate', function () {
 describe('node:boilerplate', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/boilerplate'))
-      .withOptions({name: 'my-module', babel: true});
-  });
-
-  it('creates boilerplate files in ES2015', function () {
-    assert.fileContent('lib/index.js', 'export default {};');
-    assert.fileContent('test/index.js', 'import myModule');
-  });
-});
-
-describe('node:boilerplate', function () {
-  before(function () {
-    return helpers.run(path.join(__dirname, '../generators/boilerplate'))
       .withOptions({name: 'my-module', generateInto: 'other/'});
   });
 

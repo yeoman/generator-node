@@ -22,15 +22,6 @@ describe('node:eslint', function () {
       });
   });
 
-  it('fill package.json for ES2015', function () {
-    return helpers.run(path.join(__dirname, '../generators/eslint'))
-      .withOptions({es2015: true})
-      .then(function () {
-        assert.fileContent('package.json', /"babel-eslint":/);
-        assert.fileContent('package.json', /"eslint-plugin-babel":/);
-      });
-  });
-
   it('respect generateInto option as the root of the scaffolding', function () {
     return helpers.run(path.join(__dirname, '../generators/eslint'))
       .withOptions({generateInto: 'other/'})

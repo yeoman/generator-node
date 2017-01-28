@@ -26,12 +26,6 @@ module.exports = Generator.extend({
       desc: 'Include boilerplate files'
     });
 
-    this.option('babel', {
-      type: Boolean,
-      required: false,
-      desc: 'Compile ES2015 using Babel'
-    });
-
     this.option('cli', {
       type: Boolean,
       required: false,
@@ -93,8 +87,7 @@ module.exports = Generator.extend({
       name: this.pkg.name,
       description: this.pkg.description,
       version: this.pkg.version,
-      homepage: this.pkg.homepage,
-      babel: Boolean(this.options.babel)
+      homepage: this.pkg.homepage
     };
 
     if (_.isObject(this.pkg.author)) {
@@ -163,11 +156,6 @@ module.exports = Generator.extend({
           return words.split(/\s*,\s*/g);
         }
       }, {
-        name: 'babel',
-        type: 'confirm',
-        message: 'Use es2015 (precompiled with Babel)',
-        when: this.options.babel === undefined
-      }, {
         name: 'includeCoveralls',
         type: 'confirm',
         message: 'Send coverage reports to coveralls',
@@ -217,13 +205,8 @@ module.exports = Generator.extend({
         email: this.props.authorEmail,
         url: this.props.authorUrl
       },
-      files: [
-        this.props.babel ? 'dist' : this.options.projectRoot
-      ],
-      main: this.props.babel ? 'dist/index.js' : path.join(
-        this.options.projectRoot,
-        'index.js'
-      ).replace(/\\/g, '/'),
+      files: [this.options.projectRoot],
+      main: path.join(this.options.projectRoot, 'index.js').replace(/\\/g, '/'),
       keywords: [],
       devDependencies: {}
     }, currentPkg);
@@ -253,9 +236,7 @@ module.exports = Generator.extend({
     this.composeWith(require.resolve('../editorconfig'));
     this.composeWith(require.resolve('../nsp'));
 
-    this.composeWith(require.resolve('../eslint'), {
-      es2015: this.props.babel
-    });
+    this.composeWith(require.resolve('../eslint'));
 
     this.composeWith(require.resolve('../git'), {
       name: this.props.name,
@@ -264,7 +245,6 @@ module.exports = Generator.extend({
 
     if (this.options.gulp) {
       this.composeWith(require.resolve('../gulp'), {
-        babel: this.props.babel,
         projectRoot: this.options.projectRoot,
         cli: this.options.cli
       });
@@ -272,15 +252,12 @@ module.exports = Generator.extend({
 
     if (this.options.boilerplate) {
       this.composeWith(require.resolve('../boilerplate'), {
-        name: this.props.name,
-        babel: this.props.babel
+        name: this.props.name
       });
     }
 
     if (this.options.cli) {
-      this.composeWith(require.resolve('../cli'), {
-        babel: this.props.babel
-      });
+      this.composeWith(require.resolve('../cli'));
     }
 
     if (this.options.license && !this.pkg.license) {

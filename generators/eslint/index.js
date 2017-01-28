@@ -12,12 +12,6 @@ module.exports = class extends Generator {
       default: '',
       desc: 'Relocate the location of the generated files.'
     });
-
-    this.option('es2015', {
-      required: false,
-      default: false,
-      desc: 'Allow ES2015 syntax'
-    });
   }
 
   writing() {
@@ -36,11 +30,6 @@ module.exports = class extends Generator {
         pretest: 'eslint **/*.js --fix'
       }
     };
-
-    if (this.options.es2015) {
-      pkgJson.devDependencies['babel-eslint'] = rootPkg.devDependencies['babel-eslint'];
-      pkgJson.devDependencies['eslint-plugin-babel'] = rootPkg.devDependencies['eslint-plugin-babel'];
-    }
 
     this.fs.extendJSON(
       this.destinationPath(this.options.generateInto, 'package.json'),

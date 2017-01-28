@@ -42,7 +42,6 @@ describe('node:app', function () {
         authorEmail: 'hi@yeoman.io',
         authorUrl: 'http://yeoman.io',
         keywords: ['foo', 'bar'],
-        babel: true,
         includeCoveralls: true
       };
       return helpers.run(path.join(__dirname, '../generators/app'))
@@ -74,9 +73,9 @@ describe('node:app', function () {
           email: this.answers.authorEmail,
           url: this.answers.authorUrl
         },
-        files: ['dist'],
+        files: ['lib'],
         keywords: this.answers.keywords,
-        main: 'dist/index.js'
+        main: 'lib/index.js'
       });
     });
 
@@ -137,28 +136,10 @@ describe('node:app', function () {
     });
   });
 
-  describe('--no-babel', function () {
-    before(function () {
-      return helpers.run(path.join(__dirname, '../generators/app'))
-        .withOptions({babel: false});
-    });
-
-    it('skip .bablerc', function () {
-      assert.noFile('.babelrc');
-    });
-
-    it('include the raw files', function () {
-      assert.jsonFileContent('package.json', {
-        files: ['lib'],
-        main: 'lib/index.js'
-      });
-    });
-  });
-
   describe('--projectRoot', function () {
     before(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
-        .withOptions({projectRoot: 'generators', babel: false});
+        .withOptions({projectRoot: 'generators'});
     });
 
     it('include the raw files', function () {
