@@ -12,7 +12,7 @@ describe('node:eslint', function () {
           eslintConfig: {
             extends: 'xo-space',
             env: {
-              mocha: true
+              jest: true
             }
           },
           scripts: {

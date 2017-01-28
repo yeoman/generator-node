@@ -21,26 +21,21 @@
     "eslint": "^3.8.1",
     "eslint-config-xo": "^0.17.0",
     "eslint-config-xo-space": "^0.15.0",
-    "gulp": "^3.9.1",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^3.0.1",
-    "gulp-plumber": "^1.1.0",
+    "jest": "^18.0.0",
+    "jest-cli": "^18.0.0",
     "mocha": "^3.1.2",
-    "mockery": "^2.0.0",
     "nsp": "^2.6.2",
-    "pinkie-promise": "^2.0.1",
     "yeoman-assert": "^2.2.1",
-    "yeoman-test": "^1.5.1",
-    "gulp-line-ending-corrector": "^1.0.1"
+    "yeoman-test": "^1.5.1"
   },
   "repository": "yeoman/generator-node",
   "scripts": {
     "pretest": "eslint **/*.js --fix",
-    "test": "gulp",
+    "test": "jest",
     "prepublish": "nsp check"
   },
   "dependencies": {
+    "generator-jest": "^1.1.0",
     "generator-license": "^4.0.0",
     "generator-travis": "^1.1.3",
     "git-remote-origin-url": "^2.0.0",
@@ -53,8 +48,12 @@
   "eslintConfig": {
     "extends": "xo-space",
     "env": {
-      "mocha": true
+      "mocha": true,
+      "jest": true
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "jest": {
+    "testEnvironment": "node"
+  }
 }

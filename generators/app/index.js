@@ -39,13 +39,6 @@ module.exports = Generator.extend({
       desc: 'Include coveralls config'
     });
 
-    this.option('gulp', {
-      type: Boolean,
-      required: false,
-      default: true,
-      desc: 'Include or not a gulpfile.js'
-    });
-
     this.option('license', {
       type: Boolean,
       required: false,
@@ -243,12 +236,10 @@ module.exports = Generator.extend({
       githubAccount: this.props.githubAccount
     });
 
-    if (this.options.gulp) {
-      this.composeWith(require.resolve('../gulp'), {
-        projectRoot: this.options.projectRoot,
-        cli: this.options.cli
-      });
-    }
+    this.composeWith(require.resolve('generator-jest/generators/app'), {
+      testEnvironment: 'node',
+      coveralls: false
+    });
 
     if (this.options.boilerplate) {
       this.composeWith(require.resolve('../boilerplate'), {

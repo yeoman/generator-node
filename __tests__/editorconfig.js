@@ -4,7 +4,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('node:editorconfig', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/editorconfig'));
   });
 
@@ -14,7 +14,7 @@ describe('node:editorconfig', function () {
 });
 
 describe('node:editorconfig', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/editorconfig'))
       .withOptions({generateInto: 'other/'});
   });

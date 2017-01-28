@@ -4,7 +4,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('node:readme', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/readme'))
       .withOptions({
         name: 'my-project',
@@ -34,7 +34,7 @@ describe('node:readme', function () {
 });
 
 describe('node:readme --content', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/readme'))
       .withOptions({
         name: 'my-project',
@@ -63,7 +63,7 @@ describe('node:readme --content', function () {
 });
 
 describe('node:readme --no-coveralls', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/readme'))
       .withOptions({
         name: 'my-project',
@@ -87,7 +87,7 @@ describe('node:readme --no-coveralls', function () {
 });
 
 describe('node:readme --generate-into', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/readme'))
       .withOptions({
         name: 'my-project',
@@ -118,7 +118,7 @@ describe('node:readme --generate-into', function () {
 });
 
 describe('node:readme --content and --generate-into', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/readme'))
       .withOptions({
         name: 'my-project',
@@ -148,7 +148,7 @@ describe('node:readme --content and --generate-into', function () {
 });
 
 describe('node:readme --no-coveralls and --generate-into', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/readme'))
       .withOptions({
         name: 'my-project',

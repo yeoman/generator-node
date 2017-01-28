@@ -4,7 +4,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('node:git', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node'
@@ -25,7 +25,7 @@ describe('node:git', function () {
 });
 
 describe('node:git', function () {
-  before(function () {
+  beforeEach(function () {
     return helpers.run(path.join(__dirname, '../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node',

@@ -23,7 +23,7 @@ module.exports = class extends Generator {
       eslintConfig: {
         extends: 'xo-space',
         env: {
-          mocha: true
+          jest: true
         }
       },
       scripts: {

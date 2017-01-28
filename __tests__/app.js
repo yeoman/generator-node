@@ -1,38 +1,27 @@
 'use strict';
 var _ = require('lodash');
-var mockery = require('mockery');
 var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
-var Promise = require('pinkie-promise');
 
 describe('node:app', function () {
-  before(function () {
-    mockery.enable({
-      warnOnReplace: false,
-      warnOnUnregistered: false
+  beforeEach(function () {
+    jest.mock('npm-name', function () {
+      return () => Promise.resolve(true);
     });
 
-    mockery.registerMock('npm-name', function () {
-      return Promise.resolve(true);
+    jest.mock('github-username', function () {
+      return () => Promise.resolve('unicornUser');
     });
 
-    mockery.registerMock('github-username', function () {
-      return Promise.resolve('unicornUser');
+    jest.mock('generator-license/app', function () {
+      var helpers = require('yeoman-test');
+      return helpers.createDummyGenerator();
     });
-
-    mockery.registerMock(
-      require.resolve('generator-license/app'),
-      helpers.createDummyGenerator()
-    );
-  });
-
-  after(function () {
-    mockery.disable();
   });
 
   describe('running on new project', function () {
-    before(function () {
+    beforeEach(function () {
       this.answers = {
         name: 'generator-node',
         description: 'A node generator',
@@ -56,7 +45,7 @@ describe('node:app', function () {
         '.gitattributes',
         'README.md',
         'lib/index.js',
-        'test/index.js'
+        'lib/__tests__/generatorNode.test.js'
       ]);
     });
 
@@ -95,7 +84,7 @@ describe('node:app', function () {
   });
 
   describe('running on existing project', function () {
-    before(function () {
+    beforeEach(function () {
       this.pkg = {
         version: '1.0.34',
         description: 'lots of fun',
@@ -126,7 +115,7 @@ describe('node:app', function () {
   });
 
   describe('--no-travis', function () {
-    before(function () {
+    beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withOptions({travis: false});
     });
@@ -137,7 +126,7 @@ describe('node:app', function () {
   });
 
   describe('--projectRoot', function () {
-    before(function () {
+    beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withOptions({projectRoot: 'generators'});
     });

@@ -21,17 +21,13 @@ module.exports = Generator.extend({
   },
 
   writing: function () {
-    this.fs.copyTpl(
-      this.templatePath('index.js'),
-      this.destinationPath(this.options.generateInto, 'lib/index.js')
-    );
+    var filepath = this.destinationPath(this.options.generateInto, 'lib/index.js');
 
-    this.fs.copyTpl(
-      this.templatePath('test.js'),
-      this.destinationPath(this.options.generateInto, 'test/index.js'), {
-        pkgName: this.options.name,
-        pkgSafeName: _.camelCase(this.options.name)
-      }
-    );
+    this.fs.copyTpl(this.templatePath('index.js'), filepath);
+
+    this.composeWith(require.resolve('generator-jest/generators/test'), {
+      arguments: [filepath],
+      componentName: _.camelCase(this.options.name)
+    });
   }
 });

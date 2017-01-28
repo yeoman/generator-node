@@ -23,11 +23,9 @@ $ yo node
 That'll generate a project with all the common tools setup. This includes:
 
 - Filled `package.json` file
-- [gulp](http://gulpjs.com/) task runner
-- [mocha](http://mochajs.org/) unit test
+- [jest](https://facebook.github.io/jest/) unit test and code coverage (optionally tracked on [Coveralls](https://coveralls.io/))
 - [ESLint](http://eslint.org/) linting and code style checking
 - [nsp](https://nodesecurity.io/) known vulnerability check
-- [Istanbul](https://gotwarlost.github.io/istanbul/) code coverage (optionally tracked on [Coveralls](https://coveralls.io/))
 - [Travis CI](https://travis-ci.org/) continuous integration (optional)
 - [License](https://spdx.org/licenses/)
 
@@ -40,11 +38,11 @@ Once the project is scaffolded, inside the project folder run:
 $ npm test
 ```
 
-You can also directly use mocha to run test on single files:
+You can also directly use jest to run test on single files:
 
 ```
-$ npm -g install mocha
-$ mocha test/name.js
+$ npm -g install jest-cli
+$ jest --watch
 ```
 
 
@@ -83,7 +81,6 @@ Here's a list of our supported options:
 - `cli` (Boolean, default false) include or not a `lib/cli.js` file.
 - `editorconfig` (Boolean, default true) include or not a `.editorconfig` file.
 - `git` (Boolean, default true) include or not the git files (`.gitattributes`, `.gitignore`).
-- `gulp` (Boolean, default true) include or not a `gulpfile`.
 - `license` (Boolean, default true) include or not a `LICENSE` file.
 - `travis` (Boolean, default true) include or not a `.travis.yml` file.
 - `githubAccount` (String) Account name for GitHub repo location.
@@ -101,7 +98,6 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:editorconfig`
 - `node:eslint`
 - `node:git`
-- `node:gulp`
 - `node:readme`
 
 
