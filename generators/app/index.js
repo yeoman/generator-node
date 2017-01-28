@@ -6,6 +6,7 @@ var parseAuthor = require('parse-author');
 var githubUsername = require('github-username');
 var path = require('path');
 var askName = require('inquirer-npm-name');
+var pkgJson = require('../../package.json');
 
 module.exports = Generator.extend({
   constructor: function () {
@@ -223,8 +224,13 @@ module.exports = Generator.extend({
         this.options.projectRoot,
         'index.js'
       ).replace(/\\/g, '/'),
-      keywords: []
+      keywords: [],
+      devDependencies: {}
     }, currentPkg);
+
+    if (this.props.includeCoveralls) {
+      pkg.devDependencies.coveralls = pkgJson.devDependencies.coveralls;
+    }
 
     // Combine the keywords
     if (this.props.keywords) {
@@ -237,7 +243,11 @@ module.exports = Generator.extend({
 
   default: function () {
     if (this.options.travis) {
-      this.composeWith(require.resolve('generator-travis/generators/app'));
+      let options = {config: {}};
+      if (this.props.includeCoveralls) {
+        options.config.after_script = 'cat ./coverage/lcov.info | coveralls'; // eslint-disable-line camelcase
+      }
+      this.composeWith(require.resolve('generator-travis/generators/app'), options);
     }
 
     this.composeWith(require.resolve('../editorconfig'));
@@ -254,7 +264,6 @@ module.exports = Generator.extend({
 
     if (this.options.gulp) {
       this.composeWith(require.resolve('../gulp'), {
-        coveralls: this.props.includeCoveralls,
         babel: this.props.babel,
         projectRoot: this.options.projectRoot,
         cli: this.options.cli

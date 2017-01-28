@@ -14,12 +14,6 @@ module.exports = Generator.extend({
       desc: 'Relocate the location of the generated files.'
     });
 
-    this.option('coveralls', {
-      type: Boolean,
-      required: false,
-      desc: 'Send coverage reports to coveralls'
-    });
-
     this.option('babel', {
       type: Boolean,
       required: false,
@@ -60,10 +54,6 @@ module.exports = Generator.extend({
         }
       });
 
-      if (this.options.coveralls) {
-        pkg.devDependencies['gulp-coveralls'] = '^0.1.0';
-      }
-
       if (this.options.babel) {
         pkg.devDependencies['gulp-babel'] = '^6.1.2';
         pkg.devDependencies.del = '^2.0.2';
@@ -84,10 +74,6 @@ module.exports = Generator.extend({
       var tasks = ['test'];
       var prepublishTasks = [];
 
-      if (this.options.coveralls) {
-        tasks.push('coveralls');
-      }
-
       if (this.options.cli) {
         prepublishTasks.push('line-ending-corrector');
       }
@@ -100,7 +86,6 @@ module.exports = Generator.extend({
         this.templatePath('gulpfile.js'),
         this.destinationPath(this.options.generateInto, 'gulpfile.js'),
         {
-          includeCoveralls: this.options.coveralls,
           cli: this.options.cli,
           babel: this.options.babel,
           tasks: stringifyArray(tasks),

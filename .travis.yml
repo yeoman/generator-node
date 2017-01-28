@@ -6,3 +6,4 @@ node_js:
   - node
 cache:
   yarn: true
+after_script: 'cat ./coverage/lcov.info | coveralls'

@@ -1,9 +1,14 @@
 {
   "name": "generator-node",
   "version": "1.12.1",
-  "main": "index.js",
   "description": "Create a Node.js module",
   "homepage": "https://github.com/yeoman/generator-node",
+  "author": "Yeoman team",
+  "files": [
+    "index.js",
+    "generators"
+  ],
+  "main": "index.js",
   "keywords": [
     "yeoman-generator",
     "scaffold",
@@ -11,7 +16,26 @@
     "module",
     "cli"
   ],
-  "author": "Yeoman team",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "coveralls": "^2.11.15",
+    "eslint": "^3.8.1",
+    "eslint-config-xo": "^0.17.0",
+    "eslint-config-xo-space": "^0.15.0",
+    "eslint-plugin-babel": "^4.0.0",
+    "gulp": "^3.9.1",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-plumber": "^1.1.0",
+    "mocha": "^3.1.2",
+    "mockery": "^2.0.0",
+    "nsp": "^2.6.2",
+    "pinkie-promise": "^2.0.1",
+    "yeoman-assert": "^2.2.1",
+    "yeoman-test": "^1.5.1",
+    "gulp-line-ending-corrector": "^1.0.1"
+  },
   "repository": "yeoman/generator-node",
   "scripts": {
     "pretest": "eslint **/*.js --fix",
@@ -28,33 +52,11 @@
     "parse-author": "^1.0.0",
     "yeoman-generator": "^1.0.1"
   },
-  "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "eslint": "^3.8.1",
-    "eslint-config-xo": "^0.17.0",
-    "eslint-config-xo-space": "^0.15.0",
-    "eslint-plugin-babel": "^4.0.0",
-    "gulp": "^3.9.1",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^1.1.1",
-    "gulp-mocha": "^3.0.1",
-    "gulp-plumber": "^1.1.0",
-    "mocha": "^3.1.2",
-    "mockery": "^2.0.0",
-    "nsp": "^2.6.2",
-    "pinkie-promise": "^2.0.1",
-    "yeoman-assert": "^2.2.1",
-    "yeoman-test": "^1.5.1"
-  },
   "eslintConfig": {
     "extends": "xo-space",
     "env": {
       "mocha": true
     }
   },
-  "files": [
-    "index.js",
-    "generators"
-  ],
   "license": "MIT"
 }

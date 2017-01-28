@@ -42,7 +42,8 @@ describe('node:app', function () {
         authorEmail: 'hi@yeoman.io',
         authorUrl: 'http://yeoman.io',
         keywords: ['foo', 'bar'],
-        babel: true
+        babel: true,
+        includeCoveralls: true
       };
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts(this.answers);
@@ -87,6 +88,10 @@ describe('node:app', function () {
       assert.fileContent('README.md', '© [The Yeoman Team](http://yeoman.io)');
       assert.fileContent('README.md', '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master');
       assert.fileContent('README.md', 'coveralls');
+    });
+
+    it('creates proper Travis config', function () {
+      assert.fileContent('.travis.yml', '| coveralls');
     });
   });
 

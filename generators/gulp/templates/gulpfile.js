@@ -7,9 +7,6 @@ var excludeGitignore = require('gulp-exclude-gitignore');
 var mocha = require('gulp-mocha');
 var istanbul = require('gulp-istanbul');
 var plumber = require('gulp-plumber');
-<% if (includeCoveralls) { -%>
-var coveralls = require('gulp-coveralls');
-<% } -%>
 <% if (cli) { -%>
 var lec = require('gulp-line-ending-corrector');
 <% } -%>
@@ -51,18 +48,8 @@ gulp.task('test', ['pre-test'], function (cb) {
 gulp.task('watch', function () {
   gulp.watch(['<%- projectRoot %>', 'test/**'], ['test']);
 });
-<% if (includeCoveralls) { -%>
-
-gulp.task('coveralls', ['test'], function () {
-  if (!process.env.CI) {
-    return;
-  }
-
-  return gulp.src(path.join(__dirname, 'coverage/lcov.info'))
-    .pipe(coveralls());
-});
-<% } -%>
 <% if (cli) { -%>
+
 gulp.task('line-ending-corrector', function () {
   return gulp.src('<%- projectRoot.replace("**/*.js", "cli.js") %>')
     .pipe(excludeGitignore())
