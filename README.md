@@ -1,7 +1,5 @@
 # Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node) [![Gitter](https://img.shields.io/badge/Gitter-Join_the_Yeoman_chat_%E2%86%92-00d06f.svg)](https://gitter.im/yeoman/yeoman) [![OpenCollective](https://opencollective.com/yeoman/badge/backers.svg)](https://opencollective.com/yeoman#support)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/yeoman/generator-node.svg)](https://greenkeeper.io/)
-
 `generator-node` creates a base template to start a new Node.js module.
 
 It is also easily composed into your own generators so you can only target your efforts at your generator's specific features.
