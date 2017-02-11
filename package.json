@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "generator-jest": "^1.1.0",
-    "generator-license": "^4.0.0",
+    "generator-license": "^5.1.0",
     "generator-travis": "^1.1.3",
     "git-remote-origin-url": "^2.0.0",
     "github-username": "^3.0.0",
