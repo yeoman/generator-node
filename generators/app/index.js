@@ -39,6 +39,13 @@ module.exports = Generator.extend({
       desc: 'Include coveralls config'
     });
 
+    this.option('editorconfig', {
+      type: Boolean,
+      required: false,
+      default: true,
+      desc: 'Include a .editorconfig file'
+    });
+
     this.option('license', {
       type: Boolean,
       required: false,
@@ -226,9 +233,11 @@ module.exports = Generator.extend({
       this.composeWith(require.resolve('generator-travis/generators/app'), options);
     }
 
-    this.composeWith(require.resolve('../editorconfig'));
-    this.composeWith(require.resolve('../nsp'));
+    if (this.options.editorconfig) {
+      this.composeWith(require.resolve('../editorconfig'));
+    }
 
+    this.composeWith(require.resolve('../nsp'));
     this.composeWith(require.resolve('../eslint'));
 
     this.composeWith(require.resolve('../git'), {

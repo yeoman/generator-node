@@ -138,4 +138,12 @@ describe('node:app', function () {
       });
     });
   });
+
+  describe('--no-editorconfig', function () {
+    it('include the raw files', function () {
+      return helpers.run(path.join(__dirname, '../generators/app'))
+        .withOptions({editorconfig: false})
+        .then(() => assert.noFile('.editorconfig'));
+    });
+  });
 });
