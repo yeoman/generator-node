@@ -48,8 +48,8 @@
   "eslintConfig": {
     "extends": "xo-space",
     "env": {
-      "mocha": true,
-      "jest": true
+      "jest": true,
+      "node": true
     }
   },
   "license": "MIT",

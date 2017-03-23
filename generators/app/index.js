@@ -209,7 +209,7 @@ module.exports = Generator.extend({
     }
 
     // Combine the keywords
-    if (this.props.keywords) {
+    if (this.props.keywords && this.props.keywords.length) {
       pkg.keywords = _.uniq(this.props.keywords.concat(pkg.keywords));
     }
 
