@@ -28,7 +28,7 @@ module.exports = Generator.extend({
           lec: '^1.0.1'
         },
         scripts: {
-          fixLineEndings: 'lec lib/cli.js -c LF'
+          prepublish: 'lec lib/cli.js -c LF && nsp check'
         }
       });
 
