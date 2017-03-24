@@ -23,6 +23,12 @@ module.exports = Generator.extend({
         bin: 'lib/cli.js',
         dependencies: {
           meow: '^3.7.0'
+        },
+        devDependencies: {
+          lec: '^1.0.1'
+        },
+        scripts: {
+          prepublish: 'lec lib/cli.js -c LF && nsp check'
         }
       });
 
