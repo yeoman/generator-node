@@ -24,7 +24,7 @@ describe('node:cli', function () {
     assert.fileContent('package.json', '"bin": "lib/cli.js"');
     assert.fileContent('package.json', '"meow"');
     assert.fileContent('package.json', /"lec": "\^/);
-    assert.fileContent('package.json', '"fixLineEndings": "lec lib/cli.js -c LF"');
+    assert.fileContent('package.json', '"prepublish": "lec lib/cli.js -c LF && nsp check"');
   });
 });
 
