@@ -80,7 +80,7 @@ module.exports = class extends Generator({
 Here's a list of our supported options:
 
 - `boilerplate` (Boolean, default true) include or not the boilerplate files (`lib/index.js`, `test/index.js`).
-- `cli` (Boolean, default false) include or not a `lib/cli.js` file.
+- `cli` (Boolean, default false) include or not a `lib/cli.js` file and add an additional npm script to correct line endings.
 - `editorconfig` (Boolean, default true) include or not a `.editorconfig` file.
 - `git` (Boolean, default true) include or not the git files (`.gitattributes`, `.gitignore`).
 - `license` (Boolean, default true) include or not a `LICENSE` file.
