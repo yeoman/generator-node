@@ -48,14 +48,8 @@ module.exports = Generator.extend({
   writing: function () {
     this.pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
-    var repository = '';
-    if (this.originUrl) {
-      repository = this.originUrl;
-    } else {
-      repository = this.options.githubAccount + '/' + this.options.name;
-    }
-
-    this.pkg.repository = this.pkg.repository || repository;
+    this.pkg.repository = this.pkg.repository || this.originUrl ||
+      this.options.githubAccount + '/' + this.options.name;
 
     this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), this.pkg);
   },
