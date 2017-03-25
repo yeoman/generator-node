@@ -15,7 +15,7 @@ describe('node:eslint', () => {
             }
           },
           scripts: {
-            pretest: 'eslint **/*.js --fix'
+            pretest: 'eslint . --ignore-path .gitignore --fix'
           }
         });
       });

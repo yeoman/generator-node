@@ -28,7 +28,7 @@ module.exports = class extends Generator {
         }
       },
       scripts: {
-        pretest: 'eslint **/*.js --fix'
+        pretest: 'eslint . --ignore-path .gitignore --fix'
       }
     };
 

@@ -30,7 +30,7 @@
   },
   "repository": "yeoman/generator-node",
   "scripts": {
-    "pretest": "eslint **/*.js --fix",
+    "pretest": "eslint . --fix",
     "test": "jest",
     "prepublish": "nsp check"
   },
