@@ -35,6 +35,7 @@
     "prepublish": "nsp check"
   },
   "dependencies": {
+    "chalk": "^1.1.3",
     "generator-jest": "^1.2.0",
     "generator-license": "^5.1.0",
     "generator-travis": "^1.1.3",

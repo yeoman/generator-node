@@ -6,6 +6,7 @@ const parseAuthor = require('parse-author');
 const githubUsername = require('github-username');
 const path = require('path');
 const askName = require('inquirer-npm-name');
+const chalk = require('chalk');
 const pkgJson = require('../../package.json');
 
 module.exports = class extends Generator {
@@ -283,5 +284,19 @@ module.exports = class extends Generator {
 
   installing() {
     this.npmInstall();
+  }
+
+  end() {
+    this.log('Thanks for using Yeoman.');
+
+    if (this.options.travis) {
+      let travisUrl = chalk.cyan(`https://travis-ci.org/profile/${this.props.githubAccount || ''}`);
+      this.log(`- Enable Travis integration at ${travisUrl}`);
+    }
+
+    if (this.props.includeCoveralls) {
+      let coverallsUrl = chalk.cyan('https://coveralls.io/repos/new');
+      this.log(`- Enable Coveralls integration at ${coverallsUrl}`);
+    }
   }
 };
