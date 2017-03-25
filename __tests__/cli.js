@@ -1,12 +1,11 @@
 'use strict';
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-test');
 
-describe('node:cli', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/cli'))
-      .on('ready', function (generator) {
+describe('node:cli', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/cli'))
+      .on('ready', generator => {
         generator.fs.write(
           generator.destinationPath('package.json'),
           '{"name": "my-lib"}'
@@ -14,13 +13,13 @@ describe('node:cli', function () {
       });
   });
 
-  it('creates cli.js', function () {
+  it('creates cli.js', () => {
     assert.file('lib/cli.js');
-    assert.fileContent('lib/cli.js', 'var meow = require(\'meow\')');
-    assert.fileContent('lib/cli.js', 'var myLib = require(\'./\')');
+    assert.fileContent('lib/cli.js', 'const meow = require(\'meow\')');
+    assert.fileContent('lib/cli.js', 'const myLib = require(\'./\')');
   });
 
-  it('Extends package.json', function () {
+  it('Extends package.json', () => {
     assert.fileContent('package.json', '"bin": "lib/cli.js"');
     assert.fileContent('package.json', '"meow"');
     assert.fileContent('package.json', /"lec": "\^/);
@@ -28,11 +27,11 @@ describe('node:cli', function () {
   });
 });
 
-describe('node:cli', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/cli'))
+describe('node:cli', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/cli'))
       .withOptions({generateInto: 'other/'})
-      .on('ready', function (generator) {
+      .on('ready', generator => {
         generator.fs.write(
           generator.destinationPath('other/package.json'),
           '{"name": "my-lib"}'
@@ -40,7 +39,7 @@ describe('node:cli', function () {
       });
   });
 
-  it('creates cli.js with path option', function () {
+  it('creates cli.js with path option', () => {
     assert.file('other/lib/cli.js');
   });
 });

@@ -1,47 +1,30 @@
 'use strict';
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-test');
 
-describe('node:git', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/git'))
+describe('node:git', () => {
+  it('creates the git config files and init the repository', () => {
+    return helpers.run(require.resolve('../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node'
+      })
+      .then(() => {
+        assert.file('.gitignore');
+        assert.file('.gitattributes');
+        assert.file('.git');
       });
   });
 
-  it('creates .gitignore', function () {
-    assert.file('.gitignore');
-  });
-
-  it('creates .gitattributes', function () {
-    assert.file('.gitattributes');
-  });
-
-  it('initialize git repository', function () {
-    assert.file('.git');
-  });
-});
-
-describe('node:git', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/git'))
+  it('respects --generate-into option', () => {
+    return helpers.run(require.resolve('../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node',
         generateInto: 'other/'
+      })
+      .then(() => {
+        assert.file('other/.gitignore');
+        assert.file('other/.gitattributes');
+        assert.file('other/.git');
       });
-  });
-
-  it('creates .gitignore with generate-into option', function () {
-    assert.file('other/.gitignore');
-  });
-
-  it('creates .gitattributes with generate-into option', function () {
-    assert.file('other/.gitattributes');
-  });
-
-  it('initialize git repository with generate-into option', function () {
-    assert.file('other/.git');
   });
 });

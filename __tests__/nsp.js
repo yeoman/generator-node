@@ -1,12 +1,11 @@
 'use strict';
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
-var rootPkg = require('../package.json');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-test');
+const rootPkg = require('../package.json');
 
-describe('node:nsp', function () {
-  it('setup nsp in project', function () {
-    return helpers.run(path.join(__dirname, '../generators/nsp')).then(function () {
+describe('node:nsp', () => {
+  it('setup nsp in project', () => {
+    return helpers.run(require.resolve('../generators/nsp')).then(() => {
       assert.jsonFileContent('package.json', {
         devDependencies: {
           nsp: rootPkg.devDependencies.nsp

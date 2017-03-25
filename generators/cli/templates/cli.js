@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 'use strict';
-var meow = require('meow');
-var <%= pkgSafeName %> = require('./');
+const meow = require('meow');
+const <%= pkgSafeName %> = require('./');
 
-var cli = meow(`
+const cli = meow(`
 Usage
   $ <%= pkgName %> [input]
 

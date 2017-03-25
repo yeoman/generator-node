@@ -1,10 +1,10 @@
 'use strict';
-var _ = require('lodash');
-var Generator = require('yeoman-generator');
+const _ = require('lodash');
+const Generator = require('yeoman-generator');
 
-module.exports = Generator.extend({
-  constructor: function () {
-    Generator.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('generateInto', {
       type: String,
@@ -18,10 +18,10 @@ module.exports = Generator.extend({
       required: true,
       desc: 'The new module name.'
     });
-  },
+  }
 
-  writing: function () {
-    var filepath = this.destinationPath(this.options.generateInto, 'lib/index.js');
+  writing() {
+    const filepath = this.destinationPath(this.options.generateInto, 'lib/index.js');
 
     this.fs.copyTpl(this.templatePath('index.js'), filepath);
 
@@ -30,4 +30,4 @@ module.exports = Generator.extend({
       componentName: _.camelCase(this.options.name)
     });
   }
-});
+};

@@ -1,10 +1,10 @@
 'use strict';
-var _ = require('lodash');
-var Generator = require('yeoman-generator');
+const _ = require('lodash');
+const Generator = require('yeoman-generator');
 
-module.exports = Generator.extend({
-  constructor: function () {
-    Generator.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('generateInto', {
       type: String,
@@ -54,10 +54,10 @@ module.exports = Generator.extend({
       required: false,
       desc: 'Readme content'
     });
-  },
+  }
 
-  writing: function () {
-    var pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
+  writing() {
+    const pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
     this.fs.copyTpl(
       this.templatePath('README.md'),
       this.destinationPath(this.options.generateInto, 'README.md'),
@@ -76,4 +76,4 @@ module.exports = Generator.extend({
       }
     );
   }
-});
+};

@@ -1,11 +1,10 @@
 'use strict';
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-test');
 
-describe('node:readme', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/readme'))
+describe('node:readme', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -14,17 +13,16 @@ describe('node:readme', function () {
         authorUrl: 'http://yeoman.io',
         coveralls: true
       })
-      .on('ready', function (gen) {
+      .on('ready', gen => {
         gen.fs.writeJSON(gen.destinationPath('package.json'), {
           license: 'MIT'
         });
-      })
-      .toPromise();
+      });
   });
 
-  it('creates and fill contents in README.md', function () {
+  it('creates and fill contents in README.md', () => {
     assert.file('README.md');
-    assert.fileContent('README.md', 'var myProject = require(\'my-project\');');
+    assert.fileContent('README.md', 'const myProject = require(\'my-project\');');
     assert.fileContent('README.md', '> a cool project');
     assert.fileContent('README.md', '$ npm install --save my-project');
     assert.fileContent('README.md', 'MIT © [Yeoman](http://yeoman.io)');
@@ -33,9 +31,9 @@ describe('node:readme', function () {
   });
 });
 
-describe('node:readme --content', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/readme'))
+describe('node:readme --content', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -45,15 +43,14 @@ describe('node:readme --content', function () {
         coveralls: true,
         content: 'My custom content'
       })
-      .on('ready', function (gen) {
+      .on('ready', gen => {
         gen.fs.writeJSON(gen.destinationPath('package.json'), {
           license: 'MIT'
         });
-      })
-      .toPromise();
+      });
   });
 
-  it('fill custom contents in README.md', function () {
+  it('fill custom contents in README.md', () => {
     assert.file('README.md');
     assert.fileContent('README.md', 'My custom content');
     assert.fileContent('README.md', 'MIT © [Yeoman](http://yeoman.io)');
@@ -62,9 +59,9 @@ describe('node:readme --content', function () {
   });
 });
 
-describe('node:readme --no-coveralls', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/readme'))
+describe('node:readme --no-coveralls', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -73,22 +70,21 @@ describe('node:readme --no-coveralls', function () {
         authorUrl: 'http://yeoman.io',
         coveralls: false
       })
-      .on('ready', function (gen) {
+      .on('ready', gen => {
         gen.fs.writeJSON(gen.destinationPath('package.json'), {
           license: 'MIT'
         });
-      })
-      .toPromise();
+      });
   });
 
-  it('does not include coveralls badge README.md', function () {
+  it('does not include coveralls badge README.md', () => {
     assert.noFileContent('README.md', 'coveralls');
   });
 });
 
-describe('node:readme --generate-into', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/readme'))
+describe('node:readme --generate-into', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -98,17 +94,16 @@ describe('node:readme --generate-into', function () {
         coveralls: true,
         generateInto: 'other/'
       })
-      .on('ready', function (gen) {
+      .on('ready', gen => {
         gen.fs.writeJSON(gen.destinationPath('other/package.json'), {
           license: 'MIT'
         });
-      })
-      .toPromise();
+      });
   });
 
-  it('creates and fill contents in README.md', function () {
+  it('creates and fill contents in README.md', () => {
     assert.file('other/README.md');
-    assert.fileContent('other/README.md', 'var myProject = require(\'my-project\');');
+    assert.fileContent('other/README.md', 'const myProject = require(\'my-project\');');
     assert.fileContent('other/README.md', '> a cool project');
     assert.fileContent('other/README.md', '$ npm install --save my-project');
     assert.fileContent('other/README.md', 'MIT © [Yeoman](http://yeoman.io)');
@@ -117,9 +112,9 @@ describe('node:readme --generate-into', function () {
   });
 });
 
-describe('node:readme --content and --generate-into', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/readme'))
+describe('node:readme --content and --generate-into', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -130,15 +125,14 @@ describe('node:readme --content and --generate-into', function () {
         content: 'My custom content',
         generateInto: 'other/'
       })
-      .on('ready', function (gen) {
+      .on('ready', gen => {
         gen.fs.writeJSON(gen.destinationPath('other/package.json'), {
           license: 'MIT'
         });
-      })
-      .toPromise();
+      });
   });
 
-  it('fill custom contents in README.md', function () {
+  it('fill custom contents in README.md', () => {
     assert.file('other/README.md');
     assert.fileContent('other/README.md', 'My custom content');
     assert.fileContent('other/README.md', 'MIT © [Yeoman](http://yeoman.io)');
@@ -147,9 +141,9 @@ describe('node:readme --content and --generate-into', function () {
   });
 });
 
-describe('node:readme --no-coveralls and --generate-into', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/readme'))
+describe('node:readme --no-coveralls and --generate-into', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -159,15 +153,14 @@ describe('node:readme --no-coveralls and --generate-into', function () {
         coveralls: false,
         generateInto: 'other/'
       })
-      .on('ready', function (gen) {
+      .on('ready', gen => {
         gen.fs.writeJSON(gen.destinationPath('other/package.json'), {
           license: 'MIT'
         });
-      })
-      .toPromise();
+      });
   });
 
-  it('does not include coveralls badge README.md', function () {
+  it('does not include coveralls badge README.md', () => {
     assert.noFileContent('other/README.md', 'coveralls');
   });
 });

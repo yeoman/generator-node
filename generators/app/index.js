@@ -1,16 +1,16 @@
 'use strict';
-var _ = require('lodash');
-var extend = _.merge;
-var Generator = require('yeoman-generator');
-var parseAuthor = require('parse-author');
-var githubUsername = require('github-username');
-var path = require('path');
-var askName = require('inquirer-npm-name');
-var pkgJson = require('../../package.json');
+const _ = require('lodash');
+const extend = _.merge;
+const Generator = require('yeoman-generator');
+const parseAuthor = require('parse-author');
+const githubUsername = require('github-username');
+const path = require('path');
+const askName = require('inquirer-npm-name');
+const pkgJson = require('../../package.json');
 
-module.exports = Generator.extend({
-  constructor: function () {
-    Generator.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
 
     this.option('travis', {
       type: Boolean,
@@ -77,9 +77,9 @@ module.exports = Generator.extend({
       required: false,
       desc: 'Content to insert in the README.md file'
     });
-  },
+  }
 
-  initializing: function () {
+  initializing() {
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
     // Pre set the default props from the information we have at this point
@@ -95,107 +95,107 @@ module.exports = Generator.extend({
       this.props.authorEmail = this.pkg.author.email;
       this.props.authorUrl = this.pkg.author.url;
     } else if (_.isString(this.pkg.author)) {
-      var info = parseAuthor(this.pkg.author);
+      const info = parseAuthor(this.pkg.author);
       this.props.authorName = info.name;
       this.props.authorEmail = info.email;
       this.props.authorUrl = info.url;
     }
-  },
+  }
 
-  prompting: {
-    askForModuleName: function () {
-      if (this.pkg.name || this.options.name) {
-        this.props.name = this.pkg.name || _.kebabCase(this.options.name);
-        return;
-      }
-
-      return askName({
-        name: 'name',
-        message: 'Module Name',
-        default: path.basename(process.cwd()),
-        filter: _.kebabCase,
-        validate: function (str) {
-          return str.length > 0;
-        }
-      }, this).then(function (answer) {
-        this.props.name = answer.name;
-      }.bind(this));
-    },
-
-    askFor: function () {
-      var prompts = [{
-        name: 'description',
-        message: 'Description',
-        when: !this.props.description
-      }, {
-        name: 'homepage',
-        message: 'Project homepage url',
-        when: !this.props.homepage
-      }, {
-        name: 'authorName',
-        message: 'Author\'s Name',
-        when: !this.props.authorName,
-        default: this.user.git.name(),
-        store: true
-      }, {
-        name: 'authorEmail',
-        message: 'Author\'s Email',
-        when: !this.props.authorEmail,
-        default: this.user.git.email(),
-        store: true
-      }, {
-        name: 'authorUrl',
-        message: 'Author\'s Homepage',
-        when: !this.props.authorUrl,
-        store: true
-      }, {
-        name: 'keywords',
-        message: 'Package keywords (comma to split)',
-        when: !this.pkg.keywords,
-        filter: function (words) {
-          return words.split(/\s*,\s*/g);
-        }
-      }, {
-        name: 'includeCoveralls',
-        type: 'confirm',
-        message: 'Send coverage reports to coveralls',
-        when: this.options.coveralls === undefined
-      }];
-
-      return this.prompt(prompts).then(function (props) {
-        this.props = extend(this.props, props);
-      }.bind(this));
-    },
-
-    askForGithubAccount: function () {
-      if (this.options.githubAccount) {
-        this.props.githubAccount = this.options.githubAccount;
-        return;
-      }
-
-      return githubUsername(this.props.authorEmail)
-        .then(function (username) {
-          return username;
-        }, function () {
-          return '';
-        })
-        .then(function (username) {
-          return this.prompt({
-            name: 'githubAccount',
-            message: 'GitHub username or organization',
-            default: username
-          }).then(function (prompt) {
-            this.props.githubAccount = prompt.githubAccount;
-          }.bind(this));
-        }.bind(this));
+  _askForModuleName() {
+    if (this.pkg.name || this.options.name) {
+      this.props.name = this.pkg.name || _.kebabCase(this.options.name);
+      return;
     }
-  },
 
-  writing: function () {
+    return askName({
+      name: 'name',
+      message: 'Module Name',
+      default: path.basename(process.cwd()),
+      filter: _.kebabCase,
+      validate(str) {
+        return str.length > 0;
+      }
+    }, this).then(answer => {
+      this.props.name = answer.name;
+    });
+  }
+
+  _askFor() {
+    const prompts = [{
+      name: 'description',
+      message: 'Description',
+      when: !this.props.description
+    }, {
+      name: 'homepage',
+      message: 'Project homepage url',
+      when: !this.props.homepage
+    }, {
+      name: 'authorName',
+      message: 'Author\'s Name',
+      when: !this.props.authorName,
+      default: this.user.git.name(),
+      store: true
+    }, {
+      name: 'authorEmail',
+      message: 'Author\'s Email',
+      when: !this.props.authorEmail,
+      default: this.user.git.email(),
+      store: true
+    }, {
+      name: 'authorUrl',
+      message: 'Author\'s Homepage',
+      when: !this.props.authorUrl,
+      store: true
+    }, {
+      name: 'keywords',
+      message: 'Package keywords (comma to split)',
+      when: !this.pkg.keywords,
+      filter(words) {
+        return words.split(/\s*,\s*/g);
+      }
+    }, {
+      name: 'includeCoveralls',
+      type: 'confirm',
+      message: 'Send coverage reports to coveralls',
+      when: this.options.coveralls === undefined
+    }];
+
+    return this.prompt(prompts).then(props => {
+      this.props = extend(this.props, props);
+    });
+  }
+
+  _askForGithubAccount() {
+    if (this.options.githubAccount) {
+      this.props.githubAccount = this.options.githubAccount;
+      return;
+    }
+
+    return githubUsername(this.props.authorEmail)
+      .then(username => username, () => '')
+      .then(username => {
+        return this.prompt({
+          name: 'githubAccount',
+          message: 'GitHub username or organization',
+          default: username
+        }).then(prompt => {
+          this.props.githubAccount = prompt.githubAccount;
+        });
+      });
+  }
+
+  prompting() {
+    return this._askForModuleName()
+      .then(this._askFor.bind(this))
+      .then(this._askForGithubAccount.bind(this));
+  }
+
+  writing() {
     // Re-read the content at this point because a composed generator might modify it.
-    var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+    const currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
-    var pkg = extend({
+    const pkg = extend({
       name: _.kebabCase(this.props.name),
       version: '0.0.0',
       description: this.props.description,
@@ -222,9 +222,9 @@ module.exports = Generator.extend({
 
     // Let's extend package.json so we're not overwriting user previous fields
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
-  },
+  }
 
-  default: function () {
+  default() {
     if (this.options.travis) {
       let options = {config: {}};
       if (this.props.includeCoveralls) {
@@ -279,9 +279,9 @@ module.exports = Generator.extend({
         content: this.options.readme
       });
     }
-  },
+  }
 
-  installing: function () {
+  installing() {
     this.npmInstall();
   }
-});
+};

@@ -13,7 +13,7 @@ $ npm install --save <%= projectName %>
 ## Usage
 
 ```js
-var <%= safeProjectName %> = require('<%= projectName %>');
+const <%= safeProjectName %> = require('<%= projectName %>');
 
 <%= safeProjectName %>('Rainbow');
 ```

@@ -1,6 +1,6 @@
 'use strict';
-var Generator = require('yeoman-generator');
-var originUrl = require('git-remote-origin-url');
+const Generator = require('yeoman-generator');
+const originUrl = require('git-remote-origin-url');
 
 module.exports = Generator.extend({
   constructor: function () {
@@ -48,7 +48,7 @@ module.exports = Generator.extend({
   writing: function () {
     this.pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
 
-    var repository = '';
+    let repository = '';
     if (this.originUrl) {
       repository = this.originUrl;
     } else {
@@ -61,12 +61,12 @@ module.exports = Generator.extend({
   },
 
   end: function () {
-    this.spawnCommandSync('git', ['init'], {
+    this.spawnCommandSync('git', ['init', '--quiet'], {
       cwd: this.destinationPath(this.options.generateInto)
     });
 
     if (!this.originUrl) {
-      var repoSSH = this.pkg.repository;
+      let repoSSH = this.pkg.repository;
       if (this.pkg.repository && this.pkg.repository.indexOf('.git') === -1) {
         repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
       }

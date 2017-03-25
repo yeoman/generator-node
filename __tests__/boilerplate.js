@@ -1,15 +1,14 @@
 'use strict';
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-test');
 
-describe('node:boilerplate', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/boilerplate'))
+describe('node:boilerplate', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/boilerplate'))
       .withOptions({name: 'my-module'});
   });
 
-  it('creates boilerplate files', function () {
+  it('creates boilerplate files', () => {
     assert.file('lib/index.js');
     assert.file('lib/__tests__/myModule.test.js');
     assert.fileContent('lib/index.js', 'module.exports = {};');
@@ -18,13 +17,13 @@ describe('node:boilerplate', function () {
   });
 });
 
-describe('node:boilerplate', function () {
-  beforeEach(function () {
-    return helpers.run(path.join(__dirname, '../generators/boilerplate'))
+describe('node:boilerplate', () => {
+  beforeEach(() => {
+    return helpers.run(require.resolve('../generators/boilerplate'))
       .withOptions({name: 'my-module', generateInto: 'other/'});
   });
 
-  it('creates boilerplate files using another path', function () {
+  it('creates boilerplate files using another path', () => {
     assert.file('other/lib/index.js');
     assert.file('other/lib/__tests__/myModule.test.js');
     assert.fileContent('other/lib/index.js', 'module.exports = {};');

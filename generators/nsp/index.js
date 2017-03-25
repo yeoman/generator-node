@@ -1,6 +1,6 @@
 'use strict';
-var Generator = require('yeoman-generator');
-var rootPkg = require('../../package.json');
+const Generator = require('yeoman-generator');
+const rootPkg = require('../../package.json');
 
 module.exports = class extends Generator {
   constructor(args, options) {

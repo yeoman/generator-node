@@ -1,6 +1,6 @@
 'use strict';
-var Generator = require('yeoman-generator');
-var rootPkg = require('../../package.json');
+const Generator = require('yeoman-generator');
+const rootPkg = require('../../package.json');
 
 module.exports = class extends Generator {
   constructor(args, options) {
@@ -15,7 +15,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    var pkgJson = {
+    const pkgJson = {
       devDependencies: {
         eslint: rootPkg.devDependencies.eslint,
         'eslint-config-xo-space': rootPkg.devDependencies['eslint-config-xo-space']
