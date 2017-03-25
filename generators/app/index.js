@@ -106,7 +106,7 @@ module.exports = class extends Generator {
   _askForModuleName() {
     if (this.pkg.name || this.options.name) {
       this.props.name = this.pkg.name || _.kebabCase(this.options.name);
-      return;
+      return Promise.resolve();
     }
 
     return askName({
@@ -170,7 +170,7 @@ module.exports = class extends Generator {
   _askForGithubAccount() {
     if (this.options.githubAccount) {
       this.props.githubAccount = this.options.githubAccount;
-      return;
+      return Promise.resolve();
     }
 
     return githubUsername(this.props.authorEmail)
