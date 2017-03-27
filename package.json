@@ -19,7 +19,6 @@
   "devDependencies": {
     "coveralls": "^2.12.0",
     "eslint": "^3.18.0",
-    "eslint-config-xo": "^0.18.1",
     "eslint-config-xo-space": "^0.16.0",
     "jest": "^19.0.2",
     "jest-cli": "^19.0.2",
