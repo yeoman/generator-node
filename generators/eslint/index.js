@@ -28,13 +28,18 @@ module.exports = class extends Generator {
         }
       },
       scripts: {
-        pretest: 'eslint . --ignore-path .gitignore --fix'
+        pretest: 'eslint . --fix'
       }
     };
 
     this.fs.extendJSON(
       this.destinationPath(this.options.generateInto, 'package.json'),
       pkgJson
+    );
+
+    this.fs.copy(
+      this.templatePath('eslintignore'),
+      this.destinationPath(this.options.generateInto, '.eslintignore')
     );
   }
 };
