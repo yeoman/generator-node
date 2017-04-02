@@ -15,27 +15,38 @@ module.exports = Generator.extend({
 
     this.option('name', {
       type: String,
-      required: true,
       desc: 'Module name'
     });
 
     this.option('github-account', {
       type: String,
-      required: true,
       desc: 'GitHub username or organization'
+    });
+
+    this.option('skip-files', {
+      type: String,
+      desc: 'Skip generation of .gitattributes and .gitignore'
+    });
+
+    this.option('origin-url', {
+      type: String,
+      desc: 'Origin URL.  Only used if there is no origin currently initialized'
     });
   },
 
   initializing: function () {
-    this.fs.copy(
-      this.templatePath('gitattributes'),
-      this.destinationPath(this.options.generateInto, '.gitattributes')
-    );
 
-    this.fs.copy(
-      this.templatePath('gitignore'),
-      this.destinationPath(this.options.generateInto, '.gitignore')
-    );
+    if (!this.options.skipFiles) {
+      this.fs.copy(
+        this.templatePath('gitattributes'),
+        this.destinationPath(this.options.generateInto, '.gitattributes')
+      );
+
+      this.fs.copy(
+        this.templatePath('gitignore'),
+        this.destinationPath(this.options.generateInto, '.gitignore')
+      );
+    }
 
     return originUrl(this.destinationPath(this.options.generateInto))
       .then(function (url) {
@@ -43,6 +54,8 @@ module.exports = Generator.extend({
       }.bind(this), function () {
         this.originUrl = '';
       }.bind(this));
+
+
   },
 
   writing: function () {
@@ -52,7 +65,7 @@ module.exports = Generator.extend({
     if (this.originUrl) {
       repository = this.originUrl;
     } else {
-      repository = this.options.githubAccount + '/' + this.options.name;
+      repository = this.options.originUrl || this.options.githubAccount + '/' + this.options.name;
     }
 
     this.pkg.repository = this.pkg.repository || repository;
