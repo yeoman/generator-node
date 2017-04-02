@@ -15,9 +15,10 @@ describe('node:eslint', () => {
             }
           },
           scripts: {
-            pretest: 'eslint . --ignore-path .gitignore --fix'
+            pretest: 'eslint . --fix'
           }
         });
+        assert.file('.eslintignore');
       });
   });
 
@@ -31,6 +32,7 @@ describe('node:eslint', () => {
             extends: 'xo-space'
           }
         });
+        assert.file('other/.eslintignore');
       });
   });
 });
