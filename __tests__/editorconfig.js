@@ -4,13 +4,15 @@ const helpers = require('yeoman-test');
 
 describe('node:editorconfig', () => {
   it('creates .editorconfig', () => {
-    return helpers.run(require.resolve('../generators/editorconfig'))
+    return helpers
+      .run(require.resolve('../generators/editorconfig'))
       .then(() => assert.file('.editorconfig'));
   });
 
   it('respect --generate-into option', () => {
-    return helpers.run(require.resolve('../generators/editorconfig'))
-      .withOptions({generateInto: 'other/'})
+    return helpers
+      .run(require.resolve('../generators/editorconfig'))
+      .withOptions({ generateInto: 'other/' })
       .then(() => assert.file('other/.editorconfig'));
   });
 });

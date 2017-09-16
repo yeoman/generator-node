@@ -32,7 +32,8 @@ describe('node:app', () => {
         keywords: ['foo', 'bar'],
         includeCoveralls: true
       };
-      return helpers.run(require.resolve('../generators/app'))
+      return helpers
+        .run(require.resolve('../generators/app'))
         .withPrompts(answers)
         .then(() => {
           assert.file([
@@ -63,11 +64,17 @@ describe('node:app', () => {
           });
 
           assert.file('README.md');
-          assert.fileContent('README.md', 'const generatorNode = require(\'generator-node\');');
+          assert.fileContent(
+            'README.md',
+            "const generatorNode = require('generator-node');"
+          );
           assert.fileContent('README.md', '> A node generator');
           assert.fileContent('README.md', '$ npm install --save generator-node');
           assert.fileContent('README.md', '© [The Yeoman Team](http://yeoman.io)');
-          assert.fileContent('README.md', '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master');
+          assert.fileContent(
+            'README.md',
+            '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master'
+          );
           assert.fileContent('README.md', 'coveralls');
 
           assert.fileContent('.travis.yml', '| coveralls');
@@ -86,14 +93,15 @@ describe('node:app', () => {
         files: ['lib'],
         keywords: ['bar']
       };
-      return helpers.run(require.resolve('../generators/app'))
-        .withPrompts({name: 'generator-node'})
+      return helpers
+        .run(require.resolve('../generators/app'))
+        .withPrompts({ name: 'generator-node' })
         .on('ready', gen => {
           gen.fs.writeJSON(gen.destinationPath('package.json'), pkg);
           gen.fs.write(gen.destinationPath('README.md'), 'foo');
         })
         .then(() => {
-          const newPkg = _.extend({name: 'generator-node'}, pkg);
+          const newPkg = _.extend({ name: 'generator-node' }, pkg);
           assert.jsonFileContent('package.json', newPkg);
           assert.fileContent('README.md', 'foo');
         });
@@ -102,16 +110,18 @@ describe('node:app', () => {
 
   describe('--no-travis', () => {
     it('skip .travis.yml', () => {
-      return helpers.run(require.resolve('../generators/app'))
-        .withOptions({travis: false})
+      return helpers
+        .run(require.resolve('../generators/app'))
+        .withOptions({ travis: false })
         .then(() => assert.noFile('.travis.yml'));
     });
   });
 
   describe('--projectRoot', () => {
     it('include the raw files', () => {
-      return helpers.run(require.resolve('../generators/app'))
-        .withOptions({projectRoot: 'generators'})
+      return helpers
+        .run(require.resolve('../generators/app'))
+        .withOptions({ projectRoot: 'generators' })
         .then(() => {
           assert.jsonFileContent('package.json', {
             files: ['generators'],
@@ -123,8 +133,9 @@ describe('node:app', () => {
 
   describe('--no-editorconfig', () => {
     it('include the raw files', () => {
-      return helpers.run(require.resolve('../generators/app'))
-        .withOptions({editorconfig: false})
+      return helpers
+        .run(require.resolve('../generators/app'))
+        .withOptions({ editorconfig: false })
         .then(() => assert.noFile('.editorconfig'));
     });
   });

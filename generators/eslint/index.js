@@ -18,17 +18,18 @@ module.exports = class extends Generator {
     const pkgJson = {
       devDependencies: {
         eslint: rootPkg.devDependencies.eslint,
-        'eslint-config-xo-space': rootPkg.devDependencies['eslint-config-xo-space']
+        prettier: rootPkg.devDependencies.prettier,
+        husky: rootPkg.devDependencies.husky,
+        'lint-staged': rootPkg.devDependencies['lint-staged'],
+        'eslint-config-prettier': rootPkg.devDependencies['eslint-config-prettier'],
+        'eslint-plugin-prettier': rootPkg.devDependencies['eslint-plugin-prettier'],
+        'eslint-config-xo': rootPkg.devDependencies['eslint-config-xo']
       },
-      eslintConfig: {
-        extends: 'xo-space',
-        env: {
-          jest: true,
-          node: true
-        }
-      },
+      'lint-staged': rootPkg['lint-staged'],
+      eslintConfig: rootPkg.eslintConfig,
       scripts: {
-        pretest: 'eslint . --fix'
+        pretest: rootPkg.scripts.pretest,
+        precommit: rootPkg.scripts.precommit
       }
     };
 

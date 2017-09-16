@@ -4,7 +4,8 @@ const helpers = require('yeoman-test');
 
 describe('node:git', () => {
   it('creates the git config files and init the repository', () => {
-    return helpers.run(require.resolve('../generators/git'))
+    return helpers
+      .run(require.resolve('../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node'
       })
@@ -16,7 +17,8 @@ describe('node:git', () => {
   });
 
   it('respects --generate-into option', () => {
-    return helpers.run(require.resolve('../generators/git'))
+    return helpers
+      .run(require.resolve('../generators/git'))
       .withOptions({
         repositoryPath: 'yeoman/generator-node',
         generateInto: 'other/'

@@ -109,58 +109,69 @@ module.exports = class extends Generator {
       return Promise.resolve();
     }
 
-    return askName({
-      name: 'name',
-      message: 'Module Name',
-      default: path.basename(process.cwd()),
-      filter: _.kebabCase,
-      validate(str) {
-        return str.length > 0;
-      }
-    }, this).then(answer => {
+    return askName(
+      {
+        name: 'name',
+        message: 'Module Name',
+        default: path.basename(process.cwd()),
+        filter: _.kebabCase,
+        validate(str) {
+          return str.length > 0;
+        }
+      },
+      this
+    ).then(answer => {
       this.props.name = answer.name;
     });
   }
 
   _askFor() {
-    const prompts = [{
-      name: 'description',
-      message: 'Description',
-      when: !this.props.description
-    }, {
-      name: 'homepage',
-      message: 'Project homepage url',
-      when: !this.props.homepage
-    }, {
-      name: 'authorName',
-      message: 'Author\'s Name',
-      when: !this.props.authorName,
-      default: this.user.git.name(),
-      store: true
-    }, {
-      name: 'authorEmail',
-      message: 'Author\'s Email',
-      when: !this.props.authorEmail,
-      default: this.user.git.email(),
-      store: true
-    }, {
-      name: 'authorUrl',
-      message: 'Author\'s Homepage',
-      when: !this.props.authorUrl,
-      store: true
-    }, {
-      name: 'keywords',
-      message: 'Package keywords (comma to split)',
-      when: !this.pkg.keywords,
-      filter(words) {
-        return words.split(/\s*,\s*/g);
+    const prompts = [
+      {
+        name: 'description',
+        message: 'Description',
+        when: !this.props.description
+      },
+      {
+        name: 'homepage',
+        message: 'Project homepage url',
+        when: !this.props.homepage
+      },
+      {
+        name: 'authorName',
+        message: "Author's Name",
+        when: !this.props.authorName,
+        default: this.user.git.name(),
+        store: true
+      },
+      {
+        name: 'authorEmail',
+        message: "Author's Email",
+        when: !this.props.authorEmail,
+        default: this.user.git.email(),
+        store: true
+      },
+      {
+        name: 'authorUrl',
+        message: "Author's Homepage",
+        when: !this.props.authorUrl,
+        store: true
+      },
+      {
+        name: 'keywords',
+        message: 'Package keywords (comma to split)',
+        when: !this.pkg.keywords,
+        filter(words) {
+          return words.split(/\s*,\s*/g);
+        }
+      },
+      {
+        name: 'includeCoveralls',
+        type: 'confirm',
+        message: 'Send coverage reports to coveralls',
+        when: this.options.coveralls === undefined
       }
-    }, {
-      name: 'includeCoveralls',
-      type: 'confirm',
-      message: 'Send coverage reports to coveralls',
-      when: this.options.coveralls === undefined
-    }];
+    ];
 
     return this.prompt(prompts).then(props => {
       this.props = extend(this.props, props);
@@ -196,21 +207,24 @@ module.exports = class extends Generator {
     // Re-read the content at this point because a composed generator might modify it.
     const currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
-    const pkg = extend({
-      name: _.kebabCase(this.props.name),
-      version: '0.0.0',
-      description: this.props.description,
-      homepage: this.props.homepage,
-      author: {
-        name: this.props.authorName,
-        email: this.props.authorEmail,
-        url: this.props.authorUrl
+    const pkg = extend(
+      {
+        name: _.kebabCase(this.props.name),
+        version: '0.0.0',
+        description: this.props.description,
+        homepage: this.props.homepage,
+        author: {
+          name: this.props.authorName,
+          email: this.props.authorEmail,
+          url: this.props.authorUrl
+        },
+        files: [this.options.projectRoot],
+        main: path.join(this.options.projectRoot, 'index.js').replace(/\\/g, '/'),
+        keywords: [],
+        devDependencies: {}
       },
-      files: [this.options.projectRoot],
-      main: path.join(this.options.projectRoot, 'index.js').replace(/\\/g, '/'),
-      keywords: [],
-      devDependencies: {}
-    }, currentPkg);
+      currentPkg
+    );
 
     if (this.props.includeCoveralls) {
       pkg.devDependencies.coveralls = pkgJson.devDependencies.coveralls;
@@ -227,7 +241,7 @@ module.exports = class extends Generator {
 
   default() {
     if (this.options.travis) {
-      let options = {config: {}};
+      let options = { config: {} };
       if (this.props.includeCoveralls) {
         options.config.after_script = 'cat ./coverage/lcov.info | coveralls'; // eslint-disable-line camelcase
       }
@@ -290,7 +304,9 @@ module.exports = class extends Generator {
     this.log('Thanks for using Yeoman.');
 
     if (this.options.travis) {
-      let travisUrl = chalk.cyan(`https://travis-ci.org/profile/${this.props.githubAccount || ''}`);
+      let travisUrl = chalk.cyan(
+        `https://travis-ci.org/profile/${this.props.githubAccount || ''}`
+      );
       this.log(`- Enable Travis integration at ${travisUrl}`);
     }
 
