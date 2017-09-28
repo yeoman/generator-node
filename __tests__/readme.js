@@ -4,7 +4,8 @@ const helpers = require('yeoman-test');
 
 describe('node:readme', () => {
   beforeEach(() => {
-    return helpers.run(require.resolve('../generators/readme'))
+    return helpers
+      .run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -22,18 +23,22 @@ describe('node:readme', () => {
 
   it('creates and fill contents in README.md', () => {
     assert.file('README.md');
-    assert.fileContent('README.md', 'const myProject = require(\'my-project\');');
+    assert.fileContent('README.md', "const myProject = require('my-project');");
     assert.fileContent('README.md', '> a cool project');
     assert.fileContent('README.md', '$ npm install --save my-project');
     assert.fileContent('README.md', 'MIT © [Yeoman](http://yeoman.io)');
-    assert.fileContent('README.md', '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master');
+    assert.fileContent(
+      'README.md',
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
+    );
     assert.fileContent('README.md', 'coveralls');
   });
 });
 
 describe('node:readme --content', () => {
   beforeEach(() => {
-    return helpers.run(require.resolve('../generators/readme'))
+    return helpers
+      .run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -54,14 +59,18 @@ describe('node:readme --content', () => {
     assert.file('README.md');
     assert.fileContent('README.md', 'My custom content');
     assert.fileContent('README.md', 'MIT © [Yeoman](http://yeoman.io)');
-    assert.fileContent('README.md', '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master');
+    assert.fileContent(
+      'README.md',
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
+    );
     assert.fileContent('README.md', 'coveralls');
   });
 });
 
 describe('node:readme --no-coveralls', () => {
   beforeEach(() => {
-    return helpers.run(require.resolve('../generators/readme'))
+    return helpers
+      .run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -84,7 +93,8 @@ describe('node:readme --no-coveralls', () => {
 
 describe('node:readme --generate-into', () => {
   beforeEach(() => {
-    return helpers.run(require.resolve('../generators/readme'))
+    return helpers
+      .run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -103,18 +113,22 @@ describe('node:readme --generate-into', () => {
 
   it('creates and fill contents in README.md', () => {
     assert.file('other/README.md');
-    assert.fileContent('other/README.md', 'const myProject = require(\'my-project\');');
+    assert.fileContent('other/README.md', "const myProject = require('my-project');");
     assert.fileContent('other/README.md', '> a cool project');
     assert.fileContent('other/README.md', '$ npm install --save my-project');
     assert.fileContent('other/README.md', 'MIT © [Yeoman](http://yeoman.io)');
-    assert.fileContent('other/README.md', '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master');
+    assert.fileContent(
+      'other/README.md',
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
+    );
     assert.fileContent('other/README.md', 'coveralls');
   });
 });
 
 describe('node:readme --content and --generate-into', () => {
   beforeEach(() => {
-    return helpers.run(require.resolve('../generators/readme'))
+    return helpers
+      .run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',
@@ -136,14 +150,18 @@ describe('node:readme --content and --generate-into', () => {
     assert.file('other/README.md');
     assert.fileContent('other/README.md', 'My custom content');
     assert.fileContent('other/README.md', 'MIT © [Yeoman](http://yeoman.io)');
-    assert.fileContent('other/README.md', '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master');
+    assert.fileContent(
+      'other/README.md',
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
+    );
     assert.fileContent('other/README.md', 'coveralls');
   });
 });
 
 describe('node:readme --no-coveralls and --generate-into', () => {
   beforeEach(() => {
-    return helpers.run(require.resolve('../generators/readme'))
+    return helpers
+      .run(require.resolve('../generators/readme'))
       .withOptions({
         name: 'my-project',
         description: 'a cool project',

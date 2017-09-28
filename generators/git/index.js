@@ -3,7 +3,7 @@ const Generator = require('yeoman-generator');
 const originUrl = require('git-remote-origin-url');
 
 module.exports = Generator.extend({
-  constructor: function () {
+  constructor: function() {
     Generator.apply(this, arguments);
 
     this.option('generateInto', {
@@ -26,7 +26,7 @@ module.exports = Generator.extend({
     });
   },
 
-  initializing: function () {
+  initializing: function() {
     this.fs.copy(
       this.templatePath('gitattributes'),
       this.destinationPath(this.options.generateInto, '.gitattributes')
@@ -37,16 +37,21 @@ module.exports = Generator.extend({
       this.destinationPath(this.options.generateInto, '.gitignore')
     );
 
-    return originUrl(this.destinationPath(this.options.generateInto))
-      .then(function (url) {
+    return originUrl(this.destinationPath(this.options.generateInto)).then(
+      function(url) {
         this.originUrl = url;
-      }.bind(this), function () {
+      }.bind(this),
+      function() {
         this.originUrl = '';
-      }.bind(this));
+      }.bind(this)
+    );
   },
 
-  writing: function () {
-    this.pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
+  writing: function() {
+    this.pkg = this.fs.readJSON(
+      this.destinationPath(this.options.generateInto, 'package.json'),
+      {}
+    );
 
     let repository = '';
     if (this.originUrl) {
@@ -57,10 +62,13 @@ module.exports = Generator.extend({
 
     this.pkg.repository = this.pkg.repository || repository;
 
-    this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), this.pkg);
+    this.fs.writeJSON(
+      this.destinationPath(this.options.generateInto, 'package.json'),
+      this.pkg
+    );
   },
 
-  end: function () {
+  end: function() {
     this.spawnCommandSync('git', ['init', '--quiet'], {
       cwd: this.destinationPath(this.options.generateInto)
     });

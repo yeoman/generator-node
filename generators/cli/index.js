@@ -16,7 +16,10 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
+    const pkg = this.fs.readJSON(
+      this.destinationPath(this.options.generateInto, 'package.json'),
+      {}
+    );
 
     extend(pkg, {
       bin: 'lib/cli.js',
@@ -31,11 +34,15 @@ module.exports = class extends Generator {
       }
     });
 
-    this.fs.writeJSON(this.destinationPath(this.options.generateInto, 'package.json'), pkg);
+    this.fs.writeJSON(
+      this.destinationPath(this.options.generateInto, 'package.json'),
+      pkg
+    );
 
     this.fs.copyTpl(
       this.templatePath('cli.js'),
-      this.destinationPath(this.options.generateInto, 'lib/cli.js'), {
+      this.destinationPath(this.options.generateInto, 'lib/cli.js'),
+      {
         pkgName: pkg.name,
         pkgSafeName: _.camelCase(pkg.name)
       }

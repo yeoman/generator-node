@@ -57,7 +57,10 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const pkg = this.fs.readJSON(this.destinationPath(this.options.generateInto, 'package.json'), {});
+    const pkg = this.fs.readJSON(
+      this.destinationPath(this.options.generateInto, 'package.json'),
+      {}
+    );
     this.fs.copyTpl(
       this.templatePath('README.md'),
       this.destinationPath(this.options.generateInto, 'README.md'),

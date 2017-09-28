@@ -4,32 +4,32 @@ const helpers = require('yeoman-test');
 
 describe('node:eslint', () => {
   it('fill package.json', () => {
-    return helpers.run(require.resolve('../generators/eslint'))
-      .then(() => {
-        assert.fileContent('package.json', /"eslint-config-xo-space":/);
-        assert.jsonFileContent('package.json', {
-          eslintConfig: {
-            extends: 'xo-space',
-            env: {
-              jest: true
-            }
-          },
-          scripts: {
-            pretest: 'eslint . --fix'
+    return helpers.run(require.resolve('../generators/eslint')).then(() => {
+      assert.fileContent('package.json', /"eslint-config-xo":/);
+      assert.jsonFileContent('package.json', {
+        eslintConfig: {
+          extends: ['xo', 'prettier'],
+          env: {
+            jest: true
           }
-        });
-        assert.file('.eslintignore');
+        },
+        scripts: {
+          pretest: 'eslint .'
+        }
       });
+      assert.file('.eslintignore');
+    });
   });
 
   it('respect --generate-into option as the root of the scaffolding', () => {
-    return helpers.run(require.resolve('../generators/eslint'))
-      .withOptions({generateInto: 'other/'})
+    return helpers
+      .run(require.resolve('../generators/eslint'))
+      .withOptions({ generateInto: 'other/' })
       .then(() => {
-        assert.fileContent('other/package.json', /"eslint-config-xo-space":/);
+        assert.fileContent('other/package.json', /"eslint-config-xo":/);
         assert.jsonFileContent('other/package.json', {
           eslintConfig: {
-            extends: 'xo-space'
+            extends: ['xo', 'prettier']
           }
         });
         assert.file('other/.eslintignore');
