@@ -8,18 +8,18 @@
   "main": "index.js",
   "keywords": ["yeoman-generator", "scaffold", "node", "module", "cli"],
   "devDependencies": {
-    "coveralls": "^2.13.1",
-    "eslint": "^4.1.0",
-    "eslint-config-prettier": "^2.4.0",
-    "eslint-config-xo": "^0.18.2",
-    "eslint-plugin-prettier": "^2.2.0",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.9.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-config-xo": "^0.19.0",
+    "eslint-plugin-prettier": "^2.3.1",
     "husky": "^0.14.3",
-    "jest": "^21.0.0",
-    "jest-cli": "^21.0.0",
-    "lint-staged": "^4.2.1",
-    "nsp": "^2.6.3",
-    "prettier": "^1.7.0",
-    "yeoman-assert": "^3.0.0",
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
+    "lint-staged": "^4.3.0",
+    "nsp": "^2.8.1",
+    "prettier": "^1.7.4",
+    "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.5.1"
   },
   "repository": "yeoman/generator-node",
@@ -30,8 +30,8 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "chalk": "^1.1.3",
-    "generator-jest": "^1.3.0",
+    "chalk": "^2.2.0",
+    "generator-jest": "^1.4.1",
     "generator-license": "^5.1.0",
     "generator-travis": "^1.5.2",
     "git-remote-origin-url": "^2.0.0",
@@ -39,7 +39,7 @@
     "inquirer-npm-name": "^2.0.0",
     "lodash": "^4.17.4",
     "parse-author": "^2.0.0",
-    "yeoman-generator": "^1.1.1"
+    "yeoman-generator": "^2.0.1"
   },
   "eslintConfig": {
     "extends": ["xo", "prettier"],
