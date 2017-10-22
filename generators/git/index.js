@@ -24,6 +24,7 @@ module.exports = class extends Generator {
       desc: 'GitHub username or organization'
     });
   }
+
   initializing() {
     this.fs.copy(
       this.templatePath('gitattributes'),
