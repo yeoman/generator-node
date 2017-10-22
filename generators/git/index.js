@@ -2,10 +2,9 @@
 const Generator = require('yeoman-generator');
 const originUrl = require('git-remote-origin-url');
 
-module.exports = Generator.extend({
-  constructor: function() {
-    Generator.apply(this, arguments);
-
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
     this.option('generateInto', {
       type: String,
       required: false,
@@ -24,9 +23,8 @@ module.exports = Generator.extend({
       required: true,
       desc: 'GitHub username or organization'
     });
-  },
-
-  initializing: function() {
+  }
+  initializing() {
     this.fs.copy(
       this.templatePath('gitattributes'),
       this.destinationPath(this.options.generateInto, '.gitattributes')
@@ -45,9 +43,9 @@ module.exports = Generator.extend({
         this.originUrl = '';
       }.bind(this)
     );
-  },
+  }
 
-  writing: function() {
+  writing() {
     this.pkg = this.fs.readJSON(
       this.destinationPath(this.options.generateInto, 'package.json'),
       {}
@@ -66,9 +64,9 @@ module.exports = Generator.extend({
       this.destinationPath(this.options.generateInto, 'package.json'),
       this.pkg
     );
-  },
+  }
 
-  end: function() {
+  end() {
     this.spawnCommandSync('git', ['init', '--quiet'], {
       cwd: this.destinationPath(this.options.generateInto)
     });
@@ -83,4 +81,4 @@ module.exports = Generator.extend({
       });
     }
   }
-});
+};
