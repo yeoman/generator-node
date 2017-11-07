@@ -1,4 +1,4 @@
-# Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node) [![Gitter](https://img.shields.io/badge/Gitter-Join_the_Yeoman_chat_%E2%86%92-00d06f.svg)](https://gitter.im/yeoman/yeoman) [![OpenCollective](https://img.shields.io/badge/Contribute-OpenCollective-blue.svg)](https://opencollective.com/yeoman#support)
+# Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.svg?branch=master)](https://travis-ci.org/yeoman/generator-node) [![Gitter](https://img.shields.io/badge/Gitter-Join_the_Yeoman_chat_%E2%86%92-00d06f.svg)](https://gitter.im/yeoman/yeoman) [![OpenCollective](https://opencollective.com/yeoman/backers/badge.svg)](https://opencollective.com/yeoman#support)
 
 `generator-node` creates a base template to start a new Node.js module.
 
