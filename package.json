@@ -26,7 +26,7 @@
   "scripts": {
     "pretest": "eslint .",
     "test": "jest",
-    "prepublish": "nsp check",
+    "prepare": "nsp check",
     "precommit": "lint-staged"
   },
   "dependencies": {

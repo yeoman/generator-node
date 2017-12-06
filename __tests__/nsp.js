@@ -11,7 +11,7 @@ describe('node:nsp', () => {
           nsp: rootPkg.devDependencies.nsp
         },
         scripts: {
-          prepublish: 'nsp check'
+          prepare: 'nsp check'
         }
       });
     });
