@@ -65,5 +65,8 @@
   "license": "MIT",
   "jest": {
     "testEnvironment": "node"
+  },
+  "engines": {
+    "npm": ">= 4.0.0"
   }
 }

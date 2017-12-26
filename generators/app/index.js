@@ -221,7 +221,10 @@ module.exports = class extends Generator {
         files: [this.options.projectRoot],
         main: path.join(this.options.projectRoot, 'index.js').replace(/\\/g, '/'),
         keywords: [],
-        devDependencies: {}
+        devDependencies: {},
+        engines: {
+          npm: '>= 4.0.0'
+        }
       },
       currentPkg
     );
