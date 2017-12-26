@@ -21,7 +21,7 @@ describe('node:cli', () => {
     assert.fileContent('package.json', /"lec": "\^/);
     assert.fileContent(
       'package.json',
-      '"prepublish": "lec lib/cli.js -c LF && nsp check"'
+      '"prepublishOnly": "lec lib/cli.js -c LF && nsp check"'
     );
   });
 });

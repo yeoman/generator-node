@@ -20,7 +20,7 @@ module.exports = class extends Generator {
         nsp: rootPkg.devDependencies.nsp
       },
       scripts: {
-        prepublish: 'nsp check'
+        prepublishOnly: 'nsp check'
       }
     });
   }
