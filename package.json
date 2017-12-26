@@ -39,6 +39,7 @@
     "inquirer-npm-name": "^2.0.0",
     "lodash": "^4.17.4",
     "parse-author": "^2.0.0",
+    "validate-npm-package-name": "^3.0.0",
     "yeoman-generator": "^2.0.1"
   },
   "eslintConfig": {
