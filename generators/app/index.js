@@ -7,6 +7,7 @@ const githubUsername = require('github-username');
 const path = require('path');
 const askName = require('inquirer-npm-name');
 const chalk = require('chalk');
+const validatePackageName = require('validate-npm-package-name');
 const pkgJson = require('../../package.json');
 
 module.exports = class extends Generator {
@@ -104,9 +105,19 @@ module.exports = class extends Generator {
   }
 
   _askForModuleName() {
-    if (this.pkg.name || this.options.name) {
-      this.props.name = this.pkg.name || _.kebabCase(this.options.name);
+    if (this.pkg.name) {
+      this.props.name = this.pkg.name;
       return Promise.resolve();
+    }
+
+    if (this.options.name) {
+      const { name } = this.options;
+      const { validForNewPackages, errors = [] } = validatePackageName(name);
+      if (validForNewPackages) {
+        this.props.name = name;
+      } else {
+        throw new Error(errors[0] || 'The name option is not a valid npm package name.');
+      }
     }
 
     return askName(
@@ -114,9 +125,13 @@ module.exports = class extends Generator {
         name: 'name',
         message: 'Module Name',
         default: path.basename(process.cwd()),
-        filter: _.kebabCase,
-        validate(str) {
-          return str.length > 0;
+        validate(val) {
+          const { validForNewPackages, errors = [] } = validatePackageName(val);
+          return (
+            validForNewPackages ||
+            errors[0] ||
+            'The provided value is not a valid npm package name'
+          );
         }
       },
       this
@@ -209,7 +224,7 @@ module.exports = class extends Generator {
 
     const pkg = extend(
       {
-        name: _.kebabCase(this.props.name),
+        name: this.props.name,
         version: '0.0.0',
         description: this.props.description,
         homepage: this.props.homepage,
