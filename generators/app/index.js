@@ -100,12 +100,16 @@ module.exports = class extends Generator {
     };
 
     if (this.options.name) {
-      const { name } = this.options;
-      const { validForNewPackages, errors = [] } = validatePackageName(name);
-      if (validForNewPackages) {
+      const name = this.options.name;
+      const packageNameValidity = validatePackageName(name);
+
+      if (packageNameValidity.validForNewPackages) {
         this.props.name = name;
       } else {
-        throw new Error(errors[0] || 'The name option is not a valid npm package name.');
+        throw new Error(
+          packageNameValidity.errors[0] ||
+            'The name option is not a valid npm package name.'
+        );
       }
     }
 
@@ -132,10 +136,11 @@ module.exports = class extends Generator {
         message: 'Module Name',
         default: path.basename(process.cwd()),
         validate(val) {
-          const { validForNewPackages, errors = [] } = validatePackageName(val);
+          const packageNameValidity = validatePackageName(val);
+
           return (
-            validForNewPackages ||
-            errors[0] ||
+            packageNameValidity.validForNewPackages ||
+            packageNameValidity.errors[0] ||
             'The provided value is not a valid npm package name'
           );
         }
