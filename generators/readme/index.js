@@ -28,7 +28,7 @@ module.exports = class extends Generator {
     this.option('githubAccount', {
       type: String,
       required: true,
-      desc: 'User github account'
+      desc: 'GitHub username or organization'
     });
 
     this.option('authorName', {
