@@ -99,6 +99,16 @@ module.exports = class extends Generator {
       repositoryName: this.options.repositoryName
     };
 
+    if (this.options.name) {
+      const { name } = this.options;
+      const { validForNewPackages, errors = [] } = validatePackageName(name);
+      if (validForNewPackages) {
+        this.props.name = name;
+      } else {
+        throw new Error(errors[0] || 'The name option is not a valid npm package name.');
+      }
+    }
+
     if (_.isObject(this.pkg.author)) {
       this.props.authorName = this.pkg.author.name;
       this.props.authorEmail = this.pkg.author.email;
@@ -112,19 +122,8 @@ module.exports = class extends Generator {
   }
 
   _askForModuleName() {
-    if (this.pkg.name) {
-      this.props.name = this.pkg.name;
+    if (this.props.name) {
       return Promise.resolve();
-    }
-
-    if (this.options.name) {
-      const { name } = this.options;
-      const { validForNewPackages, errors = [] } = validatePackageName(name);
-      if (validForNewPackages) {
-        this.props.name = name;
-      } else {
-        throw new Error(errors[0] || 'The name option is not a valid npm package name.');
-      }
     }
 
     return askName(
@@ -282,6 +281,13 @@ module.exports = class extends Generator {
 
     if (!this.props.repositoryName) {
       this.props.repositoryName = this.props.name;
+
+      if (this.props.repositoryName.startsWith('@')) {
+        this.props.repositoryName = this.props.repositoryName
+          .split('/')
+          .slice(1)
+          .join('/');
+      }
     }
 
     this.composeWith(require.resolve('../git'), {

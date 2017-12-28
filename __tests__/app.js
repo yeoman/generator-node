@@ -108,6 +108,67 @@ describe('node:app', () => {
     });
   });
 
+  describe('--name', () => {
+    it('allows scopes in names', () => {
+      return helpers
+        .run(require.resolve('../generators/app'))
+        .withOptions({
+          name: '@some-scope/generator-node',
+          githubAccount: 'yeoman'
+        })
+        .then(() => {
+          assert.file('lib/__tests__/someScopeGeneratorNode.test.js');
+
+          assert.file('package.json');
+          assert.jsonFileContent('package.json', {
+            name: '@some-scope/generator-node',
+            repository: 'yeoman/generator-node'
+          });
+
+          assert.file('README.md');
+          assert.fileContent(
+            'README.md',
+            "const someScopeGeneratorNode = require('@some-scope/generator-node');"
+          );
+          assert.fileContent(
+            'README.md',
+            '$ npm install --save @some-scope/generator-node'
+          );
+          assert.fileContent(
+            'README.md',
+            '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master'
+          );
+          assert.fileContent(
+            '.git/config',
+            '[remote "origin"]\n	url = git@github.com:yeoman/generator-node.git'
+          );
+        });
+    });
+
+    it('throws when an invalid name is supplied', () => {
+      const promises = [];
+
+      for (let name of ['@/invalid-name', 'invalid@name']) {
+        let threw = false;
+
+        promises.push(
+          helpers
+            .run(require.resolve('../generators/app'))
+            .withOptions({
+              name,
+              githubAccount: 'yeoman'
+            })
+            .catch(() => {
+              threw = true;
+            })
+            .then(() => assert.ok(threw, `Resolved with invalid name ${name}`))
+        );
+      }
+
+      return Promise.all(promises);
+    });
+  });
+
   describe('--repository-name', () => {
     it('can be set separately from --name', () => {
       return helpers

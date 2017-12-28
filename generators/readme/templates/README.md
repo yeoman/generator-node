@@ -25,7 +25,7 @@ const <%= safeProjectName %> = require('<%= projectName %>');
 <%= license %> © [<%= author.name %>](<%= author.url %>)
 
 
-[npm-image]: https://badge.fury.io/js/<%= projectName %>.svg
+[npm-image]: https://badge.fury.io/js/<%= escapedProjectName %>.svg
 [npm-url]: https://npmjs.org/package/<%= projectName %>
 [travis-image]: https://travis-ci.org/<%= githubAccount %>/<%= repositoryName %>.svg?branch=master
 [travis-url]: https://travis-ci.org/<%= githubAccount %>/<%= repositoryName %>
