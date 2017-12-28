@@ -23,6 +23,12 @@ module.exports = class extends Generator {
       required: true,
       desc: 'GitHub username or organization'
     });
+
+    this.option('repositoryName', {
+      type: String,
+      required: true,
+      desc: 'Name of the GitHub repository'
+    });
   }
 
   initializing() {
@@ -56,7 +62,10 @@ module.exports = class extends Generator {
     if (this.originUrl) {
       repository = this.originUrl;
     } else {
-      repository = this.options.githubAccount + '/' + this.options.name;
+      repository =
+        this.options.githubAccount +
+        '/' +
+        (this.options.repositoryName || this.options.name);
     }
 
     this.pkg.repository = this.pkg.repository || repository;

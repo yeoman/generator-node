@@ -67,6 +67,12 @@ module.exports = class extends Generator {
       desc: 'GitHub username or organization'
     });
 
+    this.option('repositoryName', {
+      type: String,
+      required: false,
+      desc: 'Name of the GitHub repository'
+    });
+
     this.option('projectRoot', {
       type: String,
       required: false,
@@ -89,7 +95,8 @@ module.exports = class extends Generator {
       name: this.pkg.name,
       description: this.pkg.description,
       version: this.pkg.version,
-      homepage: this.pkg.homepage
+      homepage: this.pkg.homepage,
+      repositoryName: this.options.repositoryName
     };
 
     if (_.isObject(this.pkg.author)) {
@@ -273,9 +280,14 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('../nsp'));
     this.composeWith(require.resolve('../eslint'));
 
+    if (!this.props.repositoryName) {
+      this.props.repositoryName = this.props.name;
+    }
+
     this.composeWith(require.resolve('../git'), {
       name: this.props.name,
-      githubAccount: this.props.githubAccount
+      githubAccount: this.props.githubAccount,
+      repositoryName: this.props.repositoryName
     });
 
     this.composeWith(require.resolve('generator-jest/generators/app'), {
@@ -306,6 +318,7 @@ module.exports = class extends Generator {
         name: this.props.name,
         description: this.props.description,
         githubAccount: this.props.githubAccount,
+        repositoryName: this.props.repositoryName,
         authorName: this.props.authorName,
         authorUrl: this.props.authorUrl,
         coveralls: this.props.includeCoveralls,

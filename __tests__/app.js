@@ -108,6 +108,34 @@ describe('node:app', () => {
     });
   });
 
+  describe('--repository-name', () => {
+    it('can be set separately from --name', () => {
+      return helpers
+        .run(require.resolve('../generators/app'))
+        .withOptions({
+          name: 'generator-node',
+          githubAccount: 'yeoman',
+          repositoryName: 'not-generator-node'
+        })
+        .then(() => {
+          assert.file('package.json');
+          assert.jsonFileContent('package.json', {
+            repository: 'yeoman/not-generator-node'
+          });
+
+          assert.file('README.md');
+          assert.fileContent(
+            'README.md',
+            '[travis-image]: https://travis-ci.org/yeoman/not-generator-node.svg?branch=master'
+          );
+          assert.fileContent(
+            '.git/config',
+            '[remote "origin"]\n	url = git@github.com:yeoman/not-generator-node.git'
+          );
+        });
+    });
+  });
+
   describe('--no-travis', () => {
     it('skip .travis.yml', () => {
       return helpers
