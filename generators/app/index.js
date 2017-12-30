@@ -133,17 +133,7 @@ module.exports = class extends Generator {
     return askName(
       {
         name: 'name',
-        message: 'Module Name',
-        default: path.basename(process.cwd()),
-        validate(val) {
-          const packageNameValidity = validatePackageName(val);
-
-          return (
-            packageNameValidity.validForNewPackages ||
-            packageNameValidity.errors[0] ||
-            'The provided value is not a valid npm package name'
-          );
-        }
+        default: path.basename(process.cwd())
       },
       this
     ).then(answer => {

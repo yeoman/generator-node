@@ -1763,11 +1763,13 @@ iniparser@~1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/iniparser/-/iniparser-1.0.5.tgz#836d6befe6dfbfcee0bccf1cf9f2acc7027f783d"
 
-inquirer-npm-name@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/inquirer-npm-name/-/inquirer-npm-name-2.0.0.tgz#f3bc154db394469ad767ddedc2ad562517caf52b"
+inquirer-npm-name@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/inquirer-npm-name/-/inquirer-npm-name-3.0.0.tgz#bf439af660eacfed22e1f3034e57f0368c15ac6c"
   dependencies:
     npm-name "^3.0.0"
+    upper-case-first "^1.1.2"
+    validate-npm-package-name "^3.0.0"
 
 inquirer@^1.0.2:
   version "1.2.3"
@@ -4102,6 +4104,16 @@ untildify@^3.0.2:
 unzip-response@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
+
+upper-case-first@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/upper-case-first/-/upper-case-first-1.1.2.tgz#5d79bedcff14419518fd2edb0a0507c9b6859115"
+  dependencies:
+    upper-case "^1.1.1"
+
+upper-case@^1.1.1:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
 
 url-parse-lax@^1.0.0:
   version "1.0.0"
