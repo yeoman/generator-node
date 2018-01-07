@@ -46,16 +46,20 @@ module.exports = class extends Generator {
     );
   }
 
-  writing() {
+  _readPkg() {
     this.pkg = this.fs.readJSON(
       this.destinationPath(this.options.generateInto, 'package.json'),
       {}
     );
+  }
+
+  writing() {
+    this._readPkg();
 
     let repository = '';
     if (this.originUrl) {
       repository = this.originUrl;
-    } else {
+    } else if (this.options.githubAccount && this.options.repositoryName) {
       repository = this.options.githubAccount + '/' + this.options.repositoryName;
     }
 
@@ -68,6 +72,8 @@ module.exports = class extends Generator {
   }
 
   end() {
+    this._readPkg();
+
     this.spawnCommandSync('git', ['init', '--quiet'], {
       cwd: this.destinationPath(this.options.generateInto)
     });
