@@ -52,7 +52,7 @@ describe('node:git', () => {
       });
   });
 
-  it("doesn't add remote `origin` when either `githubAccount` isn't passed", () => {
+  it("doesn't add remote `origin` when `githubAccount` isn't passed", () => {
     return helpers
       .run(require.resolve('../generators/git'))
       .withOptions({
@@ -69,7 +69,7 @@ describe('node:git', () => {
       });
   });
 
-  it("doesn't add remote `origin` when either `repositoryName` isn't passed", () => {
+  it("doesn't add remote `origin` when `repositoryName` isn't passed", () => {
     return helpers
       .run(require.resolve('../generators/git'))
       .withOptions({
