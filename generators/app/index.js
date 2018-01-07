@@ -125,8 +125,25 @@ module.exports = class extends Generator {
     }
   }
 
+  _initModuleName() {
+    if (this.props.name.startsWith('@')) {
+      const [scopeName, localName] = this.props.name.slice(1).split('/');
+
+      Object.assign(this.props, { scopeName, localName });
+    } else {
+      this.props.localName = this.props.name;
+    }
+
+    if (!this.props.repositoryName) {
+      this.props.repositoryName = this.props.localName;
+    }
+
+    console.log(this.props);
+  }
+
   _askForModuleName() {
     if (this.props.name) {
+      this._initModuleName();
       return Promise.resolve();
     }
 
@@ -138,6 +155,7 @@ module.exports = class extends Generator {
       this
     ).then(answer => {
       this.props.name = answer.name;
+      this._initModuleName();
     });
   }
 
@@ -200,17 +218,25 @@ module.exports = class extends Generator {
       return Promise.resolve();
     }
 
-    return githubUsername(this.props.authorEmail)
-      .then(username => username, () => '')
-      .then(username => {
-        return this.prompt({
-          name: 'githubAccount',
-          message: 'GitHub username or organization',
-          default: username
-        }).then(prompt => {
-          this.props.githubAccount = prompt.githubAccount;
-        });
+    let usernamePromise;
+    if (this.props.scopeName) {
+      usernamePromise = Promise.resolve(this.props.scopeName);
+    } else {
+      usernamePromise = githubUsername(this.props.authorEmail).then(
+        username => username,
+        () => ''
+      );
+    }
+
+    return usernamePromise.then(username => {
+      return this.prompt({
+        name: 'githubAccount',
+        message: 'GitHub username or organization',
+        default: username
+      }).then(prompt => {
+        this.props.githubAccount = prompt.githubAccount;
       });
+    });
   }
 
   prompting() {
@@ -273,17 +299,6 @@ module.exports = class extends Generator {
 
     this.composeWith(require.resolve('../nsp'));
     this.composeWith(require.resolve('../eslint'));
-
-    if (!this.props.repositoryName) {
-      this.props.repositoryName = this.props.name;
-
-      if (this.props.repositoryName.startsWith('@')) {
-        this.props.repositoryName = this.props.repositoryName
-          .split('/')
-          .slice(1)
-          .join('/');
-      }
-    }
 
     this.composeWith(require.resolve('../git'), {
       name: this.props.name,
