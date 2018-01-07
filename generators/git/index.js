@@ -56,7 +56,7 @@ module.exports = class extends Generator {
   writing() {
     this._readPkg();
 
-    let repository = '';
+    let repository;
     if (this.originUrl) {
       repository = this.originUrl;
     } else if (this.options.githubAccount && this.options.repositoryName) {
@@ -78,7 +78,7 @@ module.exports = class extends Generator {
       cwd: this.destinationPath(this.options.generateInto)
     });
 
-    if (!this.originUrl) {
+    if (this.pkg.repository && !this.originUrl) {
       let repoSSH = this.pkg.repository;
       if (this.pkg.repository && this.pkg.repository.indexOf('.git') === -1) {
         repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
