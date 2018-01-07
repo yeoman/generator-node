@@ -127,9 +127,12 @@ module.exports = class extends Generator {
 
   _initModuleName() {
     if (this.props.name.startsWith('@')) {
-      const [scopeName, localName] = this.props.name.slice(1).split('/');
+      const nameParts = this.props.name.slice(1).split('/');
 
-      Object.assign(this.props, { scopeName, localName });
+      Object.assign(this.props, {
+        scopeName: nameParts[0],
+        localName: nameParts[1]
+      });
     } else {
       this.props.localName = this.props.name;
     }
@@ -137,8 +140,6 @@ module.exports = class extends Generator {
     if (!this.props.repositoryName) {
       this.props.repositoryName = this.props.localName;
     }
-
-    console.log(this.props);
   }
 
   _askForModuleName() {
