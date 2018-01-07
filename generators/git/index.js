@@ -12,12 +12,6 @@ module.exports = class extends Generator {
       desc: 'Relocate the location of the generated files.'
     });
 
-    this.option('name', {
-      type: String,
-      required: true,
-      desc: 'Module name'
-    });
-
     this.option('githubAccount', {
       type: String,
       required: true,
@@ -62,10 +56,7 @@ module.exports = class extends Generator {
     if (this.originUrl) {
       repository = this.originUrl;
     } else {
-      repository =
-        this.options.githubAccount +
-        '/' +
-        (this.options.repositoryName || this.options.name);
+      repository = this.options.githubAccount + '/' + this.options.repositoryName;
     }
 
     this.pkg.repository = this.pkg.repository || repository;
