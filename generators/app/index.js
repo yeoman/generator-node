@@ -8,6 +8,7 @@ const path = require('path');
 const askName = require('inquirer-npm-name');
 const chalk = require('chalk');
 const pkgJson = require('../../package.json');
+require('caw-global');
 
 module.exports = class extends Generator {
   constructor(args, options) {

@@ -30,6 +30,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "caw-global": "^1.0.0-0",
     "chalk": "^2.2.0",
     "generator-jest": "^1.4.2",
     "generator-license": "^5.2.0",
