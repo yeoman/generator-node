@@ -125,38 +125,51 @@ module.exports = class extends Generator {
     }
   }
 
-  _initModuleName() {
-    if (this.props.name.startsWith('@')) {
-      const nameParts = this.props.name.slice(1).split('/');
+  _getModuleNameParts(name) {
+    const moduleName = {
+      name,
+      repositoryName: this.props.repositoryName
+    };
 
-      Object.assign(this.props, {
+    if (moduleName.name.startsWith('@')) {
+      const nameParts = moduleName.name.slice(1).split('/');
+
+      Object.assign(moduleName, {
         scopeName: nameParts[0],
         localName: nameParts[1]
       });
     } else {
-      this.props.localName = this.props.name;
+      moduleName.localName = moduleName.name;
     }
 
-    if (!this.props.repositoryName) {
-      this.props.repositoryName = this.props.localName;
+    if (!moduleName.repositoryName) {
+      moduleName.repositoryName = moduleName.localName;
     }
+
+    return moduleName;
   }
 
   _askForModuleName() {
+    let askedName;
+
     if (this.props.name) {
-      this._initModuleName();
-      return Promise.resolve();
+      askedName = Promise.resolve({
+        name: this.props.name
+      });
+    } else {
+      askedName = askName(
+        {
+          name: 'name',
+          default: path.basename(process.cwd())
+        },
+        this
+      );
     }
 
-    return askName(
-      {
-        name: 'name',
-        default: path.basename(process.cwd())
-      },
-      this
-    ).then(answer => {
-      this.props.name = answer.name;
-      this._initModuleName();
+    return askedName.then(answer => {
+      const moduleNameParts = this._getModuleNameParts(answer.name);
+
+      Object.assign(this.props, moduleNameParts);
     });
   }
 
