@@ -265,7 +265,7 @@ module.exports = class extends Generator {
       githubAccount: this.props.githubAccount
     });
 
-    this.composeWith(require.resolve('generator-mocha/generators/app'), {
+    this.composeWith(require.resolve('../testing'), {
       ui: 'BDD'
     });
 

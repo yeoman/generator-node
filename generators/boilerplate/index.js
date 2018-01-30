@@ -1,5 +1,4 @@
 'use strict';
-const _ = require('lodash');
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
@@ -24,10 +23,5 @@ module.exports = class extends Generator {
     const filepath = this.destinationPath(this.options.generateInto, 'src/index.js');
 
     this.fs.copyTpl(this.templatePath('index.js'), filepath);
-
-    // this.composeWith(require.resolve('generator-jest/generators/test'), {
-    //   arguments: [filepath],
-    //   componentName: _.camelCase(this.options.name)
-    // });
   }
 };

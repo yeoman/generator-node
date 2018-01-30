@@ -1,5 +1,5 @@
 {
-  "name": "generator-node",
+  "name": "@caradvice/generator-node",
   "version": "2.3.0",
   "description": "Create a Node.js module",
   "homepage": "https://github.com/yeoman/generator-node",
