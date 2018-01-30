@@ -47,14 +47,14 @@ module.exports = class extends Generator {
   }
 
   _readPkg() {
-    this.pkg = this.fs.readJSON(
+    return this.fs.readJSON(
       this.destinationPath(this.options.generateInto, 'package.json'),
       {}
     );
   }
 
   writing() {
-    this._readPkg();
+    const pkg = this._readPkg();
 
     let repository;
     if (this.originUrl) {
@@ -63,26 +63,27 @@ module.exports = class extends Generator {
       repository = this.options.githubAccount + '/' + this.options.repositoryName;
     }
 
-    this.pkg.repository = this.pkg.repository || repository;
+    pkg.repository = pkg.repository || repository;
 
     this.fs.writeJSON(
       this.destinationPath(this.options.generateInto, 'package.json'),
-      this.pkg
+      pkg
     );
   }
 
   end() {
-    this._readPkg();
+    const pkg = this._readPkg();
 
     this.spawnCommandSync('git', ['init', '--quiet'], {
       cwd: this.destinationPath(this.options.generateInto)
     });
 
-    if (this.pkg.repository && !this.originUrl) {
-      let repoSSH = this.pkg.repository;
-      if (this.pkg.repository && this.pkg.repository.indexOf('.git') === -1) {
-        repoSSH = 'git@github.com:' + this.pkg.repository + '.git';
+    if (pkg.repository && !this.originUrl) {
+      let repoSSH = pkg.repository;
+      if (pkg.repository && pkg.repository.indexOf('.git') === -1) {
+        repoSSH = 'git@github.com:' + pkg.repository + '.git';
       }
+
       this.spawnCommandSync('git', ['remote', 'add', 'origin', repoSSH], {
         cwd: this.destinationPath(this.options.generateInto)
       });
