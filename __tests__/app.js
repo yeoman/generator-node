@@ -37,13 +37,11 @@ describe('node:app', () => {
         .withPrompts(answers)
         .then(() => {
           assert.file([
-            '.travis.yml',
             '.editorconfig',
             '.gitignore',
             '.gitattributes',
             'README.md',
-            'lib/index.js',
-            'lib/__tests__/generatorNode.test.js'
+            'src/index.js'
           ]);
 
           assert.file('package.json');
@@ -52,32 +50,21 @@ describe('node:app', () => {
             version: '0.0.0',
             description: answers.description,
             homepage: answers.homepage,
-            repository: 'yeoman/generator-node',
+            repository: 'caradvice/generator-node',
             author: {
               name: answers.authorName,
               email: answers.authorEmail,
               url: answers.authorUrl
             },
-            files: ['lib'],
+            files: ['src'],
             keywords: answers.keywords,
-            main: 'lib/index.js'
+            main: 'src/index.js'
           });
 
           assert.file('README.md');
-          assert.fileContent(
-            'README.md',
-            "const generatorNode = require('generator-node');"
-          );
           assert.fileContent('README.md', '> A node generator');
           assert.fileContent('README.md', '$ npm install --save generator-node');
           assert.fileContent('README.md', '© [The Yeoman Team](http://yeoman.io)');
-          assert.fileContent(
-            'README.md',
-            '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master'
-          );
-          assert.fileContent('README.md', 'coveralls');
-
-          assert.fileContent('.travis.yml', '| coveralls');
         });
     });
   });
@@ -88,9 +75,9 @@ describe('node:app', () => {
         version: '1.0.34',
         description: 'lots of fun',
         homepage: 'http://yeoman.io',
-        repository: 'yeoman/generator-node',
+        repository: 'caradvice/generator-node',
         author: 'The Yeoman Team',
-        files: ['lib'],
+        files: ['src'],
         keywords: ['bar']
       };
       return helpers

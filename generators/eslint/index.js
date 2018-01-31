@@ -1,4 +1,4 @@
-'use strict';
+
 const Generator = require('yeoman-generator');
 const rootPkg = require('../../package.json');
 
@@ -10,7 +10,7 @@ module.exports = class extends Generator {
       type: String,
       required: false,
       default: '',
-      desc: 'Relocate the location of the generated files.'
+      desc: 'Relocate the location of the generated files.',
     });
   }
 
@@ -21,26 +21,27 @@ module.exports = class extends Generator {
         prettier: rootPkg.devDependencies.prettier,
         husky: rootPkg.devDependencies.husky,
         'lint-staged': rootPkg.devDependencies['lint-staged'],
-        'eslint-config-prettier': rootPkg.devDependencies['eslint-config-prettier'],
-        'eslint-plugin-prettier': rootPkg.devDependencies['eslint-plugin-prettier'],
-        'eslint-config-xo': rootPkg.devDependencies['eslint-config-xo']
+        'eslint-config-airbnb': rootPkg.devDependencies['eslint-config-airbnb'],
+        'eslint-plugin-import': rootPkg.devDependencies['eslint-plugin-import'],
+        'eslint-plugin-jsx-a11y': rootPkg.devDependencies['eslint-plugin-jsx-a11y'],
+        'eslint-plugin-react': rootPkg.devDependencies['eslint-plugin-react'],
       },
       'lint-staged': rootPkg['lint-staged'],
       eslintConfig: rootPkg.eslintConfig,
       scripts: {
         pretest: rootPkg.scripts.pretest,
-        precommit: rootPkg.scripts.precommit
-      }
+        precommit: rootPkg.scripts.precommit,
+      },
     };
 
     this.fs.extendJSON(
       this.destinationPath(this.options.generateInto, 'package.json'),
-      pkgJson
+      pkgJson,
     );
 
     this.fs.copy(
       this.templatePath('eslintignore'),
-      this.destinationPath(this.options.generateInto, '.eslintignore')
+      this.destinationPath(this.options.generateInto, '.eslintignore'),
     );
   }
 };

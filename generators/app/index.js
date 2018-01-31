@@ -16,7 +16,7 @@ module.exports = class extends Generator {
     this.option('travis', {
       type: Boolean,
       required: false,
-      default: true,
+      default: false,
       desc: 'Include travis config'
     });
 
@@ -37,6 +37,7 @@ module.exports = class extends Generator {
     this.option('coveralls', {
       type: Boolean,
       required: false,
+      default: false,
       desc: 'Include coveralls config'
     });
 
@@ -63,13 +64,14 @@ module.exports = class extends Generator {
     this.option('githubAccount', {
       type: String,
       required: false,
+      default: 'caradvice',
       desc: 'GitHub username or organization'
     });
 
     this.option('projectRoot', {
       type: String,
       required: false,
-      default: 'lib',
+      default: 'src',
       desc: 'Relative path to the project code root'
     });
 
@@ -263,9 +265,8 @@ module.exports = class extends Generator {
       githubAccount: this.props.githubAccount
     });
 
-    this.composeWith(require.resolve('generator-jest/generators/app'), {
-      testEnvironment: 'node',
-      coveralls: false
+    this.composeWith(require.resolve('../testing'), {
+      ui: 'BDD'
     });
 
     if (this.options.boilerplate) {
@@ -282,7 +283,8 @@ module.exports = class extends Generator {
       this.composeWith(require.resolve('generator-license/app'), {
         name: this.props.authorName,
         email: this.props.authorEmail,
-        website: this.props.authorUrl
+        website: this.props.authorUrl,
+        license: 'nolicense'
       });
     }
 
