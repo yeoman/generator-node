@@ -30,13 +30,13 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "caw-global": "^1.0.0-2",
     "chalk": "^2.2.0",
     "generator-jest": "^1.4.2",
     "generator-license": "^5.2.0",
     "generator-travis": "^1.5.3",
     "git-remote-origin-url": "^2.0.0",
     "github-username": "^4.1.0",
+    "global-tunnel": "^1.2.0",
     "inquirer-npm-name": "^2.0.0",
     "lodash": "^4.17.4",
     "parse-author": "^2.0.0",
