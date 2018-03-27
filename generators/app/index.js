@@ -7,6 +7,7 @@ const githubUsername = require('github-username');
 const path = require('path');
 const askName = require('inquirer-npm-name');
 const chalk = require('chalk');
+const validatePackageName = require('validate-npm-package-name');
 const pkgJson = require('../../package.json');
 
 module.exports = class extends Generator {
@@ -66,6 +67,12 @@ module.exports = class extends Generator {
       desc: 'GitHub username or organization'
     });
 
+    this.option('repositoryName', {
+      type: String,
+      required: false,
+      desc: 'Name of the GitHub repository'
+    });
+
     this.option('projectRoot', {
       type: String,
       required: false,
@@ -88,8 +95,23 @@ module.exports = class extends Generator {
       name: this.pkg.name,
       description: this.pkg.description,
       version: this.pkg.version,
-      homepage: this.pkg.homepage
+      homepage: this.pkg.homepage,
+      repositoryName: this.options.repositoryName
     };
+
+    if (this.options.name) {
+      const name = this.options.name;
+      const packageNameValidity = validatePackageName(name);
+
+      if (packageNameValidity.validForNewPackages) {
+        this.props.name = name;
+      } else {
+        throw new Error(
+          packageNameValidity.errors[0] ||
+            'The name option is not a valid npm package name.'
+        );
+      }
+    }
 
     if (_.isObject(this.pkg.author)) {
       this.props.authorName = this.pkg.author.name;
@@ -103,25 +125,51 @@ module.exports = class extends Generator {
     }
   }
 
-  _askForModuleName() {
-    if (this.pkg.name || this.options.name) {
-      this.props.name = this.pkg.name || _.kebabCase(this.options.name);
-      return Promise.resolve();
+  _getModuleNameParts(name) {
+    const moduleName = {
+      name,
+      repositoryName: this.props.repositoryName
+    };
+
+    if (moduleName.name.startsWith('@')) {
+      const nameParts = moduleName.name.slice(1).split('/');
+
+      Object.assign(moduleName, {
+        scopeName: nameParts[0],
+        localName: nameParts[1]
+      });
+    } else {
+      moduleName.localName = moduleName.name;
     }
 
-    return askName(
-      {
-        name: 'name',
-        message: 'Module Name',
-        default: path.basename(process.cwd()),
-        filter: _.kebabCase,
-        validate(str) {
-          return str.length > 0;
-        }
-      },
-      this
-    ).then(answer => {
-      this.props.name = answer.name;
+    if (!moduleName.repositoryName) {
+      moduleName.repositoryName = moduleName.localName;
+    }
+
+    return moduleName;
+  }
+
+  _askForModuleName() {
+    let askedName;
+
+    if (this.props.name) {
+      askedName = Promise.resolve({
+        name: this.props.name
+      });
+    } else {
+      askedName = askName(
+        {
+          name: 'name',
+          default: path.basename(process.cwd())
+        },
+        this
+      );
+    }
+
+    return askedName.then(answer => {
+      const moduleNameParts = this._getModuleNameParts(answer.name);
+
+      Object.assign(this.props, moduleNameParts);
     });
   }
 
@@ -184,17 +232,25 @@ module.exports = class extends Generator {
       return Promise.resolve();
     }
 
-    return githubUsername(this.props.authorEmail)
-      .then(username => username, () => '')
-      .then(username => {
-        return this.prompt({
-          name: 'githubAccount',
-          message: 'GitHub username or organization',
-          default: username
-        }).then(prompt => {
-          this.props.githubAccount = prompt.githubAccount;
-        });
+    let usernamePromise;
+    if (this.props.scopeName) {
+      usernamePromise = Promise.resolve(this.props.scopeName);
+    } else {
+      usernamePromise = githubUsername(this.props.authorEmail).then(
+        username => username,
+        () => ''
+      );
+    }
+
+    return usernamePromise.then(username => {
+      return this.prompt({
+        name: 'githubAccount',
+        message: 'GitHub username or organization',
+        default: username
+      }).then(prompt => {
+        this.props.githubAccount = prompt.githubAccount;
       });
+    });
   }
 
   prompting() {
@@ -209,7 +265,7 @@ module.exports = class extends Generator {
 
     const pkg = extend(
       {
-        name: _.kebabCase(this.props.name),
+        name: this.props.name,
         version: '0.0.0',
         description: this.props.description,
         homepage: this.props.homepage,
@@ -260,7 +316,8 @@ module.exports = class extends Generator {
 
     this.composeWith(require.resolve('../git'), {
       name: this.props.name,
-      githubAccount: this.props.githubAccount
+      githubAccount: this.props.githubAccount,
+      repositoryName: this.props.repositoryName
     });
 
     this.composeWith(require.resolve('generator-jest/generators/app'), {
@@ -291,6 +348,7 @@ module.exports = class extends Generator {
         name: this.props.name,
         description: this.props.description,
         githubAccount: this.props.githubAccount,
+        repositoryName: this.props.repositoryName,
         authorName: this.props.authorName,
         authorUrl: this.props.authorUrl,
         coveralls: this.props.includeCoveralls,
