@@ -64,7 +64,9 @@
   },
   "license": "MIT",
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageReporters": ["lcov", "text", "text-summary"]
   },
   "engines": {
     "npm": ">= 4.0.0"
