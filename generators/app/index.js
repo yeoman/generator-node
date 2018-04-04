@@ -9,6 +9,7 @@ const askName = require('inquirer-npm-name');
 const chalk = require('chalk');
 const validatePackageName = require('validate-npm-package-name');
 const pkgJson = require('../../package.json');
+require('global-tunnel-ng').initialize();
 
 module.exports = class extends Generator {
   constructor(args, options) {
