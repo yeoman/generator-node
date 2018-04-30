@@ -30,7 +30,7 @@ module.exports = class extends Generator {
         lec: '^1.0.1'
       },
       scripts: {
-        prepublishOnly: 'lec lib/cli.js -c LF && nsp check'
+        prepare: 'lec lib/cli.js -c LF'
       }
     });
 
