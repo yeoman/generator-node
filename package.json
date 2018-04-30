@@ -1,21 +1,12 @@
 {
   "name": "generator-node",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Create a Node.js module",
   "homepage": "https://github.com/yeoman/generator-node",
   "author": "Yeoman team",
-  "files": [
-    "index.js",
-    "generators"
-  ],
+  "files": ["index.js", "generators"],
   "main": "index.js",
-  "keywords": [
-    "yeoman-generator",
-    "scaffold",
-    "node",
-    "module",
-    "cli"
-  ],
+  "keywords": ["yeoman-generator", "scaffold", "node", "module", "cli"],
   "devDependencies": {
     "coveralls": "^3.0.0",
     "eslint": "^4.19.1",
@@ -52,10 +43,7 @@
     "yeoman-generator": "^2.0.3"
   },
   "eslintConfig": {
-    "extends": [
-      "xo",
-      "prettier"
-    ],
+    "extends": ["xo", "prettier"],
     "env": {
       "jest": true,
       "node": true
@@ -69,29 +57,17 @@
         }
       ]
     },
-    "plugins": [
-      "prettier"
-    ]
+    "plugins": ["prettier"]
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"]
   },
   "license": "MIT",
   "jest": {
     "testEnvironment": "node",
     "collectCoverage": true,
-    "coverageReporters": [
-      "lcov",
-      "text",
-      "text-summary"
-    ]
+    "coverageReporters": ["lcov", "text", "text-summary"]
   },
   "engines": {
     "npm": ">= 4.0.0"
