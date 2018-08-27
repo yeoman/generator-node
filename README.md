@@ -25,7 +25,6 @@ That'll generate a project with all the common tools setup. This includes:
 - Filled `package.json` file
 - [jest](https://facebook.github.io/jest/) unit test and code coverage (optionally tracked on [Coveralls](https://coveralls.io/))
 - [ESLint](http://eslint.org/) linting and code style checking
-- [nsp](https://nodesecurity.io/) known vulnerability check
 - [Travis CI](https://travis-ci.org/) continuous integration (optional)
 - [License](https://spdx.org/licenses/)
 
@@ -100,7 +99,6 @@ Remember you can see the options of each sub generators by running `yo node:sub 
 - `node:editorconfig`
 - `node:eslint`
 - `node:git`
-- `node:nsp`
 - `node:readme`
 
 

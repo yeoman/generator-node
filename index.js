@@ -7,6 +7,5 @@ module.exports = {
   editorconfig: require.resolve('./generators/editorconfig'),
   eslint: require.resolve('./generators/eslint'),
   git: require.resolve('./generators/git'),
-  nsp: require.resolve('./generators/nsp'),
   readme: require.resolve('./generators/readme')
 };

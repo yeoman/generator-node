@@ -311,7 +311,6 @@ module.exports = class extends Generator {
       this.composeWith(require.resolve('../editorconfig'));
     }
 
-    this.composeWith(require.resolve('../nsp'));
     this.composeWith(require.resolve('../eslint'));
 
     this.composeWith(require.resolve('../git'), {
