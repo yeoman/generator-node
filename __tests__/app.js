@@ -30,7 +30,8 @@ describe('node:app', () => {
         authorEmail: 'hi@yeoman.io',
         authorUrl: 'http://yeoman.io',
         keywords: ['foo', 'bar'],
-        includeCoveralls: true
+        includeCoveralls: true,
+        nodejsVersion: 'v10.4.1,v10'
       };
       return helpers
         .run(require.resolve('../generators/app'))
@@ -78,6 +79,8 @@ describe('node:app', () => {
           assert.fileContent('README.md', 'coveralls');
 
           assert.fileContent('.travis.yml', '| coveralls');
+          assert.fileContent('.travis.yml', '- v10.4.1');
+          assert.fileContent('.travis.yml', '- v10');
         });
     });
   });

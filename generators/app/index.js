@@ -226,6 +226,20 @@ module.exports = class extends Generator {
     });
   }
 
+  _askForTravis() {
+    const prompts = [
+      {
+        name: 'nodejsVersion',
+        message: 'Enter nodejs version (comma to split)',
+        when: this.options.travis
+      }
+    ];
+
+    return this.prompt(prompts).then(props => {
+      this.props = extend(this.props, props);
+    });
+  }
+
   _askForGithubAccount() {
     if (this.options.githubAccount) {
       this.props.githubAccount = this.options.githubAccount;
@@ -256,6 +270,7 @@ module.exports = class extends Generator {
   prompting() {
     return this._askForModuleName()
       .then(this._askFor.bind(this))
+      .then(this._askForTravis.bind(this))
       .then(this._askForGithubAccount.bind(this));
   }
 
@@ -301,6 +316,11 @@ module.exports = class extends Generator {
   default() {
     if (this.options.travis) {
       let options = { config: {} };
+
+      if (this.props.nodejsVersion) {
+        options.config.node_js = this.props.nodejsVersion.split(/\s*,\s*/g); // eslint-disable-line camelcase
+      }
+
       if (this.props.includeCoveralls) {
         options.config.after_script = 'cat ./coverage/lcov.info | coveralls'; // eslint-disable-line camelcase
       }
