@@ -31,7 +31,7 @@ describe('node:app', () => {
         authorUrl: 'http://yeoman.io',
         keywords: ['foo', 'bar'],
         includeCoveralls: true,
-        nodejsVersion: 'v10.4.1,v10'
+        node: 'v10.4.1,v10'
       };
       return helpers
         .run(require.resolve('../generators/app'))

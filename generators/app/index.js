@@ -229,8 +229,8 @@ module.exports = class extends Generator {
   _askForTravis() {
     const prompts = [
       {
-        name: 'nodejsVersion',
-        message: 'Enter nodejs version (comma to split)',
+        name: 'node',
+        message: 'Enter Node versions (comma separated)',
         when: this.options.travis
       }
     ];
@@ -317,8 +317,9 @@ module.exports = class extends Generator {
     if (this.options.travis) {
       let options = { config: {} };
 
-      if (this.props.nodejsVersion) {
-        options.config.node_js = this.props.nodejsVersion.split(/\s*,\s*/g); // eslint-disable-line camelcase
+      if (this.props.node) {
+        // eslint-disable-next-line camelcase
+        options.config.node_js = this.props.node.split(',');
       }
 
       if (this.props.includeCoveralls) {
