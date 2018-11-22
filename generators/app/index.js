@@ -106,9 +106,12 @@ module.exports = class extends Generator {
       if (packageNameValidity.validForNewPackages) {
         this.props.name = name;
       } else {
-        throw new Error(
-          packageNameValidity.errors[0] ||
-            'The name option is not a valid npm package name.'
+        this.emit(
+          'error',
+          new Error(
+            packageNameValidity.errors[0] ||
+              'The name option is not a valid npm package name.'
+          )
         );
       }
     }

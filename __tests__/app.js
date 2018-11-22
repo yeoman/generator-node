@@ -3,22 +3,20 @@ const _ = require('lodash');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
+jest.mock('npm-name', () => {
+  return () => Promise.resolve(true);
+});
+
+jest.mock('github-username', () => {
+  return () => Promise.resolve('unicornUser');
+});
+
+jest.mock('generator-license/app', () => {
+  const helpers = require('yeoman-test');
+  return helpers.createDummyGenerator();
+});
+
 describe('node:app', () => {
-  beforeEach(() => {
-    jest.mock('npm-name', () => {
-      return () => Promise.resolve(true);
-    });
-
-    jest.mock('github-username', () => {
-      return () => Promise.resolve('unicornUser');
-    });
-
-    jest.mock('generator-license/app', () => {
-      const helpers = require('yeoman-test');
-      return helpers.createDummyGenerator();
-    });
-  });
-
   describe('running on new project', () => {
     it('scaffold a full project', () => {
       const answers = {
@@ -148,27 +146,24 @@ describe('node:app', () => {
         });
     });
 
-    it('throws when an invalid name is supplied', () => {
-      const promises = [];
+    it('throws when an invalid name is supplied', async () => {
+      await expect(
+        helpers.run(require.resolve('../generators/app')).withOptions({
+          name: '@/invalid-name',
+          githubAccount: 'yeoman'
+        })
+      ).rejects.toMatchInlineSnapshot(
+        `[Error: name can only contain URL-friendly characters]`
+      );
 
-      for (let name of ['@/invalid-name', 'invalid@name']) {
-        let threw = false;
-
-        promises.push(
-          helpers
-            .run(require.resolve('../generators/app'))
-            .withOptions({
-              name,
-              githubAccount: 'yeoman'
-            })
-            .catch(() => {
-              threw = true;
-            })
-            .then(() => assert.ok(threw, `Resolved with invalid name ${name}`))
-        );
-      }
-
-      return Promise.all(promises);
+      await expect(
+        helpers.run(require.resolve('../generators/app')).withOptions({
+          name: 'invalid@name',
+          githubAccount: 'yeoman'
+        })
+      ).rejects.toMatchInlineSnapshot(
+        `[Error: name can only contain URL-friendly characters]`
+      );
     });
   });
 
