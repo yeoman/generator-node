@@ -1,18 +1,10 @@
 'use strict';
-const _ = require('lodash');
-const Generator = require('yeoman-generator');
-const querystring = require('querystring');
+var _ = require('lodash');
+var generators = require('yeoman-generator');
 
-module.exports = class extends Generator {
-  constructor(args, options) {
-    super(args, options);
-
-    this.option('generateInto', {
-      type: String,
-      required: false,
-      defaults: '',
-      desc: 'Relocate the location of the generated files.'
-    });
+module.exports = generators.Base.extend({
+  constructor: function () {
+    generators.Base.apply(this, arguments);
 
     this.option('name', {
       type: String,
@@ -29,13 +21,7 @@ module.exports = class extends Generator {
     this.option('githubAccount', {
       type: String,
       required: true,
-      desc: 'GitHub username or organization'
-    });
-
-    this.option('repositoryName', {
-      type: String,
-      required: true,
-      desc: 'Name of the GitHub repository'
+      desc: 'User github account'
     });
 
     this.option('authorName', {
@@ -55,27 +41,16 @@ module.exports = class extends Generator {
       required: true,
       desc: 'Include coveralls badge'
     });
+  },
 
-    this.option('content', {
-      type: String,
-      required: false,
-      desc: 'Readme content'
-    });
-  }
-
-  writing() {
-    const pkg = this.fs.readJSON(
-      this.destinationPath(this.options.generateInto, 'package.json'),
-      {}
-    );
+  writing: function () {
+    var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     this.fs.copyTpl(
       this.templatePath('README.md'),
-      this.destinationPath(this.options.generateInto, 'README.md'),
+      this.destinationPath('README.md'),
       {
         projectName: this.options.name,
         safeProjectName: _.camelCase(this.options.name),
-        escapedProjectName: querystring.escape(this.options.name),
-        repositoryName: this.options.repositoryName || this.options.name,
         description: this.options.description,
         githubAccount: this.options.githubAccount,
         author: {
@@ -83,9 +58,8 @@ module.exports = class extends Generator {
           url: this.options.authorUrl
         },
         license: pkg.license,
-        includeCoveralls: this.options.coveralls,
-        content: this.options.content
+        includeCoveralls: this.options.coveralls
       }
     );
   }
-};
+});
