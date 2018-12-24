@@ -1,38 +1,33 @@
 'use strict';
-var _ = require('lodash');
-var generators = require('yeoman-generator');
+const _ = require('lodash');
+const Generator = require('yeoman-generator');
 
-module.exports = generators.Base.extend({
-  constructor: function () {
-    generators.Base.apply(this, arguments);
+module.exports = class extends Generator {
+  constructor(args, options) {
+    super(args, options);
+
+    this.option('generateInto', {
+      type: String,
+      required: false,
+      default: '',
+      desc: 'Relocate the location of the generated files.'
+    });
 
     this.option('name', {
+      type: String,
       required: true,
       desc: 'The new module name.'
     });
-
-    this.option('babel', {
-      required: false,
-      defaults: false,
-      desc: 'Compile ES2015 using Babel'
-    });
-  },
-
-  writing: function () {
-    this.fs.copyTpl(
-      this.templatePath('index.js'),
-      this.destinationPath('lib/index.js'), {
-        babel: this.options.babel
-      }
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('test.js'),
-      this.destinationPath('test/index.js'), {
-        pkgName: this.options.name,
-        pkgSafeName: _.camelCase(this.options.name),
-        babel: this.options.babel
-      }
-    );
   }
-});
+
+  writing() {
+    const filepath = this.destinationPath(this.options.generateInto, 'lib/index.js');
+
+    this.fs.copyTpl(this.templatePath('index.js'), filepath);
+
+    this.composeWith(require.resolve('generator-jest/generators/test'), {
+      arguments: [filepath],
+      componentName: _.camelCase(this.options.name)
+    });
+  }
+};

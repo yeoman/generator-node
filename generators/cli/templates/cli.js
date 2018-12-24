@@ -1,29 +1,18 @@
 #!/usr/bin/env node
 'use strict';
-<% if (babel) { -%>
-import meow from 'meow';
-import <%= pkgSafeName %> from './';
-import pkg from '../';
-<% } else { -%>
-var meow = require('meow');
-var <%= pkgSafeName %> = require('./');
-var pkg = require('../');
-<% } -%>
+const meow = require('meow');
+const <%= pkgSafeName %> = require('./');
 
-var cli = meow({
-  pkg: pkg,
-  help: [
-    'Usage',
-    '  $ <%= pkgSafeName %> [input]',
-    '',
-    'Examples',
-    '  $ <%= pkgSafeName %>',
-    '  unicorns',
-    '',
-    '  $ <%= pkgSafeName %> rainbows',
-    '  unicorns & rainbows',
-    '',
-    'Options',
-    ' --foo Lorem ipsum. Default: false'
-  ]
-});
+const cli = meow(`
+Usage
+  $ <%= pkgName %> [input]
+
+Options
+  --foo  Lorem ipsum. [Default: false]
+
+Examples
+  $ <%= pkgName %>
+  unicorns
+  $ <%= pkgName %> rainbows
+  unicorns & rainbows
+`);
