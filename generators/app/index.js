@@ -389,7 +389,7 @@ module.exports = class extends Generator {
 
     if (this.options.travis) {
       let travisUrl = chalk.cyan(
-        `https://travis-ci.com/profile/${this.props.githubAccount || ''}`
+        `https://travis-ci.org/profile/${this.props.githubAccount || ''}`
       );
       this.log(`- Enable Travis integration at ${travisUrl}`);
     }

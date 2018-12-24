@@ -29,7 +29,7 @@ describe('node:readme', () => {
     assert.fileContent('README.md', 'MIT © [Yeoman](http://yeoman.io)');
     assert.fileContent(
       'README.md',
-      '[travis-image]: https://travis-ci.com/yeoman/my-project.svg?branch=master'
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
     );
     assert.fileContent('README.md', 'coveralls');
   });
@@ -61,7 +61,7 @@ describe('node:readme --content', () => {
     assert.fileContent('README.md', 'MIT © [Yeoman](http://yeoman.io)');
     assert.fileContent(
       'README.md',
-      '[travis-image]: https://travis-ci.com/yeoman/my-project.svg?branch=master'
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
     );
     assert.fileContent('README.md', 'coveralls');
   });
@@ -119,7 +119,7 @@ describe('node:readme --generate-into', () => {
     assert.fileContent('other/README.md', 'MIT © [Yeoman](http://yeoman.io)');
     assert.fileContent(
       'other/README.md',
-      '[travis-image]: https://travis-ci.com/yeoman/my-project.svg?branch=master'
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
     );
     assert.fileContent('other/README.md', 'coveralls');
   });
@@ -152,7 +152,7 @@ describe('node:readme --content and --generate-into', () => {
     assert.fileContent('other/README.md', 'MIT © [Yeoman](http://yeoman.io)');
     assert.fileContent(
       'other/README.md',
-      '[travis-image]: https://travis-ci.com/yeoman/my-project.svg?branch=master'
+      '[travis-image]: https://travis-ci.org/yeoman/my-project.svg?branch=master'
     );
     assert.fileContent('other/README.md', 'coveralls');
   });

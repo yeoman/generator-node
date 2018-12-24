@@ -72,7 +72,7 @@ describe('node:app', () => {
           assert.fileContent('README.md', '© [The Yeoman Team](http://yeoman.io)');
           assert.fileContent(
             'README.md',
-            '[travis-image]: https://travis-ci.com/yeoman/generator-node.svg?branch=master'
+            '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master'
           );
           assert.fileContent('README.md', 'coveralls');
 
@@ -137,7 +137,7 @@ describe('node:app', () => {
           );
           assert.fileContent(
             'README.md',
-            '[travis-image]: https://travis-ci.com/yeoman/generator-node.svg?branch=master'
+            '[travis-image]: https://travis-ci.org/yeoman/generator-node.svg?branch=master'
           );
           assert.fileContent(
             '.git/config',
