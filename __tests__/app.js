@@ -185,7 +185,7 @@ describe('node:app', () => {
           assert.file('README.md');
           assert.fileContent(
             'README.md',
-            '[travis-image]: https://travis-ci.com/yeoman/not-generator-node.svg?branch=master'
+            '[travis-image]: https://travis-ci.org/yeoman/not-generator-node.svg?branch=master'
           );
           assert.fileContent(
             '.git/config',
