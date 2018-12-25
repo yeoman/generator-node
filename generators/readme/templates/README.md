@@ -27,8 +27,8 @@ const <%= safeProjectName %> = require('<%= projectName %>');
 
 [npm-image]: https://badge.fury.io/js/<%= escapedProjectName %>.svg
 [npm-url]: https://npmjs.org/package/<%= projectName %>
-[travis-image]: https://travis-ci.org/<%= githubAccount %>/<%= repositoryName %>.svg?branch=master
-[travis-url]: https://travis-ci.org/<%= githubAccount %>/<%= repositoryName %>
+[travis-image]: https://travis-ci.com/<%= githubAccount %>/<%= repositoryName %>.svg?branch=master
+[travis-url]: https://travis-ci.com/<%= githubAccount %>/<%= repositoryName %>
 [daviddm-image]: https://david-dm.org/<%= githubAccount %>/<%= repositoryName %>.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/<%= githubAccount %>/<%= repositoryName %>
 <% if (includeCoveralls) { -%>
