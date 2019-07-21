@@ -328,6 +328,7 @@ module.exports = class extends Generator {
       if (this.props.includeCoveralls) {
         options.config.after_script = 'cat ./coverage/lcov.info | coveralls'; // eslint-disable-line camelcase
       }
+
       this.composeWith(require.resolve('generator-travis/generators/app'), options);
     }
 
