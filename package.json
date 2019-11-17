@@ -17,15 +17,15 @@
     "cli"
   ],
   "devDependencies": {
-    "coveralls": "^3.0.5",
-    "eslint": "^6.0.1",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-xo": "^0.26.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^3.0.1",
-    "jest": "^24.8.0",
-    "lint-staged": "^9.2.0",
-    "prettier": "^1.18.2",
+    "coveralls": "^3.0.7",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.6.0",
+    "eslint-config-xo": "^0.27.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.3",
+    "prettier": "^1.19.1",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^2.0.0"
   },
@@ -35,7 +35,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "generator-jest": "^1.7.0",
     "generator-license": "^5.2.0",
     "generator-travis": "^1.9.0",
@@ -45,7 +45,7 @@
     "lodash": "^4.17.15",
     "parse-author": "^2.0.0",
     "validate-npm-package-name": "^3.0.0",
-    "yeoman-generator": "^4.0.1"
+    "yeoman-generator": "^4.2.0"
   },
   "eslintConfig": {
     "extends": [
