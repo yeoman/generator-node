@@ -109,7 +109,7 @@ module.exports = class extends Generator {
         this.emit(
           'error',
           new Error(
-            packageNameValidity.errors[0] ||
+            _.get(packageNameValidity, 'errors.0') ||
               'The name option is not a valid npm package name.'
           )
         );
