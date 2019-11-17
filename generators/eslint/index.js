@@ -26,6 +26,7 @@ module.exports = class extends Generator {
         'eslint-config-xo': rootPkg.devDependencies['eslint-config-xo']
       },
       'lint-staged': rootPkg['lint-staged'],
+      husky: rootPkg.husky,
       eslintConfig: rootPkg.eslintConfig,
       scripts: {
         pretest: rootPkg.scripts.pretest,
