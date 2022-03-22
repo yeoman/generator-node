@@ -14,6 +14,13 @@ module.exports = class extends Generator {
   constructor(args, options) {
     super(args, options);
 
+    this.option('yarn', {
+      type: Boolean,
+      required: false,
+      default: false,
+      desc: 'Use yarn instead of npm for packages installation',
+    });
+
     this.option('travis', {
       type: Boolean,
       required: false,
@@ -382,7 +389,11 @@ module.exports = class extends Generator {
   }
 
   installing() {
-    this.npmInstall();
+    if (this.yarn) {
+      this.yarnInstall();
+    } else {
+      this.npmInstall();
+    }
   }
 
   end() {
