@@ -182,3 +182,29 @@ describe('node:readme --no-coveralls and --generate-into', () => {
     assert.noFileContent('other/README.md', 'coveralls');
   });
 });
+
+describe('node:readme --yarn', () => {
+  beforeEach(() => {
+    return helpers
+      .run(require.resolve('../generators/readme'))
+      .withOptions({
+        name: 'my-project',
+        description: 'a cool project',
+        githubAccount: 'yeoman',
+        authorName: 'Yeoman',
+        authorUrl: 'http://yeoman.io',
+        yarn: true,
+        coveralls: false
+      })
+      .on('ready', gen => {
+        gen.fs.writeJSON(gen.destinationPath('package.json'), {
+          license: 'MIT'
+        });
+      });
+  });
+
+  it('creates and fills contents in README.md', () => {
+    assert.file('README.md');
+    assert.fileContent('README.md', '$ yarn add my-project');
+  });
+});

@@ -7,7 +7,11 @@ if (includeCoveralls) { %> [![Coverage percentage][coveralls-image]][coveralls-u
 ## Installation
 
 ```sh
+<% if (yarn) { -%>
+$ yarn add <%= projectName %>
+<% } else { -%>
 $ npm install --save <%= projectName %>
+<% } -%>
 ```
 
 ## Usage
