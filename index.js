@@ -1,11 +1,13 @@
-'use strict';
+import Module from 'node:module';
 
-module.exports = {
-  app: require.resolve('./generators/app'),
-  boilerplate: require.resolve('./generators/boilerplate'),
-  cli: require.resolve('./generators/cli'),
-  editorconfig: require.resolve('./generators/editorconfig'),
-  eslint: require.resolve('./generators/eslint'),
-  git: require.resolve('./generators/git'),
-  readme: require.resolve('./generators/readme')
-};
+const require = Module.createRequire(import.meta.url);
+
+export { default } from './generators/app/index.js';
+
+export const app = require.resolve('./generators/app/index.js');
+export const boilerplate = require.resolve('./generators/boilerplate/index.js');
+export const cli = require.resolve('./generators/cli/index.js');
+export const editorconfig = require.resolve('./generators/editorconfig/index.js');
+export const eslint = require.resolve('./generators/eslint/index.js');
+export const git = require.resolve('./generators/git/index.js');
+export const readme = require.resolve('./generators/readme/index.js');

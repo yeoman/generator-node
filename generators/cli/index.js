@@ -1,9 +1,9 @@
-'use strict';
-const _ = require('lodash');
-const extend = _.merge;
-const Generator = require('yeoman-generator');
+import _ from 'lodash';
+import Generator from 'yeoman-generator';
 
-module.exports = class extends Generator {
+const extend = _.merge;
+
+export default class extends Generator {
   constructor(args, options) {
     super(args, options);
 
@@ -48,4 +48,4 @@ module.exports = class extends Generator {
       }
     );
   }
-};
+}

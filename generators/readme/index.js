@@ -1,9 +1,8 @@
-'use strict';
-const _ = require('lodash');
-const Generator = require('yeoman-generator');
-const querystring = require('querystring');
+import _ from 'lodash';
+import Generator from 'yeoman-generator';
+import { escape } from 'querystring';
 
-module.exports = class extends Generator {
+export default class extends Generator {
   constructor(args, options) {
     super(args, options);
 
@@ -74,7 +73,7 @@ module.exports = class extends Generator {
       {
         projectName: this.options.name,
         safeProjectName: _.camelCase(this.options.name),
-        escapedProjectName: querystring.escape(this.options.name),
+        escapedProjectName: escape(this.options.name),
         repositoryName: this.options.repositoryName || this.options.name,
         description: this.options.description,
         githubAccount: this.options.githubAccount,
@@ -88,4 +87,4 @@ module.exports = class extends Generator {
       }
     );
   }
-};
+}

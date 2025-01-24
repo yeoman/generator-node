@@ -1,8 +1,10 @@
-'use strict';
-const Generator = require('yeoman-generator');
+import Module from 'node:module';
+import Generator from 'yeoman-generator';
+
+const require = Module.createRequire(import.meta.url);
 const rootPkg = require('../../package.json');
 
-module.exports = class extends Generator {
+export default class extends Generator {
   constructor(args, options) {
     super(args, options);
 
@@ -44,4 +46,4 @@ module.exports = class extends Generator {
       this.destinationPath(this.options.generateInto, '.eslintignore')
     );
   }
-};
+}

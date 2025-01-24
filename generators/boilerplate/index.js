@@ -1,8 +1,7 @@
-'use strict';
-const _ = require('lodash');
-const Generator = require('yeoman-generator');
+import _ from 'lodash';
+import Generator from 'yeoman-generator';
 
-module.exports = class extends Generator {
+export default class extends Generator {
   constructor(args, options) {
     super(args, options);
 
@@ -30,4 +29,4 @@ module.exports = class extends Generator {
       componentName: _.camelCase(this.options.name)
     });
   }
-};
+}

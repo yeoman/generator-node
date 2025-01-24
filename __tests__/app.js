@@ -1,4 +1,3 @@
-'use strict';
 const _ = require('lodash');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');

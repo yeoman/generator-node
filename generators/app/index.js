@@ -1,16 +1,19 @@
-'use strict';
-const _ = require('lodash');
-const extend = _.merge;
-const Generator = require('yeoman-generator');
-const parseAuthor = require('parse-author');
-const githubUsername = require('github-username');
-const path = require('path');
-const askName = require('inquirer-npm-name');
-const chalk = require('chalk');
-const validatePackageName = require('validate-npm-package-name');
+import _ from 'lodash';
+import Generator from 'yeoman-generator';
+import parseAuthor from 'parse-author';
+import githubUsername from 'github-username';
+import Module from 'node:module';
+import path from 'path';
+import askName from 'inquirer-npm-name';
+import chalk from 'chalk';
+import validatePackageName from 'validate-npm-package-name';
+
+const require = Module.createRequire(import.meta.url);
 const pkgJson = require('../../package.json');
 
-module.exports = class extends Generator {
+const extend = _.merge;
+
+export default class extends Generator {
   constructor(args, options) {
     super(args, options);
 
@@ -192,14 +195,14 @@ module.exports = class extends Generator {
         name: 'authorName',
         message: "Author's Name",
         when: !this.props.authorName,
-        default: this.user.git.name(),
+        // TODO: default: this.user.git.name(),
         store: true
       },
       {
         name: 'authorEmail',
         message: "Author's Email",
         when: !this.props.authorEmail,
-        default: this.user.git.email(),
+        // TODO: default: this.user.git.email(),
         store: true
       },
       {
@@ -382,7 +385,7 @@ module.exports = class extends Generator {
   }
 
   installing() {
-    this.npmInstall();
+    this.spawnSync('npm', ['install']);
   }
 
   end() {
@@ -400,4 +403,4 @@ module.exports = class extends Generator {
       this.log(`- Enable Coveralls integration at ${coverallsUrl}`);
     }
   }
-};
+}

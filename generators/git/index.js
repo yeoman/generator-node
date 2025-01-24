@@ -1,8 +1,7 @@
-'use strict';
-const Generator = require('yeoman-generator');
-const originUrl = require('git-remote-origin-url');
+import Generator from 'yeoman-generator';
+import originUrl from 'git-remote-origin-url';
 
-module.exports = class extends Generator {
+export default class extends Generator {
   constructor(args, opts) {
     super(args, opts);
     this.option('generateInto', {
@@ -89,4 +88,4 @@ module.exports = class extends Generator {
       });
     }
   }
-};
+}
