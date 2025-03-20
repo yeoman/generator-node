@@ -84,6 +84,7 @@ module.exports = class extends Generator {
         },
         license: pkg.license,
         includeCoveralls: this.options.coveralls,
+        yarn: this.options.yarn,
         content: this.options.content
       }
     );
