@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         # TODO: We need to re-introduce Node 6 and 7 once we have a way to run tests on them.
-        node-version: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+        node-version: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
     continue-on-error: true
     steps:
       - name: Checkout repository
